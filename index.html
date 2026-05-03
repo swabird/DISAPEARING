@@ -1,0 +1,1650 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Disappearing Animal Species</title>
+  <meta name="description" content="A visual atlas of endangered and vulnerable animal species.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f7f2e8;
+      --muted: #b8c0b6;
+      --line: rgba(247, 242, 232, 0.18);
+      --surface: rgba(18, 24, 22, 0.72);
+      --surface-strong: rgba(12, 17, 16, 0.92);
+      --accent: #e3b45f;
+      --forest: #12201a;
+      --moss: #6f8c5a;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #0b0f0d;
+      color: var(--ink);
+    }
+
+    a { color: inherit; }
+
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      background: #101713;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(4, 8, 7, 0.92) 0%, rgba(4, 8, 7, 0.62) 42%, rgba(4, 8, 7, 0.14) 100%),
+        linear-gradient(180deg, rgba(4, 8, 7, 0.06) 0%, rgba(4, 8, 7, 0.82) 100%),
+        url('056_endangered_species_visual_atlas_cover.png') center / cover;
+      transform: scale(1.02);
+    }
+
+    .nav {
+      position: fixed;
+      z-index: 10;
+      inset: 0 0 auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      padding: 18px clamp(18px, 4vw, 56px);
+      background: linear-gradient(180deg, rgba(6, 10, 9, 0.78), rgba(6, 10, 9, 0));
+      backdrop-filter: blur(8px);
+    }
+
+    .brand {
+      font-weight: 760;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      font-size: 0.86rem;
+    }
+
+    .nav a {
+      font-size: 0.9rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .hero-content {
+      position: relative;
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 148px 0 86px;
+    }
+
+    .kicker {
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 760;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      margin: 0 0 18px;
+    }
+
+    h1 {
+      max-width: 960px;
+      margin: 0;
+      font-size: clamp(3rem, 8vw, 8.8rem);
+      line-height: 0.88;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      max-width: 660px;
+      margin: 28px 0 0;
+      color: var(--muted);
+      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      line-height: 1.65;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      width: min(780px, 100%);
+      margin-top: 42px;
+      border: 1px solid var(--line);
+      background: var(--line);
+    }
+
+    .stat {
+      min-height: 96px;
+      padding: 20px;
+      background: rgba(8, 13, 12, 0.72);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    main {
+      background:
+        linear-gradient(180deg, #0b0f0d, #111915 44%, #0b0f0d);
+      padding: 34px 0 80px;
+    }
+
+    .toolbar {
+      position: sticky;
+      top: 0;
+      z-index: 8;
+      padding: 14px clamp(18px, 4vw, 56px);
+      border-bottom: 1px solid var(--line);
+      background: rgba(9, 13, 12, 0.86);
+      backdrop-filter: blur(14px);
+    }
+
+    .toolbar-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 16px;
+    }
+
+    input {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      padding: 0 14px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--ink);
+      font: inherit;
+    }
+
+    input::placeholder { color: rgba(184, 192, 182, 0.76); }
+
+    .count {
+      color: var(--muted);
+      font-size: 0.92rem;
+      white-space: nowrap;
+    }
+
+    .gallery {
+      width: min(1180px, calc(100% - 36px));
+      margin: 34px auto 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.26);
+    }
+
+    .card a {
+      display: block;
+      aspect-ratio: 4 / 5;
+      background: var(--surface-strong);
+      overflow: hidden;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 240ms ease, filter 240ms ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.035);
+      filter: saturate(1.08) contrast(1.05);
+    }
+
+    .card-copy {
+      min-height: 96px;
+      display: grid;
+      align-content: start;
+      gap: 8px;
+      padding: 14px;
+    }
+
+    .card-copy span {
+      color: var(--accent);
+      font-size: 0.72rem;
+      font-weight: 760;
+    }
+
+    .card-copy h2 {
+      margin: 0;
+      font-size: 0.98rem;
+      line-height: 1.28;
+      letter-spacing: 0;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 680px) {
+      .nav { padding: 14px 18px; }
+      .hero { min-height: 88vh; }
+      .hero-content { padding-bottom: 58px; }
+      .stats { grid-template-columns: 1fr; }
+      .toolbar-inner { grid-template-columns: 1fr; }
+      .count { white-space: normal; }
+      .gallery { grid-template-columns: repeat(auto-fill, minmax(154px, 1fr)); gap: 12px; }
+      .card-copy { min-height: 112px; padding: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="brand">Disappearing</div>
+    <a href="#atlas">Visual atlas</a>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <p class="kicker">Endangered animal species</p>
+      <h1>Disappearing Animal Species</h1>
+      <p>A visual atlas of conservation posters and field-guide plates documenting fragile habitats, threatened populations, and species at risk.</p>
+      <div class="stats" aria-label="Collection summary">
+        <div class="stat"><strong>149</strong><span>visual plates</span></div>
+        <div class="stat"><strong>Global</strong><span>species and habitats</span></div>
+        <div class="stat"><strong>PNG</strong><span>poster archive</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main id="atlas">
+    <section class="toolbar" aria-label="Gallery controls">
+      <div class="toolbar-inner">
+        <input id="search" type="search" placeholder="Search species or poster title" autocomplete="off">
+        <div class="count"><span id="visible-count">149</span> / 149 plates</div>
+      </div>
+    </section>
+
+    <section class="gallery" aria-label="Endangered species poster gallery">
+
+        <article class="card" data-title="a clean high detail composite infographic image w">
+          <a href="001_a_clean_high_detail_composite_infographic_image_w.png" target="_blank" aria-label="Open A Clean High Detail Composite Infographic Image W">
+            <img src="001_a_clean_high_detail_composite_infographic_image_w.png" alt="A Clean High Detail Composite Infographic Image W" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>001</span>
+            <h2>A Clean High Detail Composite Infographic Image W</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a composite infographic poster image showing 8 ani">
+          <a href="002_a_composite_infographic_poster_image_showing_8_ani.png" target="_blank" aria-label="Open A Composite Infographic Poster Image Showing 8 Ani">
+            <img src="002_a_composite_infographic_poster_image_showing_8_ani.png" alt="A Composite Infographic Poster Image Showing 8 Ani" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>002</span>
+            <h2>A Composite Infographic Poster Image Showing 8 Ani</h2>
+          </div>
+        </article>
+        <article class="card" data-title="2b4a8a13-e4bb-4406-95fe-dcccedf2254a">
+          <a href="2b4a8a13-e4bb-4406-95fe-dcccedf2254a.png" target="_blank" aria-label="Open 2b4a8a13-E4bb-4406-95fe-Dcccedf2254a">
+            <img src="2b4a8a13-e4bb-4406-95fe-dcccedf2254a.png" alt="2b4a8a13-E4bb-4406-95fe-Dcccedf2254a" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>003</span>
+            <h2>2b4a8a13-E4bb-4406-95fe-Dcccedf2254a</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a composite poster image a grid of 8 wildlife inf">
+          <a href="003_a_composite_poster_image_a_grid_of_8_wildlife_inf.png" target="_blank" aria-label="Open A Composite Poster Image A Grid Of 8 Wildlife Inf">
+            <img src="003_a_composite_poster_image_a_grid_of_8_wildlife_inf.png" alt="A Composite Poster Image A Grid Of 8 Wildlife Inf" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>004</span>
+            <h2>A Composite Poster Image A Grid Of 8 Wildlife Inf</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a detailed infographic collage poster an overall">
+          <a href="004_a_detailed_infographic_collage_poster_an_overall.png" target="_blank" aria-label="Open A Detailed Infographic Collage Poster An Overall">
+            <img src="004_a_detailed_infographic_collage_poster_an_overall.png" alt="A Detailed Infographic Collage Poster An Overall" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>005</span>
+            <h2>A Detailed Infographic Collage Poster An Overall</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a detailed infographic image a grid of eight wild">
+          <a href="005_a_detailed_infographic_image_a_grid_of_eight_wild.png" target="_blank" aria-label="Open A Detailed Infographic Image A Grid Of Eight Wild">
+            <img src="005_a_detailed_infographic_image_a_grid_of_eight_wild.png" alt="A Detailed Infographic Image A Grid Of Eight Wild" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>006</span>
+            <h2>A Detailed Infographic Image A Grid Of Eight Wild</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a detailed infographic poster. overall scene a ve">
+          <a href="006_a_detailed_infographic_poster._overall_scene_a_ve.png" target="_blank" aria-label="Open A Detailed Infographic Poster. Overall Scene A Ve">
+            <img src="006_a_detailed_infographic_poster._overall_scene_a_ve.png" alt="A Detailed Infographic Poster. Overall Scene A Ve" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>007</span>
+            <h2>A Detailed Infographic Poster. Overall Scene A Ve</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a detailed infographic poster style scene. overall">
+          <a href="007_a_detailed_infographic_poster_style_scene._overall.png" target="_blank" aria-label="Open A Detailed Infographic Poster Style Scene. Overall">
+            <img src="007_a_detailed_infographic_poster_style_scene._overall.png" alt="A Detailed Infographic Poster Style Scene. Overall" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>008</span>
+            <h2>A Detailed Infographic Poster Style Scene. Overall</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a high detail infographic poster card grid over">
+          <a href="008_a_high_detail_infographic_poster_card_grid_over.png" target="_blank" aria-label="Open A High Detail Infographic Poster Card Grid Over">
+            <img src="008_a_high_detail_infographic_poster_card_grid_over.png" alt="A High Detail Infographic Poster Card Grid Over" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>009</span>
+            <h2>A High Detail Infographic Poster Card Grid Over</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a high detail infographic poster chart style ima">
+          <a href="009_a_high_detail_infographic_poster_chart_style_ima.png" target="_blank" aria-label="Open A High Detail Infographic Poster Chart Style Ima">
+            <img src="009_a_high_detail_infographic_poster_chart_style_ima.png" alt="A High Detail Infographic Poster Chart Style Ima" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>010</span>
+            <h2>A High Detail Infographic Poster Chart Style Ima</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a high detail infographic poster collage a grid o">
+          <a href="010_a_high_detail_infographic_poster_collage_a_grid_o.png" target="_blank" aria-label="Open A High Detail Infographic Poster Collage A Grid O">
+            <img src="010_a_high_detail_infographic_poster_collage_a_grid_o.png" alt="A High Detail Infographic Poster Collage A Grid O" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>011</span>
+            <h2>A High Detail Infographic Poster Collage A Grid O</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a high detail infographic poster grid a 4x2 block">
+          <a href="011_a_high_detail_infographic_poster_grid_a_4x2_block.png" target="_blank" aria-label="Open A High Detail Infographic Poster Grid A 4x2 Block">
+            <img src="011_a_high_detail_infographic_poster_grid_a_4x2_block.png" alt="A High Detail Infographic Poster Grid A 4x2 Block" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>012</span>
+            <h2>A High Detail Infographic Poster Grid A 4x2 Block</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a high resolution infographic poster collage of en">
+          <a href="012_a_high_resolution_infographic_poster_collage_of_en.png" target="_blank" aria-label="Open A High Resolution Infographic Poster Collage Of En">
+            <img src="012_a_high_resolution_infographic_poster_collage_of_en.png" alt="A High Resolution Infographic Poster Collage Of En" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>013</span>
+            <h2>A High Resolution Infographic Poster Collage Of En</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a large composite poster infographic sheet over">
+          <a href="013_a_large_composite_poster_infographic_sheet_over.png" target="_blank" aria-label="Open A Large Composite Poster Infographic Sheet Over">
+            <img src="013_a_large_composite_poster_infographic_sheet_over.png" alt="A Large Composite Poster Infographic Sheet Over" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>014</span>
+            <h2>A Large Composite Poster Infographic Sheet Over</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a super detailed infographic poster collage grid">
+          <a href="014_a_super_detailed_infographic_poster_collage_grid.png" target="_blank" aria-label="Open A Super Detailed Infographic Poster Collage Grid">
+            <img src="014_a_super_detailed_infographic_poster_collage_grid.png" alt="A Super Detailed Infographic Poster Collage Grid" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>015</span>
+            <h2>A Super Detailed Infographic Poster Collage Grid</h2>
+          </div>
+        </article>
+        <article class="card" data-title="a wide composite infographic poster grid scene i">
+          <a href="015_a_wide_composite_infographic_poster_grid_scene_i.png" target="_blank" aria-label="Open A Wide Composite Infographic Poster Grid Scene I">
+            <img src="015_a_wide_composite_infographic_poster_grid_scene_i.png" alt="A Wide Composite Infographic Poster Grid Scene I" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>016</span>
+            <h2>A Wide Composite Infographic Poster Grid Scene I</h2>
+          </div>
+        </article>
+        <article class="card" data-title="amazonian manatee conservation guide">
+          <a href="016_amazonian_manatee_conservation_guide.png" target="_blank" aria-label="Open Amazonian Manatee Conservation Guide">
+            <img src="016_amazonian_manatee_conservation_guide.png" alt="Amazonian Manatee Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>017</span>
+            <h2>Amazonian Manatee Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="amur leopard conservation infographic">
+          <a href="017_amur_leopard_conservation_infographic.png" target="_blank" aria-label="Open Amur Leopard Conservation Infographic">
+            <img src="017_amur_leopard_conservation_infographic.png" alt="Amur Leopard Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>018</span>
+            <h2>Amur Leopard Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="amur leopard infographic poster">
+          <a href="018_amur_leopard_infographic_poster.png" target="_blank" aria-label="Open Amur Leopard Infographic Poster">
+            <img src="018_amur_leopard_infographic_poster.png" alt="Amur Leopard Infographic Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>019</span>
+            <h2>Amur Leopard Infographic Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="axolotl conservation a vital species">
+          <a href="019_axolotl_conservation_a_vital_species.png" target="_blank" aria-label="Open Axolotl Conservation A Vital Species">
+            <img src="019_axolotl_conservation_a_vital_species.png" alt="Axolotl Conservation A Vital Species" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>020</span>
+            <h2>Axolotl Conservation A Vital Species</h2>
+          </div>
+        </article>
+        <article class="card" data-title="axolotl conservation unique species at risk">
+          <a href="020_axolotl_conservation_unique_species_at_risk.png" target="_blank" aria-label="Open Axolotl Conservation Unique Species At Risk">
+            <img src="020_axolotl_conservation_unique_species_at_risk.png" alt="Axolotl Conservation Unique Species At Risk" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>021</span>
+            <h2>Axolotl Conservation Unique Species At Risk</h2>
+          </div>
+        </article>
+        <article class="card" data-title="black footed ferret conservation poster">
+          <a href="021_black_footed_ferret_conservation_poster.png" target="_blank" aria-label="Open Black Footed Ferret Conservation Poster">
+            <img src="021_black_footed_ferret_conservation_poster.png" alt="Black Footed Ferret Conservation Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>022</span>
+            <h2>Black Footed Ferret Conservation Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="blue whale conservation infographic">
+          <a href="022_blue_whale_conservation_infographic.png" target="_blank" aria-label="Open Blue Whale Conservation Infographic">
+            <img src="022_blue_whale_conservation_infographic.png" alt="Blue Whale Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>023</span>
+            <h2>Blue Whale Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="blue whale conservation infographic poster">
+          <a href="023_blue_whale_conservation_infographic_poster.png" target="_blank" aria-label="Open Blue Whale Conservation Infographic Poster">
+            <img src="023_blue_whale_conservation_infographic_poster.png" alt="Blue Whale Conservation Infographic Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>024</span>
+            <h2>Blue Whale Conservation Infographic Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="bornean orangutan conservation infographic">
+          <a href="024_bornean_orangutan_conservation_infographic.png" target="_blank" aria-label="Open Bornean Orangutan Conservation Infographic">
+            <img src="024_bornean_orangutan_conservation_infographic.png" alt="Bornean Orangutan Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>025</span>
+            <h2>Bornean Orangutan Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="bornean orangutan conservation poster">
+          <a href="025_bornean_orangutan_conservation_poster.png" target="_blank" aria-label="Open Bornean Orangutan Conservation Poster">
+            <img src="025_bornean_orangutan_conservation_poster.png" alt="Bornean Orangutan Conservation Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>026</span>
+            <h2>Bornean Orangutan Conservation Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="bottlenose dolphin wildlife guide poster">
+          <a href="026_bottlenose_dolphin_wildlife_guide_poster.png" target="_blank" aria-label="Open Bottlenose Dolphin Wildlife Guide Poster">
+            <img src="026_bottlenose_dolphin_wildlife_guide_poster.png" alt="Bottlenose Dolphin Wildlife Guide Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>027</span>
+            <h2>Bottlenose Dolphin Wildlife Guide Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="bowhead whale in the arctic ocean">
+          <a href="027_bowhead_whale_in_the_arctic_ocean.png" target="_blank" aria-label="Open Bowhead Whale In The Arctic Ocean">
+            <img src="027_bowhead_whale_in_the_arctic_ocean.png" alt="Bowhead Whale In The Arctic Ocean" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>028</span>
+            <h2>Bowhead Whale In The Arctic Ocean</h2>
+          </div>
+        </article>
+        <article class="card" data-title="california condor conservation poster">
+          <a href="028_california_condor_conservation_poster.png" target="_blank" aria-label="Open California Condor Conservation Poster">
+            <img src="028_california_condor_conservation_poster.png" alt="California Condor Conservation Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>029</span>
+            <h2>California Condor Conservation Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="chinese giant salamander conservation infographic">
+          <a href="029_chinese_giant_salamander_conservation_infographic.png" target="_blank" aria-label="Open Chinese Giant Salamander Conservation Infographic">
+            <img src="029_chinese_giant_salamander_conservation_infographic.png" alt="Chinese Giant Salamander Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>030</span>
+            <h2>Chinese Giant Salamander Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="common dolphin wildlife guide infographic">
+          <a href="030_common_dolphin_wildlife_guide_infographic.png" target="_blank" aria-label="Open Common Dolphin Wildlife Guide Infographic">
+            <img src="030_common_dolphin_wildlife_guide_infographic.png" alt="Common Dolphin Wildlife Guide Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>031</span>
+            <h2>Common Dolphin Wildlife Guide Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation dossier fiji crested iguana">
+          <a href="031_conservation_dossier_fiji_crested_iguana.png" target="_blank" aria-label="Open Conservation Dossier Fiji Crested Iguana">
+            <img src="031_conservation_dossier_fiji_crested_iguana.png" alt="Conservation Dossier Fiji Crested Iguana" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>032</span>
+            <h2>Conservation Dossier Fiji Crested Iguana</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation of the asian elephant">
+          <a href="032_conservation_of_the_asian_elephant.png" target="_blank" aria-label="Open Conservation Of The Asian Elephant">
+            <img src="032_conservation_of_the_asian_elephant.png" alt="Conservation Of The Asian Elephant" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>033</span>
+            <h2>Conservation Of The Asian Elephant</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation of the atlantic puffin">
+          <a href="033_conservation_of_the_atlantic_puffin.png" target="_blank" aria-label="Open Conservation Of The Atlantic Puffin">
+            <img src="033_conservation_of_the_atlantic_puffin.png" alt="Conservation Of The Atlantic Puffin" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>034</span>
+            <h2>Conservation Of The Atlantic Puffin</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation of the aye aye lemur">
+          <a href="034_conservation_of_the_aye_aye_lemur.png" target="_blank" aria-label="Open Conservation Of The Aye Aye Lemur">
+            <img src="034_conservation_of_the_aye_aye_lemur.png" alt="Conservation Of The Aye Aye Lemur" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>035</span>
+            <h2>Conservation Of The Aye Aye Lemur</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation of the elusive okapi">
+          <a href="035_conservation_of_the_elusive_okapi.png" target="_blank" aria-label="Open Conservation Of The Elusive Okapi">
+            <img src="035_conservation_of_the_elusive_okapi.png" alt="Conservation Of The Elusive Okapi" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>036</span>
+            <h2>Conservation Of The Elusive Okapi</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation of the european eel">
+          <a href="036_conservation_of_the_european_eel.png" target="_blank" aria-label="Open Conservation Of The European Eel">
+            <img src="036_conservation_of_the_european_eel.png" alt="Conservation Of The European Eel" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>037</span>
+            <h2>Conservation Of The European Eel</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation of the indo pacific humpback dolphin">
+          <a href="037_conservation_of_the_indo_pacific_humpback_dolphin.png" target="_blank" aria-label="Open Conservation Of The Indo Pacific Humpback Dolphin">
+            <img src="037_conservation_of_the_indo_pacific_humpback_dolphin.png" alt="Conservation Of The Indo Pacific Humpback Dolphin" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>038</span>
+            <h2>Conservation Of The Indo Pacific Humpback Dolphin</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation of the long snouted seahorse">
+          <a href="038_conservation_of_the_long_snouted_seahorse.png" target="_blank" aria-label="Open Conservation Of The Long Snouted Seahorse">
+            <img src="038_conservation_of_the_long_snouted_seahorse.png" alt="Conservation Of The Long Snouted Seahorse" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>039</span>
+            <h2>Conservation Of The Long Snouted Seahorse</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation of the north atlantic right whale">
+          <a href="039_conservation_of_the_north_atlantic_right_whale.png" target="_blank" aria-label="Open Conservation Of The North Atlantic Right Whale">
+            <img src="039_conservation_of_the_north_atlantic_right_whale.png" alt="Conservation Of The North Atlantic Right Whale" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>040</span>
+            <h2>Conservation Of The North Atlantic Right Whale</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation of the north atlantic whale">
+          <a href="040_conservation_of_the_north_atlantic_whale.png" target="_blank" aria-label="Open Conservation Of The North Atlantic Whale">
+            <img src="040_conservation_of_the_north_atlantic_whale.png" alt="Conservation Of The North Atlantic Whale" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>041</span>
+            <h2>Conservation Of The North Atlantic Whale</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation of the proboscis monkey">
+          <a href="041_conservation_of_the_proboscis_monkey.png" target="_blank" aria-label="Open Conservation Of The Proboscis Monkey">
+            <img src="041_conservation_of_the_proboscis_monkey.png" alt="Conservation Of The Proboscis Monkey" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>042</span>
+            <h2>Conservation Of The Proboscis Monkey</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conservation of the whooping crane">
+          <a href="042_conservation_of_the_whooping_crane.png" target="_blank" aria-label="Open Conservation Of The Whooping Crane">
+            <img src="042_conservation_of_the_whooping_crane.png" alt="Conservation Of The Whooping Crane" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>043</span>
+            <h2>Conservation Of The Whooping Crane</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conserving borneo s proboscis monkey">
+          <a href="043_conserving_borneo_s_proboscis_monkey.png" target="_blank" aria-label="Open Conserving Borneo S Proboscis Monkey">
+            <img src="043_conserving_borneo_s_proboscis_monkey.png" alt="Conserving Borneo S Proboscis Monkey" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>044</span>
+            <h2>Conserving Borneo S Proboscis Monkey</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conserving the asian elephant s habitat">
+          <a href="044_conserving_the_asian_elephant_s_habitat.png" target="_blank" aria-label="Open Conserving The Asian Elephant S Habitat">
+            <img src="044_conserving_the_asian_elephant_s_habitat.png" alt="Conserving The Asian Elephant S Habitat" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>045</span>
+            <h2>Conserving The Asian Elephant S Habitat</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conserving the fossa of madagascar">
+          <a href="045_conserving_the_fossa_of_madagascar.png" target="_blank" aria-label="Open Conserving The Fossa Of Madagascar">
+            <img src="045_conserving_the_fossa_of_madagascar.png" alt="Conserving The Fossa Of Madagascar" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>046</span>
+            <h2>Conserving The Fossa Of Madagascar</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conserving the indo pacific humpback dolphin">
+          <a href="046_conserving_the_indo_pacific_humpback_dolphin.png" target="_blank" aria-label="Open Conserving The Indo Pacific Humpback Dolphin">
+            <img src="046_conserving_the_indo_pacific_humpback_dolphin.png" alt="Conserving The Indo Pacific Humpback Dolphin" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>047</span>
+            <h2>Conserving The Indo Pacific Humpback Dolphin</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conserving the javan slow loris">
+          <a href="047_conserving_the_javan_slow_loris.png" target="_blank" aria-label="Open Conserving The Javan Slow Loris">
+            <img src="047_conserving_the_javan_slow_loris.png" alt="Conserving The Javan Slow Loris" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>048</span>
+            <h2>Conserving The Javan Slow Loris</h2>
+          </div>
+        </article>
+        <article class="card" data-title="conserving the tarsier of siau island">
+          <a href="048_conserving_the_tarsier_of_siau_island.png" target="_blank" aria-label="Open Conserving The Tarsier Of Siau Island">
+            <img src="048_conserving_the_tarsier_of_siau_island.png" alt="Conserving The Tarsier Of Siau Island" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>049</span>
+            <h2>Conserving The Tarsier Of Siau Island</h2>
+          </div>
+        </article>
+        <article class="card" data-title="crocodile field guide dossier design">
+          <a href="049_crocodile_field_guide_dossier_design.png" target="_blank" aria-label="Open Crocodile Field Guide Dossier Design">
+            <img src="049_crocodile_field_guide_dossier_design.png" alt="Crocodile Field Guide Dossier Design" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>050</span>
+            <h2>Crocodile Field Guide Dossier Design</h2>
+          </div>
+        </article>
+        <article class="card" data-title="dugong conservation infographic poster">
+          <a href="050_dugong_conservation_infographic_poster.png" target="_blank" aria-label="Open Dugong Conservation Infographic Poster">
+            <img src="050_dugong_conservation_infographic_poster.png" alt="Dugong Conservation Infographic Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>051</span>
+            <h2>Dugong Conservation Infographic Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="dugong conservation protecting a marine icon">
+          <a href="051_dugong_conservation_protecting_a_marine_icon.png" target="_blank" aria-label="Open Dugong Conservation Protecting A Marine Icon">
+            <img src="051_dugong_conservation_protecting_a_marine_icon.png" alt="Dugong Conservation Protecting A Marine Icon" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>052</span>
+            <h2>Dugong Conservation Protecting A Marine Icon</h2>
+          </div>
+        </article>
+        <article class="card" data-title="endangered galápagos penguin conservation guide">
+          <a href="052_endangered_gal%C3%A1pagos_penguin_conservation_guide.png" target="_blank" aria-label="Open Endangered GaláPagos Penguin Conservation Guide">
+            <img src="052_endangered_gal%C3%A1pagos_penguin_conservation_guide.png" alt="Endangered GaláPagos Penguin Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>053</span>
+            <h2>Endangered GaláPagos Penguin Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="endangered mediterranean monk seal guide">
+          <a href="053_endangered_mediterranean_monk_seal_guide.png" target="_blank" aria-label="Open Endangered Mediterranean Monk Seal Guide">
+            <img src="053_endangered_mediterranean_monk_seal_guide.png" alt="Endangered Mediterranean Monk Seal Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>054</span>
+            <h2>Endangered Mediterranean Monk Seal Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="endangered proboscis monkey conservation poster">
+          <a href="054_endangered_proboscis_monkey_conservation_poster.png" target="_blank" aria-label="Open Endangered Proboscis Monkey Conservation Poster">
+            <img src="054_endangered_proboscis_monkey_conservation_poster.png" alt="Endangered Proboscis Monkey Conservation Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>055</span>
+            <h2>Endangered Proboscis Monkey Conservation Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="endangered species visual atlas">
+          <a href="055_endangered_species_visual_atlas.png" target="_blank" aria-label="Open Endangered Species Visual Atlas">
+            <img src="055_endangered_species_visual_atlas.png" alt="Endangered Species Visual Atlas" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>056</span>
+            <h2>Endangered Species Visual Atlas</h2>
+          </div>
+        </article>
+        <article class="card" data-title="endangered species visual atlas cover">
+          <a href="056_endangered_species_visual_atlas_cover.png" target="_blank" aria-label="Open Endangered Species Visual Atlas Cover">
+            <img src="056_endangered_species_visual_atlas_cover.png" alt="Endangered Species Visual Atlas Cover" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>057</span>
+            <h2>Endangered Species Visual Atlas Cover</h2>
+          </div>
+        </article>
+        <article class="card" data-title="ephiopian fox">
+          <a href="057_ephiopian_fox.png" target="_blank" aria-label="Open Ephiopian Fox">
+            <img src="057_ephiopian_fox.png" alt="Ephiopian Fox" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>058</span>
+            <h2>Ephiopian Fox</h2>
+          </div>
+        </article>
+        <article class="card" data-title="ethiopian wolf conservation dossier">
+          <a href="058_ethiopian_wolf_conservation_dossier.png" target="_blank" aria-label="Open Ethiopian Wolf Conservation Dossier">
+            <img src="058_ethiopian_wolf_conservation_dossier.png" alt="Ethiopian Wolf Conservation Dossier" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>059</span>
+            <h2>Ethiopian Wolf Conservation Dossier</h2>
+          </div>
+        </article>
+        <article class="card" data-title="forest elephant conservation infographic poster">
+          <a href="059_forest_elephant_conservation_infographic_poster.png" target="_blank" aria-label="Open Forest Elephant Conservation Infographic Poster">
+            <img src="059_forest_elephant_conservation_infographic_poster.png" alt="Forest Elephant Conservation Infographic Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>060</span>
+            <h2>Forest Elephant Conservation Infographic Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="galápagos penguin conservation overview">
+          <a href="060_gal%C3%A1pagos_penguin_conservation_overview.png" target="_blank" aria-label="Open GaláPagos Penguin Conservation Overview">
+            <img src="060_gal%C3%A1pagos_penguin_conservation_overview.png" alt="GaláPagos Penguin Conservation Overview" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>061</span>
+            <h2>GaláPagos Penguin Conservation Overview</h2>
+          </div>
+        </article>
+        <article class="card" data-title="ganges river dolphin conservation guide">
+          <a href="061_ganges_river_dolphin_conservation_guide.png" target="_blank" aria-label="Open Ganges River Dolphin Conservation Guide">
+            <img src="061_ganges_river_dolphin_conservation_guide.png" alt="Ganges River Dolphin Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>062</span>
+            <h2>Ganges River Dolphin Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="ganges river dolphin conservation poster">
+          <a href="062_ganges_river_dolphin_conservation_poster.png" target="_blank" aria-label="Open Ganges River Dolphin Conservation Poster">
+            <img src="062_ganges_river_dolphin_conservation_poster.png" alt="Ganges River Dolphin Conservation Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>063</span>
+            <h2>Ganges River Dolphin Conservation Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="gharial conservation endangered river crocodile">
+          <a href="063_gharial_conservation_endangered_river_crocodile.png" target="_blank" aria-label="Open Gharial Conservation Endangered River Crocodile">
+            <img src="063_gharial_conservation_endangered_river_crocodile.png" alt="Gharial Conservation Endangered River Crocodile" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>064</span>
+            <h2>Gharial Conservation Endangered River Crocodile</h2>
+          </div>
+        </article>
+        <article class="card" data-title="giant panda conservation guide">
+          <a href="064_giant_panda_conservation_guide.png" target="_blank" aria-label="Open Giant Panda Conservation Guide">
+            <img src="064_giant_panda_conservation_guide.png" alt="Giant Panda Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>065</span>
+            <h2>Giant Panda Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="giant panda conservation infographic">
+          <a href="065_giant_panda_conservation_infographic.png" target="_blank" aria-label="Open Giant Panda Conservation Infographic">
+            <img src="065_giant_panda_conservation_infographic.png" alt="Giant Panda Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>066</span>
+            <h2>Giant Panda Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="golden poison frog conservation infographic">
+          <a href="066_golden_poison_frog_conservation_infographic.png" target="_blank" aria-label="Open Golden Poison Frog Conservation Infographic">
+            <img src="066_golden_poison_frog_conservation_infographic.png" alt="Golden Poison Frog Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>067</span>
+            <h2>Golden Poison Frog Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="great white shark conservation poster">
+          <a href="067_great_white_shark_conservation_poster.png" target="_blank" aria-label="Open Great White Shark Conservation Poster">
+            <img src="067_great_white_shark_conservation_poster.png" alt="Great White Shark Conservation Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>068</span>
+            <h2>Great White Shark Conservation Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="hawksbill sea turtle protect preserve conserve">
+          <a href="068_hawksbill_sea_turtle_protect_preserve_conserve.png" target="_blank" aria-label="Open Hawksbill Sea Turtle Protect Preserve Conserve">
+            <img src="068_hawksbill_sea_turtle_protect_preserve_conserve.png" alt="Hawksbill Sea Turtle Protect Preserve Conserve" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>069</span>
+            <h2>Hawksbill Sea Turtle Protect Preserve Conserve</h2>
+          </div>
+        </article>
+        <article class="card" data-title="iberian lynx conservation facts and features">
+          <a href="069_iberian_lynx_conservation_facts_and_features.png" target="_blank" aria-label="Open Iberian Lynx Conservation Facts And Features">
+            <img src="069_iberian_lynx_conservation_facts_and_features.png" alt="Iberian Lynx Conservation Facts And Features" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>070</span>
+            <h2>Iberian Lynx Conservation Facts And Features</h2>
+          </div>
+        </article>
+        <article class="card" data-title="iberian lynx conservation infographic poster">
+          <a href="070_iberian_lynx_conservation_infographic_poster.png" target="_blank" aria-label="Open Iberian Lynx Conservation Infographic Poster">
+            <img src="070_iberian_lynx_conservation_infographic_poster.png" alt="Iberian Lynx Conservation Infographic Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>071</span>
+            <h2>Iberian Lynx Conservation Infographic Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="imagegen">
+          <a href="071_imagegen.png" target="_blank" aria-label="Open Imagegen">
+            <img src="071_imagegen.png" alt="Imagegen" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>072</span>
+            <h2>Imagegen</h2>
+          </div>
+        </article>
+        <article class="card" data-title="indian elephant conservation field guide">
+          <a href="072_indian_elephant_conservation_field_guide.png" target="_blank" aria-label="Open Indian Elephant Conservation Field Guide">
+            <img src="072_indian_elephant_conservation_field_guide.png" alt="Indian Elephant Conservation Field Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>073</span>
+            <h2>Indian Elephant Conservation Field Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="irrawaddy dolphin conservation guide">
+          <a href="073_irrawaddy_dolphin_conservation_guide.png" target="_blank" aria-label="Open Irrawaddy Dolphin Conservation Guide">
+            <img src="073_irrawaddy_dolphin_conservation_guide.png" alt="Irrawaddy Dolphin Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>074</span>
+            <h2>Irrawaddy Dolphin Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="irrawaddy dolphin conservation poster">
+          <a href="074_irrawaddy_dolphin_conservation_poster.png" target="_blank" aria-label="Open Irrawaddy Dolphin Conservation Poster">
+            <img src="074_irrawaddy_dolphin_conservation_poster.png" alt="Irrawaddy Dolphin Conservation Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>075</span>
+            <h2>Irrawaddy Dolphin Conservation Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="javan rhino conservation awareness poster">
+          <a href="075_javan_rhino_conservation_awareness_poster.png" target="_blank" aria-label="Open Javan Rhino Conservation Awareness Poster">
+            <img src="075_javan_rhino_conservation_awareness_poster.png" alt="Javan Rhino Conservation Awareness Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>076</span>
+            <h2>Javan Rhino Conservation Awareness Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="javan rhinoceros conservation infographic">
+          <a href="076_javan_rhinoceros_conservation_infographic.png" target="_blank" aria-label="Open Javan Rhinoceros Conservation Infographic">
+            <img src="076_javan_rhinoceros_conservation_infographic.png" alt="Javan Rhinoceros Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>077</span>
+            <h2>Javan Rhinoceros Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="javan slow loris conservation awareness">
+          <a href="077_javan_slow_loris_conservation_awareness.png" target="_blank" aria-label="Open Javan Slow Loris Conservation Awareness">
+            <img src="077_javan_slow_loris_conservation_awareness.png" alt="Javan Slow Loris Conservation Awareness" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>078</span>
+            <h2>Javan Slow Loris Conservation Awareness</h2>
+          </div>
+        </article>
+        <article class="card" data-title="kakapo endangered forest dweller infographic">
+          <a href="078_kakapo_endangered_forest_dweller_infographic.png" target="_blank" aria-label="Open Kakapo Endangered Forest Dweller Infographic">
+            <img src="078_kakapo_endangered_forest_dweller_infographic.png" alt="Kakapo Endangered Forest Dweller Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>079</span>
+            <h2>Kakapo Endangered Forest Dweller Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="kemp s ridley sea turtle conservation guide">
+          <a href="079_kemp_s_ridley_sea_turtle_conservation_guide.png" target="_blank" aria-label="Open Kemp S Ridley Sea Turtle Conservation Guide">
+            <img src="079_kemp_s_ridley_sea_turtle_conservation_guide.png" alt="Kemp S Ridley Sea Turtle Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>080</span>
+            <h2>Kemp S Ridley Sea Turtle Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="komodo dragon conservation field guide">
+          <a href="080_komodo_dragon_conservation_field_guide.png" target="_blank" aria-label="Open Komodo Dragon Conservation Field Guide">
+            <img src="080_komodo_dragon_conservation_field_guide.png" alt="Komodo Dragon Conservation Field Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>081</span>
+            <h2>Komodo Dragon Conservation Field Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="komodo dragon conservation infographic">
+          <a href="081_komodo_dragon_conservation_infographic.png" target="_blank" aria-label="Open Komodo Dragon Conservation Infographic">
+            <img src="081_komodo_dragon_conservation_infographic.png" alt="Komodo Dragon Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>082</span>
+            <h2>Komodo Dragon Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="kākāpō conservation field guide">
+          <a href="082_k%C4%81k%C4%81p%C5%8D_conservation_field_guide.png" target="_blank" aria-label="Open KāKāPō Conservation Field Guide">
+            <img src="082_k%C4%81k%C4%81p%C5%8D_conservation_field_guide.png" alt="KāKāPō Conservation Field Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>083</span>
+            <h2>KāKāPō Conservation Field Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="largetooth sawfish conservation guide">
+          <a href="083_largetooth_sawfish_conservation_guide.png" target="_blank" aria-label="Open Largetooth Sawfish Conservation Guide">
+            <img src="083_largetooth_sawfish_conservation_guide.png" alt="Largetooth Sawfish Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>084</span>
+            <h2>Largetooth Sawfish Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="leatherback sea turtle conservation guide">
+          <a href="084_leatherback_sea_turtle_conservation_guide.png" target="_blank" aria-label="Open Leatherback Sea Turtle Conservation Guide">
+            <img src="084_leatherback_sea_turtle_conservation_guide.png" alt="Leatherback Sea Turtle Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>085</span>
+            <h2>Leatherback Sea Turtle Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="longsnout seahorse conservation guide">
+          <a href="085_longsnout_seahorse_conservation_guide.png" target="_blank" aria-label="Open Longsnout Seahorse Conservation Guide">
+            <img src="085_longsnout_seahorse_conservation_guide.png" alt="Longsnout Seahorse Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>086</span>
+            <h2>Longsnout Seahorse Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="manatee conservation fact sheet poster">
+          <a href="086_manatee_conservation_fact_sheet_poster.png" target="_blank" aria-label="Open Manatee Conservation Fact Sheet Poster">
+            <img src="086_manatee_conservation_fact_sheet_poster.png" alt="Manatee Conservation Fact Sheet Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>087</span>
+            <h2>Manatee Conservation Fact Sheet Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="manta ray conservation infographic poster">
+          <a href="087_manta_ray_conservation_infographic_poster.png" target="_blank" aria-label="Open Manta Ray Conservation Infographic Poster">
+            <img src="087_manta_ray_conservation_infographic_poster.png" alt="Manta Ray Conservation Infographic Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>088</span>
+            <h2>Manta Ray Conservation Infographic Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="mediterranean monk seal conservation poster">
+          <a href="088_mediterranean_monk_seal_conservation_poster.png" target="_blank" aria-label="Open Mediterranean Monk Seal Conservation Poster">
+            <img src="088_mediterranean_monk_seal_conservation_poster.png" alt="Mediterranean Monk Seal Conservation Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>089</span>
+            <h2>Mediterranean Monk Seal Conservation Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="mexican gray wolf conservation guide">
+          <a href="089_mexican_gray_wolf_conservation_guide.png" target="_blank" aria-label="Open Mexican Gray Wolf Conservation Guide">
+            <img src="089_mexican_gray_wolf_conservation_guide.png" alt="Mexican Gray Wolf Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>090</span>
+            <h2>Mexican Gray Wolf Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="minke whale species guide poster">
+          <a href="090_minke_whale_species_guide_poster.png" target="_blank" aria-label="Open Minke Whale Species Guide Poster">
+            <img src="090_minke_whale_species_guide_poster.png" alt="Minke Whale Species Guide Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>091</span>
+            <h2>Minke Whale Species Guide Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="mountain gorilla conservation facts poster">
+          <a href="091_mountain_gorilla_conservation_facts_poster.png" target="_blank" aria-label="Open Mountain Gorilla Conservation Facts Poster">
+            <img src="091_mountain_gorilla_conservation_facts_poster.png" alt="Mountain Gorilla Conservation Facts Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>092</span>
+            <h2>Mountain Gorilla Conservation Facts Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="mountain gorilla conservation overview">
+          <a href="092_mountain_gorilla_conservation_overview.png" target="_blank" aria-label="Open Mountain Gorilla Conservation Overview">
+            <img src="092_mountain_gorilla_conservation_overview.png" alt="Mountain Gorilla Conservation Overview" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>093</span>
+            <h2>Mountain Gorilla Conservation Overview</h2>
+          </div>
+        </article>
+        <article class="card" data-title="okapi conservation protecting congo s forests">
+          <a href="093_okapi_conservation_protecting_congo_s_forests.png" target="_blank" aria-label="Open Okapi Conservation Protecting Congo S Forests">
+            <img src="093_okapi_conservation_protecting_congo_s_forests.png" alt="Okapi Conservation Protecting Congo S Forests" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>094</span>
+            <h2>Okapi Conservation Protecting Congo S Forests</h2>
+          </div>
+        </article>
+        <article class="card" data-title="orinoco crocodile conservation infographic">
+          <a href="094_orinoco_crocodile_conservation_infographic.png" target="_blank" aria-label="Open Orinoco Crocodile Conservation Infographic">
+            <img src="094_orinoco_crocodile_conservation_infographic.png" alt="Orinoco Crocodile Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>095</span>
+            <h2>Orinoco Crocodile Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="pangolin conservation facts sheet in russian">
+          <a href="095_pangolin_conservation_facts_sheet_in_russian.png" target="_blank" aria-label="Open Pangolin Conservation Facts Sheet In Russian">
+            <img src="095_pangolin_conservation_facts_sheet_in_russian.png" alt="Pangolin Conservation Facts Sheet In Russian" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>096</span>
+            <h2>Pangolin Conservation Facts Sheet In Russian</h2>
+          </div>
+        </article>
+        <article class="card" data-title="philippine eagle conservation infographic">
+          <a href="096_philippine_eagle_conservation_infographic.png" target="_blank" aria-label="Open Philippine Eagle Conservation Infographic">
+            <img src="096_philippine_eagle_conservation_infographic.png" alt="Philippine Eagle Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>097</span>
+            <h2>Philippine Eagle Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="proboscis monkey conservation in borneo">
+          <a href="097_proboscis_monkey_conservation_in_borneo.png" target="_blank" aria-label="Open Proboscis Monkey Conservation In Borneo">
+            <img src="097_proboscis_monkey_conservation_in_borneo.png" alt="Proboscis Monkey Conservation In Borneo" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>098</span>
+            <h2>Proboscis Monkey Conservation In Borneo</h2>
+          </div>
+        </article>
+        <article class="card" data-title="protecting the african wild dog">
+          <a href="098_protecting_the_african_wild_dog.png" target="_blank" aria-label="Open Protecting The African Wild Dog">
+            <img src="098_protecting_the_african_wild_dog.png" alt="Protecting The African Wild Dog" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>099</span>
+            <h2>Protecting The African Wild Dog</h2>
+          </div>
+        </article>
+        <article class="card" data-title="protecting the african wild dog s habitat">
+          <a href="099_protecting_the_african_wild_dog_s_habitat.png" target="_blank" aria-label="Open Protecting The African Wild Dog S Habitat">
+            <img src="099_protecting_the_african_wild_dog_s_habitat.png" alt="Protecting The African Wild Dog S Habitat" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>100</span>
+            <h2>Protecting The African Wild Dog S Habitat</h2>
+          </div>
+        </article>
+        <article class="card" data-title="protecting the atlantic puffin s home">
+          <a href="100_protecting_the_atlantic_puffin_s_home.png" target="_blank" aria-label="Open Protecting The Atlantic Puffin S Home">
+            <img src="100_protecting_the_atlantic_puffin_s_home.png" alt="Protecting The Atlantic Puffin S Home" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>101</span>
+            <h2>Protecting The Atlantic Puffin S Home</h2>
+          </div>
+        </article>
+        <article class="card" data-title="protecting the gharial a critical mission">
+          <a href="101_protecting_the_gharial_a_critical_mission.png" target="_blank" aria-label="Open Protecting The Gharial A Critical Mission">
+            <img src="101_protecting_the_gharial_a_critical_mission.png" alt="Protecting The Gharial A Critical Mission" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>102</span>
+            <h2>Protecting The Gharial A Critical Mission</h2>
+          </div>
+        </article>
+        <article class="card" data-title="protecting the hawksbill sea turtle">
+          <a href="102_protecting_the_hawksbill_sea_turtle.png" target="_blank" aria-label="Open Protecting The Hawksbill Sea Turtle">
+            <img src="102_protecting_the_hawksbill_sea_turtle.png" alt="Protecting The Hawksbill Sea Turtle" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>103</span>
+            <h2>Protecting The Hawksbill Sea Turtle</h2>
+          </div>
+        </article>
+        <article class="card" data-title="protecting the leatherback turtle">
+          <a href="103_protecting_the_leatherback_turtle_endoftext.png" target="_blank" aria-label="Open Protecting The Leatherback Turtle">
+            <img src="103_protecting_the_leatherback_turtle_endoftext.png" alt="Protecting The Leatherback Turtle" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>104</span>
+            <h2>Protecting The Leatherback Turtle</h2>
+          </div>
+        </article>
+        <article class="card" data-title="protecting the red panda s habitat">
+          <a href="104_protecting_the_red_panda_s_habitat.png" target="_blank" aria-label="Open Protecting The Red Panda S Habitat">
+            <img src="104_protecting_the_red_panda_s_habitat.png" alt="Protecting The Red Panda S Habitat" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>105</span>
+            <h2>Protecting The Red Panda S Habitat</h2>
+          </div>
+        </article>
+        <article class="card" data-title="protecting the siau island tarsier">
+          <a href="105_protecting_the_siau_island_tarsier.png" target="_blank" aria-label="Open Protecting The Siau Island Tarsier">
+            <img src="105_protecting_the_siau_island_tarsier.png" alt="Protecting The Siau Island Tarsier" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>106</span>
+            <h2>Protecting The Siau Island Tarsier</h2>
+          </div>
+        </article>
+        <article class="card" data-title="protecting the snow leopard s highland home">
+          <a href="106_protecting_the_snow_leopard_s_highland_home.png" target="_blank" aria-label="Open Protecting The Snow Leopard S Highland Home">
+            <img src="106_protecting_the_snow_leopard_s_highland_home.png" alt="Protecting The Snow Leopard S Highland Home" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>107</span>
+            <h2>Protecting The Snow Leopard S Highland Home</h2>
+          </div>
+        </article>
+        <article class="card" data-title="protecting the sumatran rhino">
+          <a href="107_protecting_the_sumatran_rhino.png" target="_blank" aria-label="Open Protecting The Sumatran Rhino">
+            <img src="107_protecting_the_sumatran_rhino.png" alt="Protecting The Sumatran Rhino" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>108</span>
+            <h2>Protecting The Sumatran Rhino</h2>
+          </div>
+        </article>
+        <article class="card" data-title="red panda conservation awareness poster">
+          <a href="108_red_panda_conservation_awareness_poster.png" target="_blank" aria-label="Open Red Panda Conservation Awareness Poster">
+            <img src="108_red_panda_conservation_awareness_poster.png" alt="Red Panda Conservation Awareness Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>109</span>
+            <h2>Red Panda Conservation Awareness Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="red wolf conservation infographic poster">
+          <a href="109_red_wolf_conservation_infographic_poster.png" target="_blank" aria-label="Open Red Wolf Conservation Infographic Poster">
+            <img src="109_red_wolf_conservation_infographic_poster.png" alt="Red Wolf Conservation Infographic Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>110</span>
+            <h2>Red Wolf Conservation Infographic Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="red wolf conservation overview infographic">
+          <a href="110_red_wolf_conservation_overview_infographic.png" target="_blank" aria-label="Open Red Wolf Conservation Overview Infographic">
+            <img src="110_red_wolf_conservation_overview_infographic.png" alt="Red Wolf Conservation Overview Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>111</span>
+            <h2>Red Wolf Conservation Overview Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saola the asian unicorn at risk">
+          <a href="111_saola_the_asian_unicorn_at_risk.png" target="_blank" aria-label="Open Saola The Asian Unicorn At Risk">
+            <img src="111_saola_the_asian_unicorn_at_risk.png" alt="Saola The Asian Unicorn At Risk" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>112</span>
+            <h2>Saola The Asian Unicorn At Risk</h2>
+          </div>
+        </article>
+        <article class="card" data-title="save the african forest elephant">
+          <a href="112_save_the_african_forest_elephant.png" target="_blank" aria-label="Open Save The African Forest Elephant">
+            <img src="112_save_the_african_forest_elephant.png" alt="Save The African Forest Elephant" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>113</span>
+            <h2>Save The African Forest Elephant</h2>
+          </div>
+        </article>
+        <article class="card" data-title="save the red panda save nature">
+          <a href="113_save_the_red_panda_save_nature.png" target="_blank" aria-label="Open Save The Red Panda Save Nature">
+            <img src="113_save_the_red_panda_save_nature.png" alt="Save The Red Panda Save Nature" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>114</span>
+            <h2>Save The Red Panda Save Nature</h2>
+          </div>
+        </article>
+        <article class="card" data-title="save the sawfish protect ecosystems">
+          <a href="114_save_the_sawfish_protect_ecosystems.png" target="_blank" aria-label="Open Save The Sawfish Protect Ecosystems">
+            <img src="114_save_the_sawfish_protect_ecosystems.png" alt="Save The Sawfish Protect Ecosystems" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>115</span>
+            <h2>Save The Sawfish Protect Ecosystems</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the black footed ferret">
+          <a href="115_saving_the_black_footed_ferret_endoftext.png" target="_blank" aria-label="Open Saving The Black Footed Ferret">
+            <img src="115_saving_the_black_footed_ferret_endoftext.png" alt="Saving The Black Footed Ferret" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>116</span>
+            <h2>Saving The Black Footed Ferret</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the california condor infographic">
+          <a href="116_saving_the_california_condor_infographic.png" target="_blank" aria-label="Open Saving The California Condor Infographic">
+            <img src="116_saving_the_california_condor_infographic.png" alt="Saving The California Condor Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>117</span>
+            <h2>Saving The California Condor Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the chinese giant salamander">
+          <a href="117_saving_the_chinese_giant_salamander.png" target="_blank" aria-label="Open Saving The Chinese Giant Salamander">
+            <img src="117_saving_the_chinese_giant_salamander.png" alt="Saving The Chinese Giant Salamander" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>118</span>
+            <h2>Saving The Chinese Giant Salamander</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the javan slow loris">
+          <a href="118_saving_the_javan_slow_loris.png" target="_blank" aria-label="Open Saving The Javan Slow Loris">
+            <img src="118_saving_the_javan_slow_loris.png" alt="Saving The Javan Slow Loris" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>119</span>
+            <h2>Saving The Javan Slow Loris</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the manta protecting our reefs">
+          <a href="119_saving_the_manta_protecting_our_reefs.png" target="_blank" aria-label="Open Saving The Manta Protecting Our Reefs">
+            <img src="119_saving_the_manta_protecting_our_reefs.png" alt="Saving The Manta Protecting Our Reefs" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>120</span>
+            <h2>Saving The Manta Protecting Our Reefs</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the philippine eagle a conservation guide">
+          <a href="120_saving_the_philippine_eagle_a_conservation_guide.png" target="_blank" aria-label="Open Saving The Philippine Eagle A Conservation Guide">
+            <img src="120_saving_the_philippine_eagle_a_conservation_guide.png" alt="Saving The Philippine Eagle A Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>121</span>
+            <h2>Saving The Philippine Eagle A Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the red panda heritage">
+          <a href="121_saving_the_red_panda_heritage.png" target="_blank" aria-label="Open Saving The Red Panda Heritage">
+            <img src="121_saving_the_red_panda_heritage.png" alt="Saving The Red Panda Heritage" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>122</span>
+            <h2>Saving The Red Panda Heritage</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the saiga a conservation call">
+          <a href="122_saving_the_saiga_a_conservation_call.png" target="_blank" aria-label="Open Saving The Saiga A Conservation Call">
+            <img src="122_saving_the_saiga_a_conservation_call.png" alt="Saving The Saiga A Conservation Call" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>123</span>
+            <h2>Saving The Saiga A Conservation Call</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the saiga a steppe battle">
+          <a href="123_saving_the_saiga_a_steppe_battle.png" target="_blank" aria-label="Open Saving The Saiga A Steppe Battle">
+            <img src="123_saving_the_saiga_a_steppe_battle.png" alt="Saving The Saiga A Steppe Battle" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>124</span>
+            <h2>Saving The Saiga A Steppe Battle</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the siamese crocodile poster">
+          <a href="124_saving_the_siamese_crocodile_poster.png" target="_blank" aria-label="Open Saving The Siamese Crocodile Poster">
+            <img src="124_saving_the_siamese_crocodile_poster.png" alt="Saving The Siamese Crocodile Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>125</span>
+            <h2>Saving The Siamese Crocodile Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the slow loris java s treasure">
+          <a href="125_saving_the_slow_loris_java_s_treasure.png" target="_blank" aria-label="Open Saving The Slow Loris Java S Treasure">
+            <img src="125_saving_the_slow_loris_java_s_treasure.png" alt="Saving The Slow Loris Java S Treasure" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>126</span>
+            <h2>Saving The Slow Loris Java S Treasure</h2>
+          </div>
+        </article>
+        <article class="card" data-title="saving the tasmanian devil conservation facts">
+          <a href="126_saving_the_tasmanian_devil_conservation_facts.png" target="_blank" aria-label="Open Saving The Tasmanian Devil Conservation Facts">
+            <img src="126_saving_the_tasmanian_devil_conservation_facts.png" alt="Saving The Tasmanian Devil Conservation Facts" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>127</span>
+            <h2>Saving The Tasmanian Devil Conservation Facts</h2>
+          </div>
+        </article>
+        <article class="card" data-title="shoebill africa s vulnerable swamp sentinel">
+          <a href="127_shoebill_africa_s_vulnerable_swamp_sentinel.png" target="_blank" aria-label="Open Shoebill Africa S Vulnerable Swamp Sentinel">
+            <img src="127_shoebill_africa_s_vulnerable_swamp_sentinel.png" alt="Shoebill Africa S Vulnerable Swamp Sentinel" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>128</span>
+            <h2>Shoebill Africa S Vulnerable Swamp Sentinel</h2>
+          </div>
+        </article>
+        <article class="card" data-title="shoebill stork conservation guide">
+          <a href="128_shoebill_stork_conservation_guide.png" target="_blank" aria-label="Open Shoebill Stork Conservation Guide">
+            <img src="128_shoebill_stork_conservation_guide.png" alt="Shoebill Stork Conservation Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>129</span>
+            <h2>Shoebill Stork Conservation Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="siamese crocodile conservation infographic">
+          <a href="129_siamese_crocodile_conservation_infographic.png" target="_blank" aria-label="Open Siamese Crocodile Conservation Infographic">
+            <img src="129_siamese_crocodile_conservation_infographic.png" alt="Siamese Crocodile Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>130</span>
+            <h2>Siamese Crocodile Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="silky shark species field guide">
+          <a href="130_silky_shark_species_field_guide.png" target="_blank" aria-label="Open Silky Shark Species Field Guide">
+            <img src="130_silky_shark_species_field_guide.png" alt="Silky Shark Species Field Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>131</span>
+            <h2>Silky Shark Species Field Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="snow leopard conservation infographic poster">
+          <a href="131_snow_leopard_conservation_infographic_poster.png" target="_blank" aria-label="Open Snow Leopard Conservation Infographic Poster">
+            <img src="131_snow_leopard_conservation_infographic_poster.png" alt="Snow Leopard Conservation Infographic Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>132</span>
+            <h2>Snow Leopard Conservation Infographic Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="sumatran rhino conservation infographic">
+          <a href="132_sumatran_rhino_conservation_infographic.png" target="_blank" aria-label="Open Sumatran Rhino Conservation Infographic">
+            <img src="132_sumatran_rhino_conservation_infographic.png" alt="Sumatran Rhino Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>133</span>
+            <h2>Sumatran Rhino Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="sumatran rhinoceros conservation field guide">
+          <a href="133_sumatran_rhinoceros_conservation_field_guide.png" target="_blank" aria-label="Open Sumatran Rhinoceros Conservation Field Guide">
+            <img src="133_sumatran_rhinoceros_conservation_field_guide.png" alt="Sumatran Rhinoceros Conservation Field Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>134</span>
+            <h2>Sumatran Rhinoceros Conservation Field Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="sumatran tiger conservation infographic">
+          <a href="134_sumatran_tiger_conservation_infographic.png" target="_blank" aria-label="Open Sumatran Tiger Conservation Infographic">
+            <img src="134_sumatran_tiger_conservation_infographic.png" alt="Sumatran Tiger Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>135</span>
+            <h2>Sumatran Tiger Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="sunda pangolin a critically endangered species">
+          <a href="135_sunda_pangolin_a_critically_endangered_species.png" target="_blank" aria-label="Open Sunda Pangolin A Critically Endangered Species">
+            <img src="135_sunda_pangolin_a_critically_endangered_species.png" alt="Sunda Pangolin A Critically Endangered Species" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>136</span>
+            <h2>Sunda Pangolin A Critically Endangered Species</h2>
+          </div>
+        </article>
+        <article class="card" data-title="sunda pangolin conservation infographic">
+          <a href="136_sunda_pangolin_conservation_infographic.png" target="_blank" aria-label="Open Sunda Pangolin Conservation Infographic">
+            <img src="136_sunda_pangolin_conservation_infographic.png" alt="Sunda Pangolin Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>137</span>
+            <h2>Sunda Pangolin Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="sunda pangolin endangered species insights">
+          <a href="137_sunda_pangolin_endangered_species_insights.png" target="_blank" aria-label="Open Sunda Pangolin Endangered Species Insights">
+            <img src="137_sunda_pangolin_endangered_species_insights.png" alt="Sunda Pangolin Endangered Species Insights" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>138</span>
+            <h2>Sunda Pangolin Endangered Species Insights</h2>
+          </div>
+        </article>
+        <article class="card" data-title="tapanuli orangutan conservation infographic">
+          <a href="138_tapanuli_orangutan_conservation_infographic.png" target="_blank" aria-label="Open Tapanuli Orangutan Conservation Infographic">
+            <img src="138_tapanuli_orangutan_conservation_infographic.png" alt="Tapanuli Orangutan Conservation Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>139</span>
+            <h2>Tapanuli Orangutan Conservation Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="tapanuli orangutan critically endangered species">
+          <a href="139_tapanuli_orangutan_critically_endangered_species.png" target="_blank" aria-label="Open Tapanuli Orangutan Critically Endangered Species">
+            <img src="139_tapanuli_orangutan_critically_endangered_species.png" alt="Tapanuli Orangutan Critically Endangered Species" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>140</span>
+            <h2>Tapanuli Orangutan Critically Endangered Species</h2>
+          </div>
+        </article>
+        <article class="card" data-title="tarsius tumpara conservation and survival guide">
+          <a href="140_tarsius_tumpara_conservation_and_survival_guide.png" target="_blank" aria-label="Open Tarsius Tumpara Conservation And Survival Guide">
+            <img src="140_tarsius_tumpara_conservation_and_survival_guide.png" alt="Tarsius Tumpara Conservation And Survival Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>141</span>
+            <h2>Tarsius Tumpara Conservation And Survival Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="tasmanian devil conservation poster">
+          <a href="141_tasmanian_devil_conservation_poster.png" target="_blank" aria-label="Open Tasmanian Devil Conservation Poster">
+            <img src="141_tasmanian_devil_conservation_poster.png" alt="Tasmanian Devil Conservation Poster" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>142</span>
+            <h2>Tasmanian Devil Conservation Poster</h2>
+          </div>
+        </article>
+        <article class="card" data-title="the aye aye madagascar s nocturnal wonder">
+          <a href="142_the_aye_aye_madagascar_s_nocturnal_wonder.png" target="_blank" aria-label="Open The Aye Aye Madagascar S Nocturnal Wonder">
+            <img src="142_the_aye_aye_madagascar_s_nocturnal_wonder.png" alt="The Aye Aye Madagascar S Nocturnal Wonder" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>143</span>
+            <h2>The Aye Aye Madagascar S Nocturnal Wonder</h2>
+          </div>
+        </article>
+        <article class="card" data-title="the rare saola earth s asian unicorn">
+          <a href="143_the_rare_saola_earth_s_asian_unicorn.png" target="_blank" aria-label="Open The Rare Saola Earth S Asian Unicorn">
+            <img src="143_the_rare_saola_earth_s_asian_unicorn.png" alt="The Rare Saola Earth S Asian Unicorn" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>144</span>
+            <h2>The Rare Saola Earth S Asian Unicorn</h2>
+          </div>
+        </article>
+        <article class="card" data-title="vaquita conservation critical facts and action">
+          <a href="144_vaquita_conservation_critical_facts_and_action.png" target="_blank" aria-label="Open Vaquita Conservation Critical Facts And Action">
+            <img src="144_vaquita_conservation_critical_facts_and_action.png" alt="Vaquita Conservation Critical Facts And Action" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>145</span>
+            <h2>Vaquita Conservation Critical Facts And Action</h2>
+          </div>
+        </article>
+        <article class="card" data-title="vaquita critically endangered species infographic">
+          <a href="145_vaquita_critically_endangered_species_infographic.png" target="_blank" aria-label="Open Vaquita Critically Endangered Species Infographic">
+            <img src="145_vaquita_critically_endangered_species_infographic.png" alt="Vaquita Critically Endangered Species Infographic" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>146</span>
+            <h2>Vaquita Critically Endangered Species Infographic</h2>
+          </div>
+        </article>
+        <article class="card" data-title="vulnerable fossa protect madagascar s wild forest">
+          <a href="146_vulnerable_fossa_protect_madagascar_s_wild_forest.png" target="_blank" aria-label="Open Vulnerable Fossa Protect Madagascar S Wild Forest">
+            <img src="146_vulnerable_fossa_protect_madagascar_s_wild_forest.png" alt="Vulnerable Fossa Protect Madagascar S Wild Forest" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>147</span>
+            <h2>Vulnerable Fossa Protect Madagascar S Wild Forest</h2>
+          </div>
+        </article>
+        <article class="card" data-title="whale shark conservation illustrated guide">
+          <a href="147_whale_shark_conservation_illustrated_guide.png" target="_blank" aria-label="Open Whale Shark Conservation Illustrated Guide">
+            <img src="147_whale_shark_conservation_illustrated_guide.png" alt="Whale Shark Conservation Illustrated Guide" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>148</span>
+            <h2>Whale Shark Conservation Illustrated Guide</h2>
+          </div>
+        </article>
+        <article class="card" data-title="b1476c21-ac62-486d-9340-c2a03da47734">
+          <a href="b1476c21-ac62-486d-9340-c2a03da47734.png" target="_blank" aria-label="Open B1476c21-Ac62-486d-9340-C2a03da47734">
+            <img src="b1476c21-ac62-486d-9340-c2a03da47734.png" alt="B1476c21-Ac62-486d-9340-C2a03da47734" loading="lazy">
+          </a>
+          <div class="card-copy">
+            <span>149</span>
+            <h2>B1476c21-Ac62-486d-9340-C2a03da47734</h2>
+          </div>
+        </article>
+    </section>
+  </main>
+
+  <script>
+    const search = document.querySelector('#search');
+    const count = document.querySelector('#visible-count');
+    const cards = [...document.querySelectorAll('.card')];
+
+    search.addEventListener('input', () => {
+      const query = search.value.trim().toLowerCase();
+      let visible = 0;
+
+      for (const card of cards) {
+        const match = card.dataset.title.includes(query);
+        card.classList.toggle('hidden', !match);
+        if (match) visible += 1;
+      }
+
+      count.textContent = visible;
+    });
+  </script>
+</body>
+</html>
