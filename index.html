@@ -63,6 +63,9 @@
     .story h2, .collection-head h2, .support-band h2 { margin: 0; font-size: clamp(2rem, 4vw, 4.2rem); line-height: 1; text-transform: uppercase; }
     .story p, .support-band p, .collection-head p { margin: 0 0 18px; color: var(--muted); font-size: 1rem; line-height: 1.7; }
     .support-band { margin-top: 14px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 24px; border: 1px solid rgba(228, 183, 95, 0.38); border-radius: 8px; background: linear-gradient(135deg, rgba(228, 183, 95, 0.18), rgba(124, 185, 177, 0.1)); }
+    .support-actions { display: flex; align-items: center; gap: 16px; }
+    .qr-card { width: 124px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: rgba(247, 242, 232, 0.08); }
+    .qr-card img { display: block; width: 100%; height: auto; border-radius: 6px; }
     .support-band h2 { font-size: clamp(1.6rem, 3vw, 3rem); }
     .support-band p { margin: 10px 0 0; }
     .collection-head { padding: 58px 0 18px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 520px); gap: 28px; align-items: end; }
@@ -88,7 +91,8 @@
     .footer { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 18px; color: var(--muted); font-size: 0.92rem; }
     .hidden, .language-hidden { display: none; }
 
-    @media (max-width: 960px) { .hero-content, .story, .collection-head { grid-template-columns: 1fr; } .side-panel { max-width: 420px; } .toolbar-inner { grid-template-columns: 1fr; align-items: stretch; } .support-band { grid-template-columns: 1fr; } }
+    @media (max-width: 960px) { .hero-content, .story, .collection-head { grid-template-columns: 1fr; } .side-panel { max-width: 420px; } .toolbar-inner { grid-template-columns: 1fr; align-items: stretch; } .support-band { grid-template-columns: 1fr; } .support-actions { justify-content: space-between; } }
+    @media (max-width: 520px) { .support-actions { align-items: stretch; flex-direction: column; } .qr-card { width: 148px; } }
     @media (max-width: 720px) { .nav { grid-template-columns: 1fr auto; gap: 12px; padding: 12px 18px; } .nav-links { grid-column: 1 / -1; justify-content: flex-start; overflow-x: auto; padding-bottom: 2px; } .hero { min-height: 92vh; } .hero-content { padding: 172px 0 58px; } .stats { grid-template-columns: 1fr; } .gallery-title { display: block; } .gallery-title p { margin-top: 10px; } .gallery { grid-template-columns: repeat(auto-fill, minmax(154px, 1fr)); gap: 12px; } .card-copy { min-height: 142px; padding: 12px; } .footer { flex-direction: column; } }
   </style>
 </head>
@@ -150,7 +154,12 @@
         <h2 data-i18n="supportTitle">Help the collection grow.</h2>
         <p data-i18n="supportText">Donations help cover visual production, research time, bilingual editing, OCR cleanup, and hosting.</p>
       </div>
-      <a class="button primary" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="supportButton">Donate through CloudTips</a>
+      <div class="support-actions">
+        <a class="button primary" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="supportButton">Donate through CloudTips</a>
+        <a class="qr-card" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" aria-label="Open CloudTips donation page">
+          <img src="assets/cloudtips-qr.svg" alt="QR code for CloudTips donation link">
+        </a>
+      </div>
     </section>
 
     <section class="collection-head" id="collections">
