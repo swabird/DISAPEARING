@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Disappearing Animal Species</title>
-  <meta name="description" content="A visual atlas of endangered and vulnerable animal species.">
+  <meta name="description" content="A bilingual visual atlas of endangered and vulnerable animal species.">
   <style>
     :root {
       color-scheme: dark;
@@ -12,10 +12,12 @@
       --muted: #b8c0b6;
       --line: rgba(247, 242, 232, 0.18);
       --surface: rgba(18, 24, 22, 0.72);
-      --surface-strong: rgba(12, 17, 16, 0.92);
+      --surface-strong: rgba(12, 17, 16, 0.94);
       --accent: #e3b45f;
-      --forest: #12201a;
-      --moss: #6f8c5a;
+      --accent-ink: #1a1206;
+      --green: #7d9b66;
+      --water: #7cb9b1;
+      --bg: #0b0f0d;
     }
 
     * { box-sizing: border-box; }
@@ -25,11 +27,86 @@
     body {
       margin: 0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #0b0f0d;
+      background: var(--bg);
       color: var(--ink);
     }
 
     a { color: inherit; }
+
+    .nav {
+      position: fixed;
+      z-index: 10;
+      inset: 0 0 auto 0;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 22px;
+      padding: 16px clamp(18px, 4vw, 56px);
+      background: linear-gradient(180deg, rgba(6, 10, 9, 0.86), rgba(6, 10, 9, 0.18));
+      backdrop-filter: blur(12px);
+    }
+
+    .brand {
+      font-weight: 790;
+      text-transform: uppercase;
+      letter-spacing: 0;
+      font-size: 0.88rem;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .nav a:not(.donate), .lang-toggle button {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .lang-toggle {
+      display: inline-grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .lang-toggle button {
+      min-width: 42px;
+      min-height: 36px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 760;
+    }
+
+    .lang-toggle button[aria-pressed="true"] {
+      background: var(--ink);
+      color: #101713;
+    }
+
+    .donate {
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      padding: 0 15px;
+      background: var(--accent);
+      color: var(--accent-ink);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
 
     .hero {
       position: relative;
@@ -45,76 +122,77 @@
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(90deg, rgba(4, 8, 7, 0.92) 0%, rgba(4, 8, 7, 0.62) 42%, rgba(4, 8, 7, 0.14) 100%),
-        linear-gradient(180deg, rgba(4, 8, 7, 0.06) 0%, rgba(4, 8, 7, 0.82) 100%),
+        linear-gradient(90deg, rgba(4, 8, 7, 0.94) 0%, rgba(4, 8, 7, 0.68) 42%, rgba(4, 8, 7, 0.18) 100%),
+        linear-gradient(180deg, rgba(4, 8, 7, 0.04) 0%, rgba(4, 8, 7, 0.84) 100%),
         url('056_endangered_species_visual_atlas_cover.png') center / cover;
       transform: scale(1.02);
-    }
-
-    .nav {
-      position: fixed;
-      z-index: 10;
-      inset: 0 0 auto 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 24px;
-      padding: 18px clamp(18px, 4vw, 56px);
-      background: linear-gradient(180deg, rgba(6, 10, 9, 0.78), rgba(6, 10, 9, 0));
-      backdrop-filter: blur(8px);
-    }
-
-    .brand {
-      font-weight: 760;
-      text-transform: uppercase;
-      letter-spacing: 0;
-      font-size: 0.86rem;
-    }
-
-    .nav a {
-      font-size: 0.9rem;
-      color: var(--muted);
-      text-decoration: none;
     }
 
     .hero-content {
       position: relative;
       width: min(1180px, calc(100% - 36px));
       margin: 0 auto;
-      padding: 148px 0 86px;
+      padding: 148px 0 76px;
     }
 
     .kicker {
       color: var(--accent);
       font-size: 0.84rem;
-      font-weight: 760;
+      font-weight: 790;
       text-transform: uppercase;
       letter-spacing: 0;
       margin: 0 0 18px;
     }
 
     h1 {
-      max-width: 960px;
+      max-width: 1020px;
       margin: 0;
-      font-size: clamp(3rem, 8vw, 8.8rem);
-      line-height: 0.88;
+      font-size: clamp(3rem, 8vw, 8.4rem);
+      line-height: 0.9;
       letter-spacing: 0;
       text-transform: uppercase;
     }
 
-    .hero p {
-      max-width: 660px;
+    .lede {
+      max-width: 720px;
       margin: 28px 0 0;
       color: var(--muted);
-      font-size: clamp(1rem, 1.6vw, 1.25rem);
+      font-size: clamp(1rem, 1.6vw, 1.24rem);
       line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 0 18px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 760;
+    }
+
+    .button.primary {
+      border-color: transparent;
+      background: var(--accent);
+      color: var(--accent-ink);
     }
 
     .stats {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 1px;
-      width: min(780px, 100%);
+      width: min(820px, 100%);
       margin-top: 42px;
       border: 1px solid var(--line);
       background: var(--line);
@@ -123,12 +201,12 @@
     .stat {
       min-height: 96px;
       padding: 20px;
-      background: rgba(8, 13, 12, 0.72);
+      background: rgba(8, 13, 12, 0.74);
     }
 
     .stat strong {
       display: block;
-      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      font-size: clamp(1.75rem, 4vw, 3rem);
       line-height: 1;
     }
 
@@ -141,8 +219,47 @@
 
     main {
       background:
+        radial-gradient(circle at 18% 0%, rgba(124, 185, 177, 0.13), transparent 28%),
         linear-gradient(180deg, #0b0f0d, #111915 44%, #0b0f0d);
-      padding: 34px 0 80px;
+      padding: 0 0 80px;
+    }
+
+    .intro {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 54px 0 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+      gap: clamp(28px, 5vw, 72px);
+      align-items: start;
+    }
+
+    .section-kicker {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .intro h2 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 4.6rem);
+      line-height: 0.98;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .intro p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .note {
+      border-left: 3px solid var(--accent);
+      padding-left: 18px;
     }
 
     .toolbar {
@@ -150,8 +267,9 @@
       top: 0;
       z-index: 8;
       padding: 14px clamp(18px, 4vw, 56px);
+      border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
-      background: rgba(9, 13, 12, 0.86);
+      background: rgba(9, 13, 12, 0.9);
       backdrop-filter: blur(14px);
     }
 
@@ -231,7 +349,7 @@
     .card-copy span {
       color: var(--accent);
       font-size: 0.72rem;
-      font-weight: 760;
+      font-weight: 790;
     }
 
     .card-copy h2 {
@@ -241,50 +359,102 @@
       letter-spacing: 0;
     }
 
+    .footer {
+      width: min(1180px, calc(100% - 36px));
+      margin: 64px auto 0;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
     .hidden { display: none; }
 
+    @media (max-width: 860px) {
+      .nav {
+        grid-template-columns: 1fr auto;
+        gap: 12px;
+      }
+
+      .nav-links {
+        grid-column: 1 / -1;
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .intro { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 680px) {
-      .nav { padding: 14px 18px; }
+      .nav { padding: 12px 18px; }
       .hero { min-height: 88vh; }
-      .hero-content { padding-bottom: 58px; }
+      .hero-content { padding: 174px 0 58px; }
       .stats { grid-template-columns: 1fr; }
       .toolbar-inner { grid-template-columns: 1fr; }
       .count { white-space: normal; }
       .gallery { grid-template-columns: repeat(auto-fill, minmax(154px, 1fr)); gap: 12px; }
       .card-copy { min-height: 112px; padding: 12px; }
+      .footer { flex-direction: column; }
     }
   </style>
 </head>
 <body>
   <nav class="nav" aria-label="Primary navigation">
     <div class="brand">Disappearing</div>
-    <a href="#atlas">Visual atlas</a>
+    <div class="nav-links">
+      <a href="#story" data-i18n="navStory">Story</a>
+      <a href="#atlas" data-i18n="navAtlas">Visual atlas</a>
+      <a class="donate" href="https://buymeacoffee.com/" target="_blank" rel="noopener" data-i18n="donate">Donate</a>
+    </div>
+    <div class="lang-toggle" aria-label="Language switcher">
+      <button type="button" data-lang="en" aria-pressed="true">EN</button>
+      <button type="button" data-lang="ru" aria-pressed="false">RU</button>
+    </div>
   </nav>
 
   <header class="hero">
     <div class="hero-content">
-      <p class="kicker">Endangered animal species</p>
-      <h1>Disappearing Animal Species</h1>
-      <p>A visual atlas of conservation posters and field-guide plates documenting fragile habitats, threatened populations, and species at risk.</p>
+      <p class="kicker" data-i18n="kicker">Endangered animal species</p>
+      <h1 data-i18n="title">Disappearing Animal Species</h1>
+      <p class="lede" data-i18n="lede">A bilingual visual atlas of conservation posters and field-guide plates documenting fragile habitats, threatened populations, and species at risk.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#atlas" data-i18n="explore">Explore the atlas</a>
+        <a class="button" href="https://buymeacoffee.com/" target="_blank" rel="noopener" data-i18n="support">Support the project</a>
+      </div>
       <div class="stats" aria-label="Collection summary">
-        <div class="stat"><strong>149</strong><span>visual plates</span></div>
-        <div class="stat"><strong>Global</strong><span>species and habitats</span></div>
-        <div class="stat"><strong>PNG</strong><span>poster archive</span></div>
+        <div class="stat"><strong>149</strong><span data-i18n="statPlates">visual plates</span></div>
+        <div class="stat"><strong data-i18n="statGlobalValue">Global</strong><span data-i18n="statGlobal">species and habitats</span></div>
+        <div class="stat"><strong>EN/RU</strong><span data-i18n="statLang">bilingual interface</span></div>
       </div>
     </div>
   </header>
 
-  <main id="atlas">
-    <section class="toolbar" aria-label="Gallery controls">
+  <main>
+    <section class="intro" id="story">
+      <div>
+        <p class="section-kicker" data-i18n="storyKicker">Why this atlas exists</p>
+        <h2 data-i18n="storyTitle">A quiet archive for species that should not vanish quietly.</h2>
+      </div>
+      <div>
+        <p data-i18n="storyOne">Each plate gathers conservation signals into an image-first format: habitat, pressure, rarity, and the emotional scale of loss. The collection is meant for classrooms, campaigns, visual research, and anyone who needs a strong first encounter with endangered life.</p>
+        <p class="note" data-i18n="storyTwo">The project is still growing. Donations help cover image production, research time, hosting, and bilingual editorial work.</p>
+      </div>
+    </section>
+
+    <section class="toolbar" id="atlas" aria-label="Gallery controls">
       <div class="toolbar-inner">
         <input id="search" type="search" placeholder="Search species or poster title" autocomplete="off">
-        <div class="count"><span id="visible-count">149</span> / 149 plates</div>
+        <div class="count"><span id="visible-count">149</span> / 149 <span data-i18n="platesLabel">plates</span></div>
       </div>
     </section>
 
     <section class="gallery" aria-label="Endangered species poster gallery">
 
-        <article class="card" data-title="a clean high detail composite infographic image w">
+        <article class="card" data-title="a clean high detail composite infographic image w 001_a_clean_high_detail_composite_infographic_image_w.png">
           <a href="001_a_clean_high_detail_composite_infographic_image_w.png" target="_blank" aria-label="Open A Clean High Detail Composite Infographic Image W">
             <img src="001_a_clean_high_detail_composite_infographic_image_w.png" alt="A Clean High Detail Composite Infographic Image W" loading="lazy">
           </a>
@@ -293,7 +463,7 @@
             <h2>A Clean High Detail Composite Infographic Image W</h2>
           </div>
         </article>
-        <article class="card" data-title="a composite infographic poster image showing 8 ani">
+        <article class="card" data-title="a composite infographic poster image showing 8 ani 002_a_composite_infographic_poster_image_showing_8_ani.png">
           <a href="002_a_composite_infographic_poster_image_showing_8_ani.png" target="_blank" aria-label="Open A Composite Infographic Poster Image Showing 8 Ani">
             <img src="002_a_composite_infographic_poster_image_showing_8_ani.png" alt="A Composite Infographic Poster Image Showing 8 Ani" loading="lazy">
           </a>
@@ -302,16 +472,16 @@
             <h2>A Composite Infographic Poster Image Showing 8 Ani</h2>
           </div>
         </article>
-        <article class="card" data-title="2b4a8a13-e4bb-4406-95fe-dcccedf2254a">
-          <a href="2b4a8a13-e4bb-4406-95fe-dcccedf2254a.png" target="_blank" aria-label="Open 2b4a8a13-E4bb-4406-95fe-Dcccedf2254a">
-            <img src="2b4a8a13-e4bb-4406-95fe-dcccedf2254a.png" alt="2b4a8a13-E4bb-4406-95fe-Dcccedf2254a" loading="lazy">
+        <article class="card" data-title="archive plate 2b4a8a13-e4bb-4406-95fe-dcccedf2254a.png">
+          <a href="2b4a8a13-e4bb-4406-95fe-dcccedf2254a.png" target="_blank" aria-label="Open Archive Plate">
+            <img src="2b4a8a13-e4bb-4406-95fe-dcccedf2254a.png" alt="Archive Plate" loading="lazy">
           </a>
           <div class="card-copy">
             <span>003</span>
-            <h2>2b4a8a13-E4bb-4406-95fe-Dcccedf2254a</h2>
+            <h2>Archive Plate</h2>
           </div>
         </article>
-        <article class="card" data-title="a composite poster image a grid of 8 wildlife inf">
+        <article class="card" data-title="a composite poster image a grid of 8 wildlife inf 003_a_composite_poster_image_a_grid_of_8_wildlife_inf.png">
           <a href="003_a_composite_poster_image_a_grid_of_8_wildlife_inf.png" target="_blank" aria-label="Open A Composite Poster Image A Grid Of 8 Wildlife Inf">
             <img src="003_a_composite_poster_image_a_grid_of_8_wildlife_inf.png" alt="A Composite Poster Image A Grid Of 8 Wildlife Inf" loading="lazy">
           </a>
@@ -320,7 +490,7 @@
             <h2>A Composite Poster Image A Grid Of 8 Wildlife Inf</h2>
           </div>
         </article>
-        <article class="card" data-title="a detailed infographic collage poster an overall">
+        <article class="card" data-title="a detailed infographic collage poster an overall 004_a_detailed_infographic_collage_poster_an_overall.png">
           <a href="004_a_detailed_infographic_collage_poster_an_overall.png" target="_blank" aria-label="Open A Detailed Infographic Collage Poster An Overall">
             <img src="004_a_detailed_infographic_collage_poster_an_overall.png" alt="A Detailed Infographic Collage Poster An Overall" loading="lazy">
           </a>
@@ -329,7 +499,7 @@
             <h2>A Detailed Infographic Collage Poster An Overall</h2>
           </div>
         </article>
-        <article class="card" data-title="a detailed infographic image a grid of eight wild">
+        <article class="card" data-title="a detailed infographic image a grid of eight wild 005_a_detailed_infographic_image_a_grid_of_eight_wild.png">
           <a href="005_a_detailed_infographic_image_a_grid_of_eight_wild.png" target="_blank" aria-label="Open A Detailed Infographic Image A Grid Of Eight Wild">
             <img src="005_a_detailed_infographic_image_a_grid_of_eight_wild.png" alt="A Detailed Infographic Image A Grid Of Eight Wild" loading="lazy">
           </a>
@@ -338,7 +508,7 @@
             <h2>A Detailed Infographic Image A Grid Of Eight Wild</h2>
           </div>
         </article>
-        <article class="card" data-title="a detailed infographic poster. overall scene a ve">
+        <article class="card" data-title="a detailed infographic poster. overall scene a ve 006_a_detailed_infographic_poster._overall_scene_a_ve.png">
           <a href="006_a_detailed_infographic_poster._overall_scene_a_ve.png" target="_blank" aria-label="Open A Detailed Infographic Poster. Overall Scene A Ve">
             <img src="006_a_detailed_infographic_poster._overall_scene_a_ve.png" alt="A Detailed Infographic Poster. Overall Scene A Ve" loading="lazy">
           </a>
@@ -347,7 +517,7 @@
             <h2>A Detailed Infographic Poster. Overall Scene A Ve</h2>
           </div>
         </article>
-        <article class="card" data-title="a detailed infographic poster style scene. overall">
+        <article class="card" data-title="a detailed infographic poster style scene. overall 007_a_detailed_infographic_poster_style_scene._overall.png">
           <a href="007_a_detailed_infographic_poster_style_scene._overall.png" target="_blank" aria-label="Open A Detailed Infographic Poster Style Scene. Overall">
             <img src="007_a_detailed_infographic_poster_style_scene._overall.png" alt="A Detailed Infographic Poster Style Scene. Overall" loading="lazy">
           </a>
@@ -356,7 +526,7 @@
             <h2>A Detailed Infographic Poster Style Scene. Overall</h2>
           </div>
         </article>
-        <article class="card" data-title="a high detail infographic poster card grid over">
+        <article class="card" data-title="a high detail infographic poster card grid over 008_a_high_detail_infographic_poster_card_grid_over.png">
           <a href="008_a_high_detail_infographic_poster_card_grid_over.png" target="_blank" aria-label="Open A High Detail Infographic Poster Card Grid Over">
             <img src="008_a_high_detail_infographic_poster_card_grid_over.png" alt="A High Detail Infographic Poster Card Grid Over" loading="lazy">
           </a>
@@ -365,7 +535,7 @@
             <h2>A High Detail Infographic Poster Card Grid Over</h2>
           </div>
         </article>
-        <article class="card" data-title="a high detail infographic poster chart style ima">
+        <article class="card" data-title="a high detail infographic poster chart style ima 009_a_high_detail_infographic_poster_chart_style_ima.png">
           <a href="009_a_high_detail_infographic_poster_chart_style_ima.png" target="_blank" aria-label="Open A High Detail Infographic Poster Chart Style Ima">
             <img src="009_a_high_detail_infographic_poster_chart_style_ima.png" alt="A High Detail Infographic Poster Chart Style Ima" loading="lazy">
           </a>
@@ -374,7 +544,7 @@
             <h2>A High Detail Infographic Poster Chart Style Ima</h2>
           </div>
         </article>
-        <article class="card" data-title="a high detail infographic poster collage a grid o">
+        <article class="card" data-title="a high detail infographic poster collage a grid o 010_a_high_detail_infographic_poster_collage_a_grid_o.png">
           <a href="010_a_high_detail_infographic_poster_collage_a_grid_o.png" target="_blank" aria-label="Open A High Detail Infographic Poster Collage A Grid O">
             <img src="010_a_high_detail_infographic_poster_collage_a_grid_o.png" alt="A High Detail Infographic Poster Collage A Grid O" loading="lazy">
           </a>
@@ -383,7 +553,7 @@
             <h2>A High Detail Infographic Poster Collage A Grid O</h2>
           </div>
         </article>
-        <article class="card" data-title="a high detail infographic poster grid a 4x2 block">
+        <article class="card" data-title="a high detail infographic poster grid a 4x2 block 011_a_high_detail_infographic_poster_grid_a_4x2_block.png">
           <a href="011_a_high_detail_infographic_poster_grid_a_4x2_block.png" target="_blank" aria-label="Open A High Detail Infographic Poster Grid A 4x2 Block">
             <img src="011_a_high_detail_infographic_poster_grid_a_4x2_block.png" alt="A High Detail Infographic Poster Grid A 4x2 Block" loading="lazy">
           </a>
@@ -392,7 +562,7 @@
             <h2>A High Detail Infographic Poster Grid A 4x2 Block</h2>
           </div>
         </article>
-        <article class="card" data-title="a high resolution infographic poster collage of en">
+        <article class="card" data-title="a high resolution infographic poster collage of en 012_a_high_resolution_infographic_poster_collage_of_en.png">
           <a href="012_a_high_resolution_infographic_poster_collage_of_en.png" target="_blank" aria-label="Open A High Resolution Infographic Poster Collage Of En">
             <img src="012_a_high_resolution_infographic_poster_collage_of_en.png" alt="A High Resolution Infographic Poster Collage Of En" loading="lazy">
           </a>
@@ -401,7 +571,7 @@
             <h2>A High Resolution Infographic Poster Collage Of En</h2>
           </div>
         </article>
-        <article class="card" data-title="a large composite poster infographic sheet over">
+        <article class="card" data-title="a large composite poster infographic sheet over 013_a_large_composite_poster_infographic_sheet_over.png">
           <a href="013_a_large_composite_poster_infographic_sheet_over.png" target="_blank" aria-label="Open A Large Composite Poster Infographic Sheet Over">
             <img src="013_a_large_composite_poster_infographic_sheet_over.png" alt="A Large Composite Poster Infographic Sheet Over" loading="lazy">
           </a>
@@ -410,7 +580,7 @@
             <h2>A Large Composite Poster Infographic Sheet Over</h2>
           </div>
         </article>
-        <article class="card" data-title="a super detailed infographic poster collage grid">
+        <article class="card" data-title="a super detailed infographic poster collage grid 014_a_super_detailed_infographic_poster_collage_grid.png">
           <a href="014_a_super_detailed_infographic_poster_collage_grid.png" target="_blank" aria-label="Open A Super Detailed Infographic Poster Collage Grid">
             <img src="014_a_super_detailed_infographic_poster_collage_grid.png" alt="A Super Detailed Infographic Poster Collage Grid" loading="lazy">
           </a>
@@ -419,7 +589,7 @@
             <h2>A Super Detailed Infographic Poster Collage Grid</h2>
           </div>
         </article>
-        <article class="card" data-title="a wide composite infographic poster grid scene i">
+        <article class="card" data-title="a wide composite infographic poster grid scene i 015_a_wide_composite_infographic_poster_grid_scene_i.png">
           <a href="015_a_wide_composite_infographic_poster_grid_scene_i.png" target="_blank" aria-label="Open A Wide Composite Infographic Poster Grid Scene I">
             <img src="015_a_wide_composite_infographic_poster_grid_scene_i.png" alt="A Wide Composite Infographic Poster Grid Scene I" loading="lazy">
           </a>
@@ -428,7 +598,7 @@
             <h2>A Wide Composite Infographic Poster Grid Scene I</h2>
           </div>
         </article>
-        <article class="card" data-title="amazonian manatee conservation guide">
+        <article class="card" data-title="amazonian manatee conservation guide 016_amazonian_manatee_conservation_guide.png">
           <a href="016_amazonian_manatee_conservation_guide.png" target="_blank" aria-label="Open Amazonian Manatee Conservation Guide">
             <img src="016_amazonian_manatee_conservation_guide.png" alt="Amazonian Manatee Conservation Guide" loading="lazy">
           </a>
@@ -437,7 +607,7 @@
             <h2>Amazonian Manatee Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="amur leopard conservation infographic">
+        <article class="card" data-title="amur leopard conservation infographic 017_amur_leopard_conservation_infographic.png">
           <a href="017_amur_leopard_conservation_infographic.png" target="_blank" aria-label="Open Amur Leopard Conservation Infographic">
             <img src="017_amur_leopard_conservation_infographic.png" alt="Amur Leopard Conservation Infographic" loading="lazy">
           </a>
@@ -446,7 +616,7 @@
             <h2>Amur Leopard Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="amur leopard infographic poster">
+        <article class="card" data-title="amur leopard infographic poster 018_amur_leopard_infographic_poster.png">
           <a href="018_amur_leopard_infographic_poster.png" target="_blank" aria-label="Open Amur Leopard Infographic Poster">
             <img src="018_amur_leopard_infographic_poster.png" alt="Amur Leopard Infographic Poster" loading="lazy">
           </a>
@@ -455,7 +625,7 @@
             <h2>Amur Leopard Infographic Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="axolotl conservation a vital species">
+        <article class="card" data-title="axolotl conservation a vital species 019_axolotl_conservation_a_vital_species.png">
           <a href="019_axolotl_conservation_a_vital_species.png" target="_blank" aria-label="Open Axolotl Conservation A Vital Species">
             <img src="019_axolotl_conservation_a_vital_species.png" alt="Axolotl Conservation A Vital Species" loading="lazy">
           </a>
@@ -464,7 +634,7 @@
             <h2>Axolotl Conservation A Vital Species</h2>
           </div>
         </article>
-        <article class="card" data-title="axolotl conservation unique species at risk">
+        <article class="card" data-title="axolotl conservation unique species at risk 020_axolotl_conservation_unique_species_at_risk.png">
           <a href="020_axolotl_conservation_unique_species_at_risk.png" target="_blank" aria-label="Open Axolotl Conservation Unique Species At Risk">
             <img src="020_axolotl_conservation_unique_species_at_risk.png" alt="Axolotl Conservation Unique Species At Risk" loading="lazy">
           </a>
@@ -473,7 +643,7 @@
             <h2>Axolotl Conservation Unique Species At Risk</h2>
           </div>
         </article>
-        <article class="card" data-title="black footed ferret conservation poster">
+        <article class="card" data-title="black footed ferret conservation poster 021_black_footed_ferret_conservation_poster.png">
           <a href="021_black_footed_ferret_conservation_poster.png" target="_blank" aria-label="Open Black Footed Ferret Conservation Poster">
             <img src="021_black_footed_ferret_conservation_poster.png" alt="Black Footed Ferret Conservation Poster" loading="lazy">
           </a>
@@ -482,7 +652,7 @@
             <h2>Black Footed Ferret Conservation Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="blue whale conservation infographic">
+        <article class="card" data-title="blue whale conservation infographic 022_blue_whale_conservation_infographic.png">
           <a href="022_blue_whale_conservation_infographic.png" target="_blank" aria-label="Open Blue Whale Conservation Infographic">
             <img src="022_blue_whale_conservation_infographic.png" alt="Blue Whale Conservation Infographic" loading="lazy">
           </a>
@@ -491,7 +661,7 @@
             <h2>Blue Whale Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="blue whale conservation infographic poster">
+        <article class="card" data-title="blue whale conservation infographic poster 023_blue_whale_conservation_infographic_poster.png">
           <a href="023_blue_whale_conservation_infographic_poster.png" target="_blank" aria-label="Open Blue Whale Conservation Infographic Poster">
             <img src="023_blue_whale_conservation_infographic_poster.png" alt="Blue Whale Conservation Infographic Poster" loading="lazy">
           </a>
@@ -500,7 +670,7 @@
             <h2>Blue Whale Conservation Infographic Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="bornean orangutan conservation infographic">
+        <article class="card" data-title="bornean orangutan conservation infographic 024_bornean_orangutan_conservation_infographic.png">
           <a href="024_bornean_orangutan_conservation_infographic.png" target="_blank" aria-label="Open Bornean Orangutan Conservation Infographic">
             <img src="024_bornean_orangutan_conservation_infographic.png" alt="Bornean Orangutan Conservation Infographic" loading="lazy">
           </a>
@@ -509,7 +679,7 @@
             <h2>Bornean Orangutan Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="bornean orangutan conservation poster">
+        <article class="card" data-title="bornean orangutan conservation poster 025_bornean_orangutan_conservation_poster.png">
           <a href="025_bornean_orangutan_conservation_poster.png" target="_blank" aria-label="Open Bornean Orangutan Conservation Poster">
             <img src="025_bornean_orangutan_conservation_poster.png" alt="Bornean Orangutan Conservation Poster" loading="lazy">
           </a>
@@ -518,7 +688,7 @@
             <h2>Bornean Orangutan Conservation Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="bottlenose dolphin wildlife guide poster">
+        <article class="card" data-title="bottlenose dolphin wildlife guide poster 026_bottlenose_dolphin_wildlife_guide_poster.png">
           <a href="026_bottlenose_dolphin_wildlife_guide_poster.png" target="_blank" aria-label="Open Bottlenose Dolphin Wildlife Guide Poster">
             <img src="026_bottlenose_dolphin_wildlife_guide_poster.png" alt="Bottlenose Dolphin Wildlife Guide Poster" loading="lazy">
           </a>
@@ -527,7 +697,7 @@
             <h2>Bottlenose Dolphin Wildlife Guide Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="bowhead whale in the arctic ocean">
+        <article class="card" data-title="bowhead whale in the arctic ocean 027_bowhead_whale_in_the_arctic_ocean.png">
           <a href="027_bowhead_whale_in_the_arctic_ocean.png" target="_blank" aria-label="Open Bowhead Whale In The Arctic Ocean">
             <img src="027_bowhead_whale_in_the_arctic_ocean.png" alt="Bowhead Whale In The Arctic Ocean" loading="lazy">
           </a>
@@ -536,7 +706,7 @@
             <h2>Bowhead Whale In The Arctic Ocean</h2>
           </div>
         </article>
-        <article class="card" data-title="california condor conservation poster">
+        <article class="card" data-title="california condor conservation poster 028_california_condor_conservation_poster.png">
           <a href="028_california_condor_conservation_poster.png" target="_blank" aria-label="Open California Condor Conservation Poster">
             <img src="028_california_condor_conservation_poster.png" alt="California Condor Conservation Poster" loading="lazy">
           </a>
@@ -545,7 +715,7 @@
             <h2>California Condor Conservation Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="chinese giant salamander conservation infographic">
+        <article class="card" data-title="chinese giant salamander conservation infographic 029_chinese_giant_salamander_conservation_infographic.png">
           <a href="029_chinese_giant_salamander_conservation_infographic.png" target="_blank" aria-label="Open Chinese Giant Salamander Conservation Infographic">
             <img src="029_chinese_giant_salamander_conservation_infographic.png" alt="Chinese Giant Salamander Conservation Infographic" loading="lazy">
           </a>
@@ -554,7 +724,7 @@
             <h2>Chinese Giant Salamander Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="common dolphin wildlife guide infographic">
+        <article class="card" data-title="common dolphin wildlife guide infographic 030_common_dolphin_wildlife_guide_infographic.png">
           <a href="030_common_dolphin_wildlife_guide_infographic.png" target="_blank" aria-label="Open Common Dolphin Wildlife Guide Infographic">
             <img src="030_common_dolphin_wildlife_guide_infographic.png" alt="Common Dolphin Wildlife Guide Infographic" loading="lazy">
           </a>
@@ -563,7 +733,7 @@
             <h2>Common Dolphin Wildlife Guide Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation dossier fiji crested iguana">
+        <article class="card" data-title="conservation dossier fiji crested iguana 031_conservation_dossier_fiji_crested_iguana.png">
           <a href="031_conservation_dossier_fiji_crested_iguana.png" target="_blank" aria-label="Open Conservation Dossier Fiji Crested Iguana">
             <img src="031_conservation_dossier_fiji_crested_iguana.png" alt="Conservation Dossier Fiji Crested Iguana" loading="lazy">
           </a>
@@ -572,7 +742,7 @@
             <h2>Conservation Dossier Fiji Crested Iguana</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation of the asian elephant">
+        <article class="card" data-title="conservation of the asian elephant 032_conservation_of_the_asian_elephant.png">
           <a href="032_conservation_of_the_asian_elephant.png" target="_blank" aria-label="Open Conservation Of The Asian Elephant">
             <img src="032_conservation_of_the_asian_elephant.png" alt="Conservation Of The Asian Elephant" loading="lazy">
           </a>
@@ -581,7 +751,7 @@
             <h2>Conservation Of The Asian Elephant</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation of the atlantic puffin">
+        <article class="card" data-title="conservation of the atlantic puffin 033_conservation_of_the_atlantic_puffin.png">
           <a href="033_conservation_of_the_atlantic_puffin.png" target="_blank" aria-label="Open Conservation Of The Atlantic Puffin">
             <img src="033_conservation_of_the_atlantic_puffin.png" alt="Conservation Of The Atlantic Puffin" loading="lazy">
           </a>
@@ -590,7 +760,7 @@
             <h2>Conservation Of The Atlantic Puffin</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation of the aye aye lemur">
+        <article class="card" data-title="conservation of the aye aye lemur 034_conservation_of_the_aye_aye_lemur.png">
           <a href="034_conservation_of_the_aye_aye_lemur.png" target="_blank" aria-label="Open Conservation Of The Aye Aye Lemur">
             <img src="034_conservation_of_the_aye_aye_lemur.png" alt="Conservation Of The Aye Aye Lemur" loading="lazy">
           </a>
@@ -599,7 +769,7 @@
             <h2>Conservation Of The Aye Aye Lemur</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation of the elusive okapi">
+        <article class="card" data-title="conservation of the elusive okapi 035_conservation_of_the_elusive_okapi.png">
           <a href="035_conservation_of_the_elusive_okapi.png" target="_blank" aria-label="Open Conservation Of The Elusive Okapi">
             <img src="035_conservation_of_the_elusive_okapi.png" alt="Conservation Of The Elusive Okapi" loading="lazy">
           </a>
@@ -608,7 +778,7 @@
             <h2>Conservation Of The Elusive Okapi</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation of the european eel">
+        <article class="card" data-title="conservation of the european eel 036_conservation_of_the_european_eel.png">
           <a href="036_conservation_of_the_european_eel.png" target="_blank" aria-label="Open Conservation Of The European Eel">
             <img src="036_conservation_of_the_european_eel.png" alt="Conservation Of The European Eel" loading="lazy">
           </a>
@@ -617,7 +787,7 @@
             <h2>Conservation Of The European Eel</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation of the indo pacific humpback dolphin">
+        <article class="card" data-title="conservation of the indo pacific humpback dolphin 037_conservation_of_the_indo_pacific_humpback_dolphin.png">
           <a href="037_conservation_of_the_indo_pacific_humpback_dolphin.png" target="_blank" aria-label="Open Conservation Of The Indo Pacific Humpback Dolphin">
             <img src="037_conservation_of_the_indo_pacific_humpback_dolphin.png" alt="Conservation Of The Indo Pacific Humpback Dolphin" loading="lazy">
           </a>
@@ -626,7 +796,7 @@
             <h2>Conservation Of The Indo Pacific Humpback Dolphin</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation of the long snouted seahorse">
+        <article class="card" data-title="conservation of the long snouted seahorse 038_conservation_of_the_long_snouted_seahorse.png">
           <a href="038_conservation_of_the_long_snouted_seahorse.png" target="_blank" aria-label="Open Conservation Of The Long Snouted Seahorse">
             <img src="038_conservation_of_the_long_snouted_seahorse.png" alt="Conservation Of The Long Snouted Seahorse" loading="lazy">
           </a>
@@ -635,7 +805,7 @@
             <h2>Conservation Of The Long Snouted Seahorse</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation of the north atlantic right whale">
+        <article class="card" data-title="conservation of the north atlantic right whale 039_conservation_of_the_north_atlantic_right_whale.png">
           <a href="039_conservation_of_the_north_atlantic_right_whale.png" target="_blank" aria-label="Open Conservation Of The North Atlantic Right Whale">
             <img src="039_conservation_of_the_north_atlantic_right_whale.png" alt="Conservation Of The North Atlantic Right Whale" loading="lazy">
           </a>
@@ -644,7 +814,7 @@
             <h2>Conservation Of The North Atlantic Right Whale</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation of the north atlantic whale">
+        <article class="card" data-title="conservation of the north atlantic whale 040_conservation_of_the_north_atlantic_whale.png">
           <a href="040_conservation_of_the_north_atlantic_whale.png" target="_blank" aria-label="Open Conservation Of The North Atlantic Whale">
             <img src="040_conservation_of_the_north_atlantic_whale.png" alt="Conservation Of The North Atlantic Whale" loading="lazy">
           </a>
@@ -653,7 +823,7 @@
             <h2>Conservation Of The North Atlantic Whale</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation of the proboscis monkey">
+        <article class="card" data-title="conservation of the proboscis monkey 041_conservation_of_the_proboscis_monkey.png">
           <a href="041_conservation_of_the_proboscis_monkey.png" target="_blank" aria-label="Open Conservation Of The Proboscis Monkey">
             <img src="041_conservation_of_the_proboscis_monkey.png" alt="Conservation Of The Proboscis Monkey" loading="lazy">
           </a>
@@ -662,7 +832,7 @@
             <h2>Conservation Of The Proboscis Monkey</h2>
           </div>
         </article>
-        <article class="card" data-title="conservation of the whooping crane">
+        <article class="card" data-title="conservation of the whooping crane 042_conservation_of_the_whooping_crane.png">
           <a href="042_conservation_of_the_whooping_crane.png" target="_blank" aria-label="Open Conservation Of The Whooping Crane">
             <img src="042_conservation_of_the_whooping_crane.png" alt="Conservation Of The Whooping Crane" loading="lazy">
           </a>
@@ -671,7 +841,7 @@
             <h2>Conservation Of The Whooping Crane</h2>
           </div>
         </article>
-        <article class="card" data-title="conserving borneo s proboscis monkey">
+        <article class="card" data-title="conserving borneo s proboscis monkey 043_conserving_borneo_s_proboscis_monkey.png">
           <a href="043_conserving_borneo_s_proboscis_monkey.png" target="_blank" aria-label="Open Conserving Borneo S Proboscis Monkey">
             <img src="043_conserving_borneo_s_proboscis_monkey.png" alt="Conserving Borneo S Proboscis Monkey" loading="lazy">
           </a>
@@ -680,7 +850,7 @@
             <h2>Conserving Borneo S Proboscis Monkey</h2>
           </div>
         </article>
-        <article class="card" data-title="conserving the asian elephant s habitat">
+        <article class="card" data-title="conserving the asian elephant s habitat 044_conserving_the_asian_elephant_s_habitat.png">
           <a href="044_conserving_the_asian_elephant_s_habitat.png" target="_blank" aria-label="Open Conserving The Asian Elephant S Habitat">
             <img src="044_conserving_the_asian_elephant_s_habitat.png" alt="Conserving The Asian Elephant S Habitat" loading="lazy">
           </a>
@@ -689,7 +859,7 @@
             <h2>Conserving The Asian Elephant S Habitat</h2>
           </div>
         </article>
-        <article class="card" data-title="conserving the fossa of madagascar">
+        <article class="card" data-title="conserving the fossa of madagascar 045_conserving_the_fossa_of_madagascar.png">
           <a href="045_conserving_the_fossa_of_madagascar.png" target="_blank" aria-label="Open Conserving The Fossa Of Madagascar">
             <img src="045_conserving_the_fossa_of_madagascar.png" alt="Conserving The Fossa Of Madagascar" loading="lazy">
           </a>
@@ -698,7 +868,7 @@
             <h2>Conserving The Fossa Of Madagascar</h2>
           </div>
         </article>
-        <article class="card" data-title="conserving the indo pacific humpback dolphin">
+        <article class="card" data-title="conserving the indo pacific humpback dolphin 046_conserving_the_indo_pacific_humpback_dolphin.png">
           <a href="046_conserving_the_indo_pacific_humpback_dolphin.png" target="_blank" aria-label="Open Conserving The Indo Pacific Humpback Dolphin">
             <img src="046_conserving_the_indo_pacific_humpback_dolphin.png" alt="Conserving The Indo Pacific Humpback Dolphin" loading="lazy">
           </a>
@@ -707,7 +877,7 @@
             <h2>Conserving The Indo Pacific Humpback Dolphin</h2>
           </div>
         </article>
-        <article class="card" data-title="conserving the javan slow loris">
+        <article class="card" data-title="conserving the javan slow loris 047_conserving_the_javan_slow_loris.png">
           <a href="047_conserving_the_javan_slow_loris.png" target="_blank" aria-label="Open Conserving The Javan Slow Loris">
             <img src="047_conserving_the_javan_slow_loris.png" alt="Conserving The Javan Slow Loris" loading="lazy">
           </a>
@@ -716,7 +886,7 @@
             <h2>Conserving The Javan Slow Loris</h2>
           </div>
         </article>
-        <article class="card" data-title="conserving the tarsier of siau island">
+        <article class="card" data-title="conserving the tarsier of siau island 048_conserving_the_tarsier_of_siau_island.png">
           <a href="048_conserving_the_tarsier_of_siau_island.png" target="_blank" aria-label="Open Conserving The Tarsier Of Siau Island">
             <img src="048_conserving_the_tarsier_of_siau_island.png" alt="Conserving The Tarsier Of Siau Island" loading="lazy">
           </a>
@@ -725,7 +895,7 @@
             <h2>Conserving The Tarsier Of Siau Island</h2>
           </div>
         </article>
-        <article class="card" data-title="crocodile field guide dossier design">
+        <article class="card" data-title="crocodile field guide dossier design 049_crocodile_field_guide_dossier_design.png">
           <a href="049_crocodile_field_guide_dossier_design.png" target="_blank" aria-label="Open Crocodile Field Guide Dossier Design">
             <img src="049_crocodile_field_guide_dossier_design.png" alt="Crocodile Field Guide Dossier Design" loading="lazy">
           </a>
@@ -734,7 +904,7 @@
             <h2>Crocodile Field Guide Dossier Design</h2>
           </div>
         </article>
-        <article class="card" data-title="dugong conservation infographic poster">
+        <article class="card" data-title="dugong conservation infographic poster 050_dugong_conservation_infographic_poster.png">
           <a href="050_dugong_conservation_infographic_poster.png" target="_blank" aria-label="Open Dugong Conservation Infographic Poster">
             <img src="050_dugong_conservation_infographic_poster.png" alt="Dugong Conservation Infographic Poster" loading="lazy">
           </a>
@@ -743,7 +913,7 @@
             <h2>Dugong Conservation Infographic Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="dugong conservation protecting a marine icon">
+        <article class="card" data-title="dugong conservation protecting a marine icon 051_dugong_conservation_protecting_a_marine_icon.png">
           <a href="051_dugong_conservation_protecting_a_marine_icon.png" target="_blank" aria-label="Open Dugong Conservation Protecting A Marine Icon">
             <img src="051_dugong_conservation_protecting_a_marine_icon.png" alt="Dugong Conservation Protecting A Marine Icon" loading="lazy">
           </a>
@@ -752,7 +922,7 @@
             <h2>Dugong Conservation Protecting A Marine Icon</h2>
           </div>
         </article>
-        <article class="card" data-title="endangered galápagos penguin conservation guide">
+        <article class="card" data-title="endangered galápagos penguin conservation guide 052_endangered_galápagos_penguin_conservation_guide.png">
           <a href="052_endangered_gal%C3%A1pagos_penguin_conservation_guide.png" target="_blank" aria-label="Open Endangered GaláPagos Penguin Conservation Guide">
             <img src="052_endangered_gal%C3%A1pagos_penguin_conservation_guide.png" alt="Endangered GaláPagos Penguin Conservation Guide" loading="lazy">
           </a>
@@ -761,7 +931,7 @@
             <h2>Endangered GaláPagos Penguin Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="endangered mediterranean monk seal guide">
+        <article class="card" data-title="endangered mediterranean monk seal guide 053_endangered_mediterranean_monk_seal_guide.png">
           <a href="053_endangered_mediterranean_monk_seal_guide.png" target="_blank" aria-label="Open Endangered Mediterranean Monk Seal Guide">
             <img src="053_endangered_mediterranean_monk_seal_guide.png" alt="Endangered Mediterranean Monk Seal Guide" loading="lazy">
           </a>
@@ -770,7 +940,7 @@
             <h2>Endangered Mediterranean Monk Seal Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="endangered proboscis monkey conservation poster">
+        <article class="card" data-title="endangered proboscis monkey conservation poster 054_endangered_proboscis_monkey_conservation_poster.png">
           <a href="054_endangered_proboscis_monkey_conservation_poster.png" target="_blank" aria-label="Open Endangered Proboscis Monkey Conservation Poster">
             <img src="054_endangered_proboscis_monkey_conservation_poster.png" alt="Endangered Proboscis Monkey Conservation Poster" loading="lazy">
           </a>
@@ -779,7 +949,7 @@
             <h2>Endangered Proboscis Monkey Conservation Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="endangered species visual atlas">
+        <article class="card" data-title="endangered species visual atlas 055_endangered_species_visual_atlas.png">
           <a href="055_endangered_species_visual_atlas.png" target="_blank" aria-label="Open Endangered Species Visual Atlas">
             <img src="055_endangered_species_visual_atlas.png" alt="Endangered Species Visual Atlas" loading="lazy">
           </a>
@@ -788,7 +958,7 @@
             <h2>Endangered Species Visual Atlas</h2>
           </div>
         </article>
-        <article class="card" data-title="endangered species visual atlas cover">
+        <article class="card" data-title="endangered species visual atlas cover 056_endangered_species_visual_atlas_cover.png">
           <a href="056_endangered_species_visual_atlas_cover.png" target="_blank" aria-label="Open Endangered Species Visual Atlas Cover">
             <img src="056_endangered_species_visual_atlas_cover.png" alt="Endangered Species Visual Atlas Cover" loading="lazy">
           </a>
@@ -797,7 +967,7 @@
             <h2>Endangered Species Visual Atlas Cover</h2>
           </div>
         </article>
-        <article class="card" data-title="ephiopian fox">
+        <article class="card" data-title="ephiopian fox 057_ephiopian_fox.png">
           <a href="057_ephiopian_fox.png" target="_blank" aria-label="Open Ephiopian Fox">
             <img src="057_ephiopian_fox.png" alt="Ephiopian Fox" loading="lazy">
           </a>
@@ -806,7 +976,7 @@
             <h2>Ephiopian Fox</h2>
           </div>
         </article>
-        <article class="card" data-title="ethiopian wolf conservation dossier">
+        <article class="card" data-title="ethiopian wolf conservation dossier 058_ethiopian_wolf_conservation_dossier.png">
           <a href="058_ethiopian_wolf_conservation_dossier.png" target="_blank" aria-label="Open Ethiopian Wolf Conservation Dossier">
             <img src="058_ethiopian_wolf_conservation_dossier.png" alt="Ethiopian Wolf Conservation Dossier" loading="lazy">
           </a>
@@ -815,7 +985,7 @@
             <h2>Ethiopian Wolf Conservation Dossier</h2>
           </div>
         </article>
-        <article class="card" data-title="forest elephant conservation infographic poster">
+        <article class="card" data-title="forest elephant conservation infographic poster 059_forest_elephant_conservation_infographic_poster.png">
           <a href="059_forest_elephant_conservation_infographic_poster.png" target="_blank" aria-label="Open Forest Elephant Conservation Infographic Poster">
             <img src="059_forest_elephant_conservation_infographic_poster.png" alt="Forest Elephant Conservation Infographic Poster" loading="lazy">
           </a>
@@ -824,7 +994,7 @@
             <h2>Forest Elephant Conservation Infographic Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="galápagos penguin conservation overview">
+        <article class="card" data-title="galápagos penguin conservation overview 060_galápagos_penguin_conservation_overview.png">
           <a href="060_gal%C3%A1pagos_penguin_conservation_overview.png" target="_blank" aria-label="Open GaláPagos Penguin Conservation Overview">
             <img src="060_gal%C3%A1pagos_penguin_conservation_overview.png" alt="GaláPagos Penguin Conservation Overview" loading="lazy">
           </a>
@@ -833,7 +1003,7 @@
             <h2>GaláPagos Penguin Conservation Overview</h2>
           </div>
         </article>
-        <article class="card" data-title="ganges river dolphin conservation guide">
+        <article class="card" data-title="ganges river dolphin conservation guide 061_ganges_river_dolphin_conservation_guide.png">
           <a href="061_ganges_river_dolphin_conservation_guide.png" target="_blank" aria-label="Open Ganges River Dolphin Conservation Guide">
             <img src="061_ganges_river_dolphin_conservation_guide.png" alt="Ganges River Dolphin Conservation Guide" loading="lazy">
           </a>
@@ -842,7 +1012,7 @@
             <h2>Ganges River Dolphin Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="ganges river dolphin conservation poster">
+        <article class="card" data-title="ganges river dolphin conservation poster 062_ganges_river_dolphin_conservation_poster.png">
           <a href="062_ganges_river_dolphin_conservation_poster.png" target="_blank" aria-label="Open Ganges River Dolphin Conservation Poster">
             <img src="062_ganges_river_dolphin_conservation_poster.png" alt="Ganges River Dolphin Conservation Poster" loading="lazy">
           </a>
@@ -851,7 +1021,7 @@
             <h2>Ganges River Dolphin Conservation Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="gharial conservation endangered river crocodile">
+        <article class="card" data-title="gharial conservation endangered river crocodile 063_gharial_conservation_endangered_river_crocodile.png">
           <a href="063_gharial_conservation_endangered_river_crocodile.png" target="_blank" aria-label="Open Gharial Conservation Endangered River Crocodile">
             <img src="063_gharial_conservation_endangered_river_crocodile.png" alt="Gharial Conservation Endangered River Crocodile" loading="lazy">
           </a>
@@ -860,7 +1030,7 @@
             <h2>Gharial Conservation Endangered River Crocodile</h2>
           </div>
         </article>
-        <article class="card" data-title="giant panda conservation guide">
+        <article class="card" data-title="giant panda conservation guide 064_giant_panda_conservation_guide.png">
           <a href="064_giant_panda_conservation_guide.png" target="_blank" aria-label="Open Giant Panda Conservation Guide">
             <img src="064_giant_panda_conservation_guide.png" alt="Giant Panda Conservation Guide" loading="lazy">
           </a>
@@ -869,7 +1039,7 @@
             <h2>Giant Panda Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="giant panda conservation infographic">
+        <article class="card" data-title="giant panda conservation infographic 065_giant_panda_conservation_infographic.png">
           <a href="065_giant_panda_conservation_infographic.png" target="_blank" aria-label="Open Giant Panda Conservation Infographic">
             <img src="065_giant_panda_conservation_infographic.png" alt="Giant Panda Conservation Infographic" loading="lazy">
           </a>
@@ -878,7 +1048,7 @@
             <h2>Giant Panda Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="golden poison frog conservation infographic">
+        <article class="card" data-title="golden poison frog conservation infographic 066_golden_poison_frog_conservation_infographic.png">
           <a href="066_golden_poison_frog_conservation_infographic.png" target="_blank" aria-label="Open Golden Poison Frog Conservation Infographic">
             <img src="066_golden_poison_frog_conservation_infographic.png" alt="Golden Poison Frog Conservation Infographic" loading="lazy">
           </a>
@@ -887,7 +1057,7 @@
             <h2>Golden Poison Frog Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="great white shark conservation poster">
+        <article class="card" data-title="great white shark conservation poster 067_great_white_shark_conservation_poster.png">
           <a href="067_great_white_shark_conservation_poster.png" target="_blank" aria-label="Open Great White Shark Conservation Poster">
             <img src="067_great_white_shark_conservation_poster.png" alt="Great White Shark Conservation Poster" loading="lazy">
           </a>
@@ -896,7 +1066,7 @@
             <h2>Great White Shark Conservation Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="hawksbill sea turtle protect preserve conserve">
+        <article class="card" data-title="hawksbill sea turtle protect preserve conserve 068_hawksbill_sea_turtle_protect_preserve_conserve.png">
           <a href="068_hawksbill_sea_turtle_protect_preserve_conserve.png" target="_blank" aria-label="Open Hawksbill Sea Turtle Protect Preserve Conserve">
             <img src="068_hawksbill_sea_turtle_protect_preserve_conserve.png" alt="Hawksbill Sea Turtle Protect Preserve Conserve" loading="lazy">
           </a>
@@ -905,7 +1075,7 @@
             <h2>Hawksbill Sea Turtle Protect Preserve Conserve</h2>
           </div>
         </article>
-        <article class="card" data-title="iberian lynx conservation facts and features">
+        <article class="card" data-title="iberian lynx conservation facts and features 069_iberian_lynx_conservation_facts_and_features.png">
           <a href="069_iberian_lynx_conservation_facts_and_features.png" target="_blank" aria-label="Open Iberian Lynx Conservation Facts And Features">
             <img src="069_iberian_lynx_conservation_facts_and_features.png" alt="Iberian Lynx Conservation Facts And Features" loading="lazy">
           </a>
@@ -914,7 +1084,7 @@
             <h2>Iberian Lynx Conservation Facts And Features</h2>
           </div>
         </article>
-        <article class="card" data-title="iberian lynx conservation infographic poster">
+        <article class="card" data-title="iberian lynx conservation infographic poster 070_iberian_lynx_conservation_infographic_poster.png">
           <a href="070_iberian_lynx_conservation_infographic_poster.png" target="_blank" aria-label="Open Iberian Lynx Conservation Infographic Poster">
             <img src="070_iberian_lynx_conservation_infographic_poster.png" alt="Iberian Lynx Conservation Infographic Poster" loading="lazy">
           </a>
@@ -923,7 +1093,7 @@
             <h2>Iberian Lynx Conservation Infographic Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="imagegen">
+        <article class="card" data-title="imagegen 071_imagegen.png">
           <a href="071_imagegen.png" target="_blank" aria-label="Open Imagegen">
             <img src="071_imagegen.png" alt="Imagegen" loading="lazy">
           </a>
@@ -932,7 +1102,7 @@
             <h2>Imagegen</h2>
           </div>
         </article>
-        <article class="card" data-title="indian elephant conservation field guide">
+        <article class="card" data-title="indian elephant conservation field guide 072_indian_elephant_conservation_field_guide.png">
           <a href="072_indian_elephant_conservation_field_guide.png" target="_blank" aria-label="Open Indian Elephant Conservation Field Guide">
             <img src="072_indian_elephant_conservation_field_guide.png" alt="Indian Elephant Conservation Field Guide" loading="lazy">
           </a>
@@ -941,7 +1111,7 @@
             <h2>Indian Elephant Conservation Field Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="irrawaddy dolphin conservation guide">
+        <article class="card" data-title="irrawaddy dolphin conservation guide 073_irrawaddy_dolphin_conservation_guide.png">
           <a href="073_irrawaddy_dolphin_conservation_guide.png" target="_blank" aria-label="Open Irrawaddy Dolphin Conservation Guide">
             <img src="073_irrawaddy_dolphin_conservation_guide.png" alt="Irrawaddy Dolphin Conservation Guide" loading="lazy">
           </a>
@@ -950,7 +1120,7 @@
             <h2>Irrawaddy Dolphin Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="irrawaddy dolphin conservation poster">
+        <article class="card" data-title="irrawaddy dolphin conservation poster 074_irrawaddy_dolphin_conservation_poster.png">
           <a href="074_irrawaddy_dolphin_conservation_poster.png" target="_blank" aria-label="Open Irrawaddy Dolphin Conservation Poster">
             <img src="074_irrawaddy_dolphin_conservation_poster.png" alt="Irrawaddy Dolphin Conservation Poster" loading="lazy">
           </a>
@@ -959,7 +1129,7 @@
             <h2>Irrawaddy Dolphin Conservation Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="javan rhino conservation awareness poster">
+        <article class="card" data-title="javan rhino conservation awareness poster 075_javan_rhino_conservation_awareness_poster.png">
           <a href="075_javan_rhino_conservation_awareness_poster.png" target="_blank" aria-label="Open Javan Rhino Conservation Awareness Poster">
             <img src="075_javan_rhino_conservation_awareness_poster.png" alt="Javan Rhino Conservation Awareness Poster" loading="lazy">
           </a>
@@ -968,7 +1138,7 @@
             <h2>Javan Rhino Conservation Awareness Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="javan rhinoceros conservation infographic">
+        <article class="card" data-title="javan rhinoceros conservation infographic 076_javan_rhinoceros_conservation_infographic.png">
           <a href="076_javan_rhinoceros_conservation_infographic.png" target="_blank" aria-label="Open Javan Rhinoceros Conservation Infographic">
             <img src="076_javan_rhinoceros_conservation_infographic.png" alt="Javan Rhinoceros Conservation Infographic" loading="lazy">
           </a>
@@ -977,7 +1147,7 @@
             <h2>Javan Rhinoceros Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="javan slow loris conservation awareness">
+        <article class="card" data-title="javan slow loris conservation awareness 077_javan_slow_loris_conservation_awareness.png">
           <a href="077_javan_slow_loris_conservation_awareness.png" target="_blank" aria-label="Open Javan Slow Loris Conservation Awareness">
             <img src="077_javan_slow_loris_conservation_awareness.png" alt="Javan Slow Loris Conservation Awareness" loading="lazy">
           </a>
@@ -986,7 +1156,7 @@
             <h2>Javan Slow Loris Conservation Awareness</h2>
           </div>
         </article>
-        <article class="card" data-title="kakapo endangered forest dweller infographic">
+        <article class="card" data-title="kakapo endangered forest dweller infographic 078_kakapo_endangered_forest_dweller_infographic.png">
           <a href="078_kakapo_endangered_forest_dweller_infographic.png" target="_blank" aria-label="Open Kakapo Endangered Forest Dweller Infographic">
             <img src="078_kakapo_endangered_forest_dweller_infographic.png" alt="Kakapo Endangered Forest Dweller Infographic" loading="lazy">
           </a>
@@ -995,7 +1165,7 @@
             <h2>Kakapo Endangered Forest Dweller Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="kemp s ridley sea turtle conservation guide">
+        <article class="card" data-title="kemp s ridley sea turtle conservation guide 079_kemp_s_ridley_sea_turtle_conservation_guide.png">
           <a href="079_kemp_s_ridley_sea_turtle_conservation_guide.png" target="_blank" aria-label="Open Kemp S Ridley Sea Turtle Conservation Guide">
             <img src="079_kemp_s_ridley_sea_turtle_conservation_guide.png" alt="Kemp S Ridley Sea Turtle Conservation Guide" loading="lazy">
           </a>
@@ -1004,7 +1174,7 @@
             <h2>Kemp S Ridley Sea Turtle Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="komodo dragon conservation field guide">
+        <article class="card" data-title="komodo dragon conservation field guide 080_komodo_dragon_conservation_field_guide.png">
           <a href="080_komodo_dragon_conservation_field_guide.png" target="_blank" aria-label="Open Komodo Dragon Conservation Field Guide">
             <img src="080_komodo_dragon_conservation_field_guide.png" alt="Komodo Dragon Conservation Field Guide" loading="lazy">
           </a>
@@ -1013,7 +1183,7 @@
             <h2>Komodo Dragon Conservation Field Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="komodo dragon conservation infographic">
+        <article class="card" data-title="komodo dragon conservation infographic 081_komodo_dragon_conservation_infographic.png">
           <a href="081_komodo_dragon_conservation_infographic.png" target="_blank" aria-label="Open Komodo Dragon Conservation Infographic">
             <img src="081_komodo_dragon_conservation_infographic.png" alt="Komodo Dragon Conservation Infographic" loading="lazy">
           </a>
@@ -1022,7 +1192,7 @@
             <h2>Komodo Dragon Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="kākāpō conservation field guide">
+        <article class="card" data-title="kākāpō conservation field guide 082_kākāpō_conservation_field_guide.png">
           <a href="082_k%C4%81k%C4%81p%C5%8D_conservation_field_guide.png" target="_blank" aria-label="Open KāKāPō Conservation Field Guide">
             <img src="082_k%C4%81k%C4%81p%C5%8D_conservation_field_guide.png" alt="KāKāPō Conservation Field Guide" loading="lazy">
           </a>
@@ -1031,7 +1201,7 @@
             <h2>KāKāPō Conservation Field Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="largetooth sawfish conservation guide">
+        <article class="card" data-title="largetooth sawfish conservation guide 083_largetooth_sawfish_conservation_guide.png">
           <a href="083_largetooth_sawfish_conservation_guide.png" target="_blank" aria-label="Open Largetooth Sawfish Conservation Guide">
             <img src="083_largetooth_sawfish_conservation_guide.png" alt="Largetooth Sawfish Conservation Guide" loading="lazy">
           </a>
@@ -1040,7 +1210,7 @@
             <h2>Largetooth Sawfish Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="leatherback sea turtle conservation guide">
+        <article class="card" data-title="leatherback sea turtle conservation guide 084_leatherback_sea_turtle_conservation_guide.png">
           <a href="084_leatherback_sea_turtle_conservation_guide.png" target="_blank" aria-label="Open Leatherback Sea Turtle Conservation Guide">
             <img src="084_leatherback_sea_turtle_conservation_guide.png" alt="Leatherback Sea Turtle Conservation Guide" loading="lazy">
           </a>
@@ -1049,7 +1219,7 @@
             <h2>Leatherback Sea Turtle Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="longsnout seahorse conservation guide">
+        <article class="card" data-title="longsnout seahorse conservation guide 085_longsnout_seahorse_conservation_guide.png">
           <a href="085_longsnout_seahorse_conservation_guide.png" target="_blank" aria-label="Open Longsnout Seahorse Conservation Guide">
             <img src="085_longsnout_seahorse_conservation_guide.png" alt="Longsnout Seahorse Conservation Guide" loading="lazy">
           </a>
@@ -1058,7 +1228,7 @@
             <h2>Longsnout Seahorse Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="manatee conservation fact sheet poster">
+        <article class="card" data-title="manatee conservation fact sheet poster 086_manatee_conservation_fact_sheet_poster.png">
           <a href="086_manatee_conservation_fact_sheet_poster.png" target="_blank" aria-label="Open Manatee Conservation Fact Sheet Poster">
             <img src="086_manatee_conservation_fact_sheet_poster.png" alt="Manatee Conservation Fact Sheet Poster" loading="lazy">
           </a>
@@ -1067,7 +1237,7 @@
             <h2>Manatee Conservation Fact Sheet Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="manta ray conservation infographic poster">
+        <article class="card" data-title="manta ray conservation infographic poster 087_manta_ray_conservation_infographic_poster.png">
           <a href="087_manta_ray_conservation_infographic_poster.png" target="_blank" aria-label="Open Manta Ray Conservation Infographic Poster">
             <img src="087_manta_ray_conservation_infographic_poster.png" alt="Manta Ray Conservation Infographic Poster" loading="lazy">
           </a>
@@ -1076,7 +1246,7 @@
             <h2>Manta Ray Conservation Infographic Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="mediterranean monk seal conservation poster">
+        <article class="card" data-title="mediterranean monk seal conservation poster 088_mediterranean_monk_seal_conservation_poster.png">
           <a href="088_mediterranean_monk_seal_conservation_poster.png" target="_blank" aria-label="Open Mediterranean Monk Seal Conservation Poster">
             <img src="088_mediterranean_monk_seal_conservation_poster.png" alt="Mediterranean Monk Seal Conservation Poster" loading="lazy">
           </a>
@@ -1085,7 +1255,7 @@
             <h2>Mediterranean Monk Seal Conservation Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="mexican gray wolf conservation guide">
+        <article class="card" data-title="mexican gray wolf conservation guide 089_mexican_gray_wolf_conservation_guide.png">
           <a href="089_mexican_gray_wolf_conservation_guide.png" target="_blank" aria-label="Open Mexican Gray Wolf Conservation Guide">
             <img src="089_mexican_gray_wolf_conservation_guide.png" alt="Mexican Gray Wolf Conservation Guide" loading="lazy">
           </a>
@@ -1094,7 +1264,7 @@
             <h2>Mexican Gray Wolf Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="minke whale species guide poster">
+        <article class="card" data-title="minke whale species guide poster 090_minke_whale_species_guide_poster.png">
           <a href="090_minke_whale_species_guide_poster.png" target="_blank" aria-label="Open Minke Whale Species Guide Poster">
             <img src="090_minke_whale_species_guide_poster.png" alt="Minke Whale Species Guide Poster" loading="lazy">
           </a>
@@ -1103,7 +1273,7 @@
             <h2>Minke Whale Species Guide Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="mountain gorilla conservation facts poster">
+        <article class="card" data-title="mountain gorilla conservation facts poster 091_mountain_gorilla_conservation_facts_poster.png">
           <a href="091_mountain_gorilla_conservation_facts_poster.png" target="_blank" aria-label="Open Mountain Gorilla Conservation Facts Poster">
             <img src="091_mountain_gorilla_conservation_facts_poster.png" alt="Mountain Gorilla Conservation Facts Poster" loading="lazy">
           </a>
@@ -1112,7 +1282,7 @@
             <h2>Mountain Gorilla Conservation Facts Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="mountain gorilla conservation overview">
+        <article class="card" data-title="mountain gorilla conservation overview 092_mountain_gorilla_conservation_overview.png">
           <a href="092_mountain_gorilla_conservation_overview.png" target="_blank" aria-label="Open Mountain Gorilla Conservation Overview">
             <img src="092_mountain_gorilla_conservation_overview.png" alt="Mountain Gorilla Conservation Overview" loading="lazy">
           </a>
@@ -1121,7 +1291,7 @@
             <h2>Mountain Gorilla Conservation Overview</h2>
           </div>
         </article>
-        <article class="card" data-title="okapi conservation protecting congo s forests">
+        <article class="card" data-title="okapi conservation protecting congo s forests 093_okapi_conservation_protecting_congo_s_forests.png">
           <a href="093_okapi_conservation_protecting_congo_s_forests.png" target="_blank" aria-label="Open Okapi Conservation Protecting Congo S Forests">
             <img src="093_okapi_conservation_protecting_congo_s_forests.png" alt="Okapi Conservation Protecting Congo S Forests" loading="lazy">
           </a>
@@ -1130,7 +1300,7 @@
             <h2>Okapi Conservation Protecting Congo S Forests</h2>
           </div>
         </article>
-        <article class="card" data-title="orinoco crocodile conservation infographic">
+        <article class="card" data-title="orinoco crocodile conservation infographic 094_orinoco_crocodile_conservation_infographic.png">
           <a href="094_orinoco_crocodile_conservation_infographic.png" target="_blank" aria-label="Open Orinoco Crocodile Conservation Infographic">
             <img src="094_orinoco_crocodile_conservation_infographic.png" alt="Orinoco Crocodile Conservation Infographic" loading="lazy">
           </a>
@@ -1139,7 +1309,7 @@
             <h2>Orinoco Crocodile Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="pangolin conservation facts sheet in russian">
+        <article class="card" data-title="pangolin conservation facts sheet in russian 095_pangolin_conservation_facts_sheet_in_russian.png">
           <a href="095_pangolin_conservation_facts_sheet_in_russian.png" target="_blank" aria-label="Open Pangolin Conservation Facts Sheet In Russian">
             <img src="095_pangolin_conservation_facts_sheet_in_russian.png" alt="Pangolin Conservation Facts Sheet In Russian" loading="lazy">
           </a>
@@ -1148,7 +1318,7 @@
             <h2>Pangolin Conservation Facts Sheet In Russian</h2>
           </div>
         </article>
-        <article class="card" data-title="philippine eagle conservation infographic">
+        <article class="card" data-title="philippine eagle conservation infographic 096_philippine_eagle_conservation_infographic.png">
           <a href="096_philippine_eagle_conservation_infographic.png" target="_blank" aria-label="Open Philippine Eagle Conservation Infographic">
             <img src="096_philippine_eagle_conservation_infographic.png" alt="Philippine Eagle Conservation Infographic" loading="lazy">
           </a>
@@ -1157,7 +1327,7 @@
             <h2>Philippine Eagle Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="proboscis monkey conservation in borneo">
+        <article class="card" data-title="proboscis monkey conservation in borneo 097_proboscis_monkey_conservation_in_borneo.png">
           <a href="097_proboscis_monkey_conservation_in_borneo.png" target="_blank" aria-label="Open Proboscis Monkey Conservation In Borneo">
             <img src="097_proboscis_monkey_conservation_in_borneo.png" alt="Proboscis Monkey Conservation In Borneo" loading="lazy">
           </a>
@@ -1166,7 +1336,7 @@
             <h2>Proboscis Monkey Conservation In Borneo</h2>
           </div>
         </article>
-        <article class="card" data-title="protecting the african wild dog">
+        <article class="card" data-title="protecting the african wild dog 098_protecting_the_african_wild_dog.png">
           <a href="098_protecting_the_african_wild_dog.png" target="_blank" aria-label="Open Protecting The African Wild Dog">
             <img src="098_protecting_the_african_wild_dog.png" alt="Protecting The African Wild Dog" loading="lazy">
           </a>
@@ -1175,7 +1345,7 @@
             <h2>Protecting The African Wild Dog</h2>
           </div>
         </article>
-        <article class="card" data-title="protecting the african wild dog s habitat">
+        <article class="card" data-title="protecting the african wild dog s habitat 099_protecting_the_african_wild_dog_s_habitat.png">
           <a href="099_protecting_the_african_wild_dog_s_habitat.png" target="_blank" aria-label="Open Protecting The African Wild Dog S Habitat">
             <img src="099_protecting_the_african_wild_dog_s_habitat.png" alt="Protecting The African Wild Dog S Habitat" loading="lazy">
           </a>
@@ -1184,7 +1354,7 @@
             <h2>Protecting The African Wild Dog S Habitat</h2>
           </div>
         </article>
-        <article class="card" data-title="protecting the atlantic puffin s home">
+        <article class="card" data-title="protecting the atlantic puffin s home 100_protecting_the_atlantic_puffin_s_home.png">
           <a href="100_protecting_the_atlantic_puffin_s_home.png" target="_blank" aria-label="Open Protecting The Atlantic Puffin S Home">
             <img src="100_protecting_the_atlantic_puffin_s_home.png" alt="Protecting The Atlantic Puffin S Home" loading="lazy">
           </a>
@@ -1193,7 +1363,7 @@
             <h2>Protecting The Atlantic Puffin S Home</h2>
           </div>
         </article>
-        <article class="card" data-title="protecting the gharial a critical mission">
+        <article class="card" data-title="protecting the gharial a critical mission 101_protecting_the_gharial_a_critical_mission.png">
           <a href="101_protecting_the_gharial_a_critical_mission.png" target="_blank" aria-label="Open Protecting The Gharial A Critical Mission">
             <img src="101_protecting_the_gharial_a_critical_mission.png" alt="Protecting The Gharial A Critical Mission" loading="lazy">
           </a>
@@ -1202,7 +1372,7 @@
             <h2>Protecting The Gharial A Critical Mission</h2>
           </div>
         </article>
-        <article class="card" data-title="protecting the hawksbill sea turtle">
+        <article class="card" data-title="protecting the hawksbill sea turtle 102_protecting_the_hawksbill_sea_turtle.png">
           <a href="102_protecting_the_hawksbill_sea_turtle.png" target="_blank" aria-label="Open Protecting The Hawksbill Sea Turtle">
             <img src="102_protecting_the_hawksbill_sea_turtle.png" alt="Protecting The Hawksbill Sea Turtle" loading="lazy">
           </a>
@@ -1211,7 +1381,7 @@
             <h2>Protecting The Hawksbill Sea Turtle</h2>
           </div>
         </article>
-        <article class="card" data-title="protecting the leatherback turtle">
+        <article class="card" data-title="protecting the leatherback turtle 103_protecting_the_leatherback_turtle_endoftext.png">
           <a href="103_protecting_the_leatherback_turtle_endoftext.png" target="_blank" aria-label="Open Protecting The Leatherback Turtle">
             <img src="103_protecting_the_leatherback_turtle_endoftext.png" alt="Protecting The Leatherback Turtle" loading="lazy">
           </a>
@@ -1220,7 +1390,7 @@
             <h2>Protecting The Leatherback Turtle</h2>
           </div>
         </article>
-        <article class="card" data-title="protecting the red panda s habitat">
+        <article class="card" data-title="protecting the red panda s habitat 104_protecting_the_red_panda_s_habitat.png">
           <a href="104_protecting_the_red_panda_s_habitat.png" target="_blank" aria-label="Open Protecting The Red Panda S Habitat">
             <img src="104_protecting_the_red_panda_s_habitat.png" alt="Protecting The Red Panda S Habitat" loading="lazy">
           </a>
@@ -1229,7 +1399,7 @@
             <h2>Protecting The Red Panda S Habitat</h2>
           </div>
         </article>
-        <article class="card" data-title="protecting the siau island tarsier">
+        <article class="card" data-title="protecting the siau island tarsier 105_protecting_the_siau_island_tarsier.png">
           <a href="105_protecting_the_siau_island_tarsier.png" target="_blank" aria-label="Open Protecting The Siau Island Tarsier">
             <img src="105_protecting_the_siau_island_tarsier.png" alt="Protecting The Siau Island Tarsier" loading="lazy">
           </a>
@@ -1238,7 +1408,7 @@
             <h2>Protecting The Siau Island Tarsier</h2>
           </div>
         </article>
-        <article class="card" data-title="protecting the snow leopard s highland home">
+        <article class="card" data-title="protecting the snow leopard s highland home 106_protecting_the_snow_leopard_s_highland_home.png">
           <a href="106_protecting_the_snow_leopard_s_highland_home.png" target="_blank" aria-label="Open Protecting The Snow Leopard S Highland Home">
             <img src="106_protecting_the_snow_leopard_s_highland_home.png" alt="Protecting The Snow Leopard S Highland Home" loading="lazy">
           </a>
@@ -1247,7 +1417,7 @@
             <h2>Protecting The Snow Leopard S Highland Home</h2>
           </div>
         </article>
-        <article class="card" data-title="protecting the sumatran rhino">
+        <article class="card" data-title="protecting the sumatran rhino 107_protecting_the_sumatran_rhino.png">
           <a href="107_protecting_the_sumatran_rhino.png" target="_blank" aria-label="Open Protecting The Sumatran Rhino">
             <img src="107_protecting_the_sumatran_rhino.png" alt="Protecting The Sumatran Rhino" loading="lazy">
           </a>
@@ -1256,7 +1426,7 @@
             <h2>Protecting The Sumatran Rhino</h2>
           </div>
         </article>
-        <article class="card" data-title="red panda conservation awareness poster">
+        <article class="card" data-title="red panda conservation awareness poster 108_red_panda_conservation_awareness_poster.png">
           <a href="108_red_panda_conservation_awareness_poster.png" target="_blank" aria-label="Open Red Panda Conservation Awareness Poster">
             <img src="108_red_panda_conservation_awareness_poster.png" alt="Red Panda Conservation Awareness Poster" loading="lazy">
           </a>
@@ -1265,7 +1435,7 @@
             <h2>Red Panda Conservation Awareness Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="red wolf conservation infographic poster">
+        <article class="card" data-title="red wolf conservation infographic poster 109_red_wolf_conservation_infographic_poster.png">
           <a href="109_red_wolf_conservation_infographic_poster.png" target="_blank" aria-label="Open Red Wolf Conservation Infographic Poster">
             <img src="109_red_wolf_conservation_infographic_poster.png" alt="Red Wolf Conservation Infographic Poster" loading="lazy">
           </a>
@@ -1274,7 +1444,7 @@
             <h2>Red Wolf Conservation Infographic Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="red wolf conservation overview infographic">
+        <article class="card" data-title="red wolf conservation overview infographic 110_red_wolf_conservation_overview_infographic.png">
           <a href="110_red_wolf_conservation_overview_infographic.png" target="_blank" aria-label="Open Red Wolf Conservation Overview Infographic">
             <img src="110_red_wolf_conservation_overview_infographic.png" alt="Red Wolf Conservation Overview Infographic" loading="lazy">
           </a>
@@ -1283,7 +1453,7 @@
             <h2>Red Wolf Conservation Overview Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="saola the asian unicorn at risk">
+        <article class="card" data-title="saola the asian unicorn at risk 111_saola_the_asian_unicorn_at_risk.png">
           <a href="111_saola_the_asian_unicorn_at_risk.png" target="_blank" aria-label="Open Saola The Asian Unicorn At Risk">
             <img src="111_saola_the_asian_unicorn_at_risk.png" alt="Saola The Asian Unicorn At Risk" loading="lazy">
           </a>
@@ -1292,7 +1462,7 @@
             <h2>Saola The Asian Unicorn At Risk</h2>
           </div>
         </article>
-        <article class="card" data-title="save the african forest elephant">
+        <article class="card" data-title="save the african forest elephant 112_save_the_african_forest_elephant.png">
           <a href="112_save_the_african_forest_elephant.png" target="_blank" aria-label="Open Save The African Forest Elephant">
             <img src="112_save_the_african_forest_elephant.png" alt="Save The African Forest Elephant" loading="lazy">
           </a>
@@ -1301,7 +1471,7 @@
             <h2>Save The African Forest Elephant</h2>
           </div>
         </article>
-        <article class="card" data-title="save the red panda save nature">
+        <article class="card" data-title="save the red panda save nature 113_save_the_red_panda_save_nature.png">
           <a href="113_save_the_red_panda_save_nature.png" target="_blank" aria-label="Open Save The Red Panda Save Nature">
             <img src="113_save_the_red_panda_save_nature.png" alt="Save The Red Panda Save Nature" loading="lazy">
           </a>
@@ -1310,7 +1480,7 @@
             <h2>Save The Red Panda Save Nature</h2>
           </div>
         </article>
-        <article class="card" data-title="save the sawfish protect ecosystems">
+        <article class="card" data-title="save the sawfish protect ecosystems 114_save_the_sawfish_protect_ecosystems.png">
           <a href="114_save_the_sawfish_protect_ecosystems.png" target="_blank" aria-label="Open Save The Sawfish Protect Ecosystems">
             <img src="114_save_the_sawfish_protect_ecosystems.png" alt="Save The Sawfish Protect Ecosystems" loading="lazy">
           </a>
@@ -1319,7 +1489,7 @@
             <h2>Save The Sawfish Protect Ecosystems</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the black footed ferret">
+        <article class="card" data-title="saving the black footed ferret 115_saving_the_black_footed_ferret_endoftext.png">
           <a href="115_saving_the_black_footed_ferret_endoftext.png" target="_blank" aria-label="Open Saving The Black Footed Ferret">
             <img src="115_saving_the_black_footed_ferret_endoftext.png" alt="Saving The Black Footed Ferret" loading="lazy">
           </a>
@@ -1328,7 +1498,7 @@
             <h2>Saving The Black Footed Ferret</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the california condor infographic">
+        <article class="card" data-title="saving the california condor infographic 116_saving_the_california_condor_infographic.png">
           <a href="116_saving_the_california_condor_infographic.png" target="_blank" aria-label="Open Saving The California Condor Infographic">
             <img src="116_saving_the_california_condor_infographic.png" alt="Saving The California Condor Infographic" loading="lazy">
           </a>
@@ -1337,7 +1507,7 @@
             <h2>Saving The California Condor Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the chinese giant salamander">
+        <article class="card" data-title="saving the chinese giant salamander 117_saving_the_chinese_giant_salamander.png">
           <a href="117_saving_the_chinese_giant_salamander.png" target="_blank" aria-label="Open Saving The Chinese Giant Salamander">
             <img src="117_saving_the_chinese_giant_salamander.png" alt="Saving The Chinese Giant Salamander" loading="lazy">
           </a>
@@ -1346,7 +1516,7 @@
             <h2>Saving The Chinese Giant Salamander</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the javan slow loris">
+        <article class="card" data-title="saving the javan slow loris 118_saving_the_javan_slow_loris.png">
           <a href="118_saving_the_javan_slow_loris.png" target="_blank" aria-label="Open Saving The Javan Slow Loris">
             <img src="118_saving_the_javan_slow_loris.png" alt="Saving The Javan Slow Loris" loading="lazy">
           </a>
@@ -1355,7 +1525,7 @@
             <h2>Saving The Javan Slow Loris</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the manta protecting our reefs">
+        <article class="card" data-title="saving the manta protecting our reefs 119_saving_the_manta_protecting_our_reefs.png">
           <a href="119_saving_the_manta_protecting_our_reefs.png" target="_blank" aria-label="Open Saving The Manta Protecting Our Reefs">
             <img src="119_saving_the_manta_protecting_our_reefs.png" alt="Saving The Manta Protecting Our Reefs" loading="lazy">
           </a>
@@ -1364,7 +1534,7 @@
             <h2>Saving The Manta Protecting Our Reefs</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the philippine eagle a conservation guide">
+        <article class="card" data-title="saving the philippine eagle a conservation guide 120_saving_the_philippine_eagle_a_conservation_guide.png">
           <a href="120_saving_the_philippine_eagle_a_conservation_guide.png" target="_blank" aria-label="Open Saving The Philippine Eagle A Conservation Guide">
             <img src="120_saving_the_philippine_eagle_a_conservation_guide.png" alt="Saving The Philippine Eagle A Conservation Guide" loading="lazy">
           </a>
@@ -1373,7 +1543,7 @@
             <h2>Saving The Philippine Eagle A Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the red panda heritage">
+        <article class="card" data-title="saving the red panda heritage 121_saving_the_red_panda_heritage.png">
           <a href="121_saving_the_red_panda_heritage.png" target="_blank" aria-label="Open Saving The Red Panda Heritage">
             <img src="121_saving_the_red_panda_heritage.png" alt="Saving The Red Panda Heritage" loading="lazy">
           </a>
@@ -1382,7 +1552,7 @@
             <h2>Saving The Red Panda Heritage</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the saiga a conservation call">
+        <article class="card" data-title="saving the saiga a conservation call 122_saving_the_saiga_a_conservation_call.png">
           <a href="122_saving_the_saiga_a_conservation_call.png" target="_blank" aria-label="Open Saving The Saiga A Conservation Call">
             <img src="122_saving_the_saiga_a_conservation_call.png" alt="Saving The Saiga A Conservation Call" loading="lazy">
           </a>
@@ -1391,7 +1561,7 @@
             <h2>Saving The Saiga A Conservation Call</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the saiga a steppe battle">
+        <article class="card" data-title="saving the saiga a steppe battle 123_saving_the_saiga_a_steppe_battle.png">
           <a href="123_saving_the_saiga_a_steppe_battle.png" target="_blank" aria-label="Open Saving The Saiga A Steppe Battle">
             <img src="123_saving_the_saiga_a_steppe_battle.png" alt="Saving The Saiga A Steppe Battle" loading="lazy">
           </a>
@@ -1400,7 +1570,7 @@
             <h2>Saving The Saiga A Steppe Battle</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the siamese crocodile poster">
+        <article class="card" data-title="saving the siamese crocodile poster 124_saving_the_siamese_crocodile_poster.png">
           <a href="124_saving_the_siamese_crocodile_poster.png" target="_blank" aria-label="Open Saving The Siamese Crocodile Poster">
             <img src="124_saving_the_siamese_crocodile_poster.png" alt="Saving The Siamese Crocodile Poster" loading="lazy">
           </a>
@@ -1409,7 +1579,7 @@
             <h2>Saving The Siamese Crocodile Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the slow loris java s treasure">
+        <article class="card" data-title="saving the slow loris java s treasure 125_saving_the_slow_loris_java_s_treasure.png">
           <a href="125_saving_the_slow_loris_java_s_treasure.png" target="_blank" aria-label="Open Saving The Slow Loris Java S Treasure">
             <img src="125_saving_the_slow_loris_java_s_treasure.png" alt="Saving The Slow Loris Java S Treasure" loading="lazy">
           </a>
@@ -1418,7 +1588,7 @@
             <h2>Saving The Slow Loris Java S Treasure</h2>
           </div>
         </article>
-        <article class="card" data-title="saving the tasmanian devil conservation facts">
+        <article class="card" data-title="saving the tasmanian devil conservation facts 126_saving_the_tasmanian_devil_conservation_facts.png">
           <a href="126_saving_the_tasmanian_devil_conservation_facts.png" target="_blank" aria-label="Open Saving The Tasmanian Devil Conservation Facts">
             <img src="126_saving_the_tasmanian_devil_conservation_facts.png" alt="Saving The Tasmanian Devil Conservation Facts" loading="lazy">
           </a>
@@ -1427,7 +1597,7 @@
             <h2>Saving The Tasmanian Devil Conservation Facts</h2>
           </div>
         </article>
-        <article class="card" data-title="shoebill africa s vulnerable swamp sentinel">
+        <article class="card" data-title="shoebill africa s vulnerable swamp sentinel 127_shoebill_africa_s_vulnerable_swamp_sentinel.png">
           <a href="127_shoebill_africa_s_vulnerable_swamp_sentinel.png" target="_blank" aria-label="Open Shoebill Africa S Vulnerable Swamp Sentinel">
             <img src="127_shoebill_africa_s_vulnerable_swamp_sentinel.png" alt="Shoebill Africa S Vulnerable Swamp Sentinel" loading="lazy">
           </a>
@@ -1436,7 +1606,7 @@
             <h2>Shoebill Africa S Vulnerable Swamp Sentinel</h2>
           </div>
         </article>
-        <article class="card" data-title="shoebill stork conservation guide">
+        <article class="card" data-title="shoebill stork conservation guide 128_shoebill_stork_conservation_guide.png">
           <a href="128_shoebill_stork_conservation_guide.png" target="_blank" aria-label="Open Shoebill Stork Conservation Guide">
             <img src="128_shoebill_stork_conservation_guide.png" alt="Shoebill Stork Conservation Guide" loading="lazy">
           </a>
@@ -1445,7 +1615,7 @@
             <h2>Shoebill Stork Conservation Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="siamese crocodile conservation infographic">
+        <article class="card" data-title="siamese crocodile conservation infographic 129_siamese_crocodile_conservation_infographic.png">
           <a href="129_siamese_crocodile_conservation_infographic.png" target="_blank" aria-label="Open Siamese Crocodile Conservation Infographic">
             <img src="129_siamese_crocodile_conservation_infographic.png" alt="Siamese Crocodile Conservation Infographic" loading="lazy">
           </a>
@@ -1454,7 +1624,7 @@
             <h2>Siamese Crocodile Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="silky shark species field guide">
+        <article class="card" data-title="silky shark species field guide 130_silky_shark_species_field_guide.png">
           <a href="130_silky_shark_species_field_guide.png" target="_blank" aria-label="Open Silky Shark Species Field Guide">
             <img src="130_silky_shark_species_field_guide.png" alt="Silky Shark Species Field Guide" loading="lazy">
           </a>
@@ -1463,7 +1633,7 @@
             <h2>Silky Shark Species Field Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="snow leopard conservation infographic poster">
+        <article class="card" data-title="snow leopard conservation infographic poster 131_snow_leopard_conservation_infographic_poster.png">
           <a href="131_snow_leopard_conservation_infographic_poster.png" target="_blank" aria-label="Open Snow Leopard Conservation Infographic Poster">
             <img src="131_snow_leopard_conservation_infographic_poster.png" alt="Snow Leopard Conservation Infographic Poster" loading="lazy">
           </a>
@@ -1472,7 +1642,7 @@
             <h2>Snow Leopard Conservation Infographic Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="sumatran rhino conservation infographic">
+        <article class="card" data-title="sumatran rhino conservation infographic 132_sumatran_rhino_conservation_infographic.png">
           <a href="132_sumatran_rhino_conservation_infographic.png" target="_blank" aria-label="Open Sumatran Rhino Conservation Infographic">
             <img src="132_sumatran_rhino_conservation_infographic.png" alt="Sumatran Rhino Conservation Infographic" loading="lazy">
           </a>
@@ -1481,7 +1651,7 @@
             <h2>Sumatran Rhino Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="sumatran rhinoceros conservation field guide">
+        <article class="card" data-title="sumatran rhinoceros conservation field guide 133_sumatran_rhinoceros_conservation_field_guide.png">
           <a href="133_sumatran_rhinoceros_conservation_field_guide.png" target="_blank" aria-label="Open Sumatran Rhinoceros Conservation Field Guide">
             <img src="133_sumatran_rhinoceros_conservation_field_guide.png" alt="Sumatran Rhinoceros Conservation Field Guide" loading="lazy">
           </a>
@@ -1490,7 +1660,7 @@
             <h2>Sumatran Rhinoceros Conservation Field Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="sumatran tiger conservation infographic">
+        <article class="card" data-title="sumatran tiger conservation infographic 134_sumatran_tiger_conservation_infographic.png">
           <a href="134_sumatran_tiger_conservation_infographic.png" target="_blank" aria-label="Open Sumatran Tiger Conservation Infographic">
             <img src="134_sumatran_tiger_conservation_infographic.png" alt="Sumatran Tiger Conservation Infographic" loading="lazy">
           </a>
@@ -1499,7 +1669,7 @@
             <h2>Sumatran Tiger Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="sunda pangolin a critically endangered species">
+        <article class="card" data-title="sunda pangolin a critically endangered species 135_sunda_pangolin_a_critically_endangered_species.png">
           <a href="135_sunda_pangolin_a_critically_endangered_species.png" target="_blank" aria-label="Open Sunda Pangolin A Critically Endangered Species">
             <img src="135_sunda_pangolin_a_critically_endangered_species.png" alt="Sunda Pangolin A Critically Endangered Species" loading="lazy">
           </a>
@@ -1508,7 +1678,7 @@
             <h2>Sunda Pangolin A Critically Endangered Species</h2>
           </div>
         </article>
-        <article class="card" data-title="sunda pangolin conservation infographic">
+        <article class="card" data-title="sunda pangolin conservation infographic 136_sunda_pangolin_conservation_infographic.png">
           <a href="136_sunda_pangolin_conservation_infographic.png" target="_blank" aria-label="Open Sunda Pangolin Conservation Infographic">
             <img src="136_sunda_pangolin_conservation_infographic.png" alt="Sunda Pangolin Conservation Infographic" loading="lazy">
           </a>
@@ -1517,7 +1687,7 @@
             <h2>Sunda Pangolin Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="sunda pangolin endangered species insights">
+        <article class="card" data-title="sunda pangolin endangered species insights 137_sunda_pangolin_endangered_species_insights.png">
           <a href="137_sunda_pangolin_endangered_species_insights.png" target="_blank" aria-label="Open Sunda Pangolin Endangered Species Insights">
             <img src="137_sunda_pangolin_endangered_species_insights.png" alt="Sunda Pangolin Endangered Species Insights" loading="lazy">
           </a>
@@ -1526,7 +1696,7 @@
             <h2>Sunda Pangolin Endangered Species Insights</h2>
           </div>
         </article>
-        <article class="card" data-title="tapanuli orangutan conservation infographic">
+        <article class="card" data-title="tapanuli orangutan conservation infographic 138_tapanuli_orangutan_conservation_infographic.png">
           <a href="138_tapanuli_orangutan_conservation_infographic.png" target="_blank" aria-label="Open Tapanuli Orangutan Conservation Infographic">
             <img src="138_tapanuli_orangutan_conservation_infographic.png" alt="Tapanuli Orangutan Conservation Infographic" loading="lazy">
           </a>
@@ -1535,7 +1705,7 @@
             <h2>Tapanuli Orangutan Conservation Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="tapanuli orangutan critically endangered species">
+        <article class="card" data-title="tapanuli orangutan critically endangered species 139_tapanuli_orangutan_critically_endangered_species.png">
           <a href="139_tapanuli_orangutan_critically_endangered_species.png" target="_blank" aria-label="Open Tapanuli Orangutan Critically Endangered Species">
             <img src="139_tapanuli_orangutan_critically_endangered_species.png" alt="Tapanuli Orangutan Critically Endangered Species" loading="lazy">
           </a>
@@ -1544,7 +1714,7 @@
             <h2>Tapanuli Orangutan Critically Endangered Species</h2>
           </div>
         </article>
-        <article class="card" data-title="tarsius tumpara conservation and survival guide">
+        <article class="card" data-title="tarsius tumpara conservation and survival guide 140_tarsius_tumpara_conservation_and_survival_guide.png">
           <a href="140_tarsius_tumpara_conservation_and_survival_guide.png" target="_blank" aria-label="Open Tarsius Tumpara Conservation And Survival Guide">
             <img src="140_tarsius_tumpara_conservation_and_survival_guide.png" alt="Tarsius Tumpara Conservation And Survival Guide" loading="lazy">
           </a>
@@ -1553,7 +1723,7 @@
             <h2>Tarsius Tumpara Conservation And Survival Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="tasmanian devil conservation poster">
+        <article class="card" data-title="tasmanian devil conservation poster 141_tasmanian_devil_conservation_poster.png">
           <a href="141_tasmanian_devil_conservation_poster.png" target="_blank" aria-label="Open Tasmanian Devil Conservation Poster">
             <img src="141_tasmanian_devil_conservation_poster.png" alt="Tasmanian Devil Conservation Poster" loading="lazy">
           </a>
@@ -1562,7 +1732,7 @@
             <h2>Tasmanian Devil Conservation Poster</h2>
           </div>
         </article>
-        <article class="card" data-title="the aye aye madagascar s nocturnal wonder">
+        <article class="card" data-title="the aye aye madagascar s nocturnal wonder 142_the_aye_aye_madagascar_s_nocturnal_wonder.png">
           <a href="142_the_aye_aye_madagascar_s_nocturnal_wonder.png" target="_blank" aria-label="Open The Aye Aye Madagascar S Nocturnal Wonder">
             <img src="142_the_aye_aye_madagascar_s_nocturnal_wonder.png" alt="The Aye Aye Madagascar S Nocturnal Wonder" loading="lazy">
           </a>
@@ -1571,7 +1741,7 @@
             <h2>The Aye Aye Madagascar S Nocturnal Wonder</h2>
           </div>
         </article>
-        <article class="card" data-title="the rare saola earth s asian unicorn">
+        <article class="card" data-title="the rare saola earth s asian unicorn 143_the_rare_saola_earth_s_asian_unicorn.png">
           <a href="143_the_rare_saola_earth_s_asian_unicorn.png" target="_blank" aria-label="Open The Rare Saola Earth S Asian Unicorn">
             <img src="143_the_rare_saola_earth_s_asian_unicorn.png" alt="The Rare Saola Earth S Asian Unicorn" loading="lazy">
           </a>
@@ -1580,7 +1750,7 @@
             <h2>The Rare Saola Earth S Asian Unicorn</h2>
           </div>
         </article>
-        <article class="card" data-title="vaquita conservation critical facts and action">
+        <article class="card" data-title="vaquita conservation critical facts and action 144_vaquita_conservation_critical_facts_and_action.png">
           <a href="144_vaquita_conservation_critical_facts_and_action.png" target="_blank" aria-label="Open Vaquita Conservation Critical Facts And Action">
             <img src="144_vaquita_conservation_critical_facts_and_action.png" alt="Vaquita Conservation Critical Facts And Action" loading="lazy">
           </a>
@@ -1589,7 +1759,7 @@
             <h2>Vaquita Conservation Critical Facts And Action</h2>
           </div>
         </article>
-        <article class="card" data-title="vaquita critically endangered species infographic">
+        <article class="card" data-title="vaquita critically endangered species infographic 145_vaquita_critically_endangered_species_infographic.png">
           <a href="145_vaquita_critically_endangered_species_infographic.png" target="_blank" aria-label="Open Vaquita Critically Endangered Species Infographic">
             <img src="145_vaquita_critically_endangered_species_infographic.png" alt="Vaquita Critically Endangered Species Infographic" loading="lazy">
           </a>
@@ -1598,7 +1768,7 @@
             <h2>Vaquita Critically Endangered Species Infographic</h2>
           </div>
         </article>
-        <article class="card" data-title="vulnerable fossa protect madagascar s wild forest">
+        <article class="card" data-title="vulnerable fossa protect madagascar s wild forest 146_vulnerable_fossa_protect_madagascar_s_wild_forest.png">
           <a href="146_vulnerable_fossa_protect_madagascar_s_wild_forest.png" target="_blank" aria-label="Open Vulnerable Fossa Protect Madagascar S Wild Forest">
             <img src="146_vulnerable_fossa_protect_madagascar_s_wild_forest.png" alt="Vulnerable Fossa Protect Madagascar S Wild Forest" loading="lazy">
           </a>
@@ -1607,7 +1777,7 @@
             <h2>Vulnerable Fossa Protect Madagascar S Wild Forest</h2>
           </div>
         </article>
-        <article class="card" data-title="whale shark conservation illustrated guide">
+        <article class="card" data-title="whale shark conservation illustrated guide 147_whale_shark_conservation_illustrated_guide.png">
           <a href="147_whale_shark_conservation_illustrated_guide.png" target="_blank" aria-label="Open Whale Shark Conservation Illustrated Guide">
             <img src="147_whale_shark_conservation_illustrated_guide.png" alt="Whale Shark Conservation Illustrated Guide" loading="lazy">
           </a>
@@ -1616,24 +1786,79 @@
             <h2>Whale Shark Conservation Illustrated Guide</h2>
           </div>
         </article>
-        <article class="card" data-title="b1476c21-ac62-486d-9340-c2a03da47734">
-          <a href="b1476c21-ac62-486d-9340-c2a03da47734.png" target="_blank" aria-label="Open B1476c21-Ac62-486d-9340-C2a03da47734">
-            <img src="b1476c21-ac62-486d-9340-c2a03da47734.png" alt="B1476c21-Ac62-486d-9340-C2a03da47734" loading="lazy">
+        <article class="card" data-title="archive plate b1476c21-ac62-486d-9340-c2a03da47734.png">
+          <a href="b1476c21-ac62-486d-9340-c2a03da47734.png" target="_blank" aria-label="Open Archive Plate">
+            <img src="b1476c21-ac62-486d-9340-c2a03da47734.png" alt="Archive Plate" loading="lazy">
           </a>
           <div class="card-copy">
             <span>149</span>
-            <h2>B1476c21-Ac62-486d-9340-C2a03da47734</h2>
+            <h2>Archive Plate</h2>
           </div>
         </article>
     </section>
+
+    <footer class="footer">
+      <span data-i18n="footerOne">Disappearing Animal Species visual atlas</span>
+      <a href="https://buymeacoffee.com/" target="_blank" rel="noopener" data-i18n="footerDonate">Donate through Buy Me a Coffee</a>
+    </footer>
   </main>
 
   <script>
+    const copy = {
+      en: {
+        navStory: 'Story',
+        navAtlas: 'Visual atlas',
+        donate: 'Donate',
+        kicker: 'Endangered animal species',
+        title: 'Disappearing Animal Species',
+        lede: 'A bilingual visual atlas of conservation posters and field-guide plates documenting fragile habitats, threatened populations, and species at risk.',
+        explore: 'Explore the atlas',
+        support: 'Support the project',
+        statPlates: 'visual plates',
+        statGlobalValue: 'Global',
+        statGlobal: 'species and habitats',
+        statLang: 'bilingual interface',
+        storyKicker: 'Why this atlas exists',
+        storyTitle: 'A quiet archive for species that should not vanish quietly.',
+        storyOne: 'Each plate gathers conservation signals into an image-first format: habitat, pressure, rarity, and the emotional scale of loss. The collection is meant for classrooms, campaigns, visual research, and anyone who needs a strong first encounter with endangered life.',
+        storyTwo: 'The project is still growing. Donations help cover image production, research time, hosting, and bilingual editorial work.',
+        platesLabel: 'plates',
+        footerOne: 'Disappearing Animal Species visual atlas',
+        footerDonate: 'Donate through Buy Me a Coffee',
+        search: 'Search species or poster title'
+      },
+      ru: {
+        navStory: 'История',
+        navAtlas: 'Атлас',
+        donate: 'Поддержать',
+        kicker: 'Исчезающие виды животных',
+        title: 'Исчезающие виды животных',
+        lede: 'Двуязычный визуальный атлас природоохранных постеров и полевых карточек о хрупких средах обитания, редких популяциях и видах под угрозой.',
+        explore: 'Открыть атлас',
+        support: 'Поддержать проект',
+        statPlates: 'визуальных листов',
+        statGlobalValue: 'Мир',
+        statGlobal: 'виды и среды обитания',
+        statLang: 'интерфейс на двух языках',
+        storyKicker: 'Зачем существует этот атлас',
+        storyTitle: 'Тихий архив для видов, которые не должны исчезнуть тихо.',
+        storyOne: 'Каждый лист собирает природоохранные сигналы в визуальный формат: среду обитания, угрозы, редкость и эмоциональный масштаб потери. Коллекция подходит для уроков, кампаний, визуальных исследований и первого сильного знакомства с исчезающей жизнью.',
+        storyTwo: 'Проект продолжает расти. Донаты помогают покрывать создание изображений, исследование, хостинг и двуязычную редактуру.',
+        platesLabel: 'листов',
+        footerOne: 'Визуальный атлас исчезающих видов животных',
+        footerDonate: 'Поддержать через Buy Me a Coffee',
+        search: 'Искать вид или название постера'
+      }
+    };
+
     const search = document.querySelector('#search');
     const count = document.querySelector('#visible-count');
     const cards = [...document.querySelectorAll('.card')];
+    const langButtons = [...document.querySelectorAll('[data-lang]')];
+    const translatable = [...document.querySelectorAll('[data-i18n]')];
+    let language = localStorage.getItem('language') || 'en';
 
-    search.addEventListener('input', () => {
+    function filterCards() {
       const query = search.value.trim().toLowerCase();
       let visible = 0;
 
@@ -1644,7 +1869,28 @@
       }
 
       count.textContent = visible;
-    });
+    }
+
+    function setLanguage(nextLanguage) {
+      language = nextLanguage;
+      localStorage.setItem('language', language);
+      document.documentElement.lang = language;
+
+      for (const node of translatable) {
+        const key = node.dataset.i18n;
+        node.textContent = copy[language][key];
+      }
+
+      search.placeholder = copy[language].search;
+
+      for (const button of langButtons) {
+        button.setAttribute('aria-pressed', String(button.dataset.lang === language));
+      }
+    }
+
+    search.addEventListener('input', filterCards);
+    langButtons.forEach((button) => button.addEventListener('click', () => setLanguage(button.dataset.lang)));
+    setLanguage(language);
   </script>
 </body>
 </html>
