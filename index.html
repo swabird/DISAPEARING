@@ -88,10 +88,20 @@
     [data-label="ru"] { color: var(--water); }
     .card-copy h3 { margin: 0; font-size: 1rem; line-height: 1.28; }
     .card-copy p { margin: 0; color: var(--muted); font-size: 0.78rem; }
+    .poster-dialog { position: relative; width: min(1120px, calc(100% - 32px)); max-height: calc(100vh - 32px); padding: 0; border: 1px solid var(--line); border-radius: 8px; background: #0b100e; color: var(--ink); box-shadow: 0 28px 90px rgba(0, 0, 0, 0.62); }
+    .poster-dialog::backdrop { background: rgba(3, 6, 5, 0.78); backdrop-filter: blur(8px); }
+    .poster-viewer { display: grid; grid-template-columns: minmax(0, 1fr) 300px; min-height: min(760px, calc(100vh - 34px)); }
+    .poster-stage { display: grid; place-items: center; padding: clamp(14px, 3vw, 28px); background: #050806; }
+    .poster-stage img { display: block; max-width: 100%; max-height: calc(100vh - 92px); object-fit: contain; border-radius: 6px; box-shadow: 0 18px 80px rgba(0, 0, 0, 0.42); }
+    .poster-info { display: grid; align-content: start; gap: 14px; padding: 22px; border-left: 1px solid var(--line); background: rgba(18, 26, 23, 0.9); }
+    .poster-info h2 { margin: 0; font-size: 1.45rem; line-height: 1.1; }
+    .poster-info p { margin: 0; color: var(--muted); line-height: 1.55; }
+    .poster-chip { width: fit-content; border: 1px solid var(--line); border-radius: 999px; padding: 5px 10px; color: var(--accent); font-size: 0.76rem; font-weight: 820; }
+    .poster-close { position: absolute; top: 12px; right: 12px; min-width: 40px; padding: 0; border: 1px solid var(--line); border-radius: 999px; background: rgba(8, 13, 12, 0.88); color: var(--ink); font-size: 1.2rem; }
     .footer { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 18px; color: var(--muted); font-size: 0.92rem; }
     .hidden, .language-hidden { display: none; }
 
-    @media (max-width: 960px) { .hero-content, .story, .collection-head { grid-template-columns: 1fr; } .side-panel { max-width: 420px; } .toolbar-inner { grid-template-columns: 1fr; align-items: stretch; } .support-band { grid-template-columns: 1fr; } .support-actions { justify-content: space-between; } }
+    @media (max-width: 960px) { .hero-content, .story, .collection-head { grid-template-columns: 1fr; } .side-panel { max-width: 420px; } .toolbar-inner { grid-template-columns: 1fr; align-items: stretch; } .support-band { grid-template-columns: 1fr; } .support-actions { justify-content: space-between; } .poster-viewer { grid-template-columns: 1fr; } .poster-info { border-left: 0; border-top: 1px solid var(--line); } .poster-stage img { max-height: 62vh; } }
     @media (max-width: 520px) { .support-actions { align-items: stretch; flex-direction: column; } .qr-card { width: 148px; } }
     @media (max-width: 720px) { .nav { grid-template-columns: 1fr auto; gap: 12px; padding: 12px 18px; } .nav-links { grid-column: 1 / -1; justify-content: flex-start; overflow-x: auto; padding-bottom: 2px; } .hero { min-height: 92vh; } .hero-content { padding: 172px 0 58px; } .stats { grid-template-columns: 1fr; } .gallery-title { display: block; } .gallery-title p { margin-top: 10px; } .gallery { grid-template-columns: repeat(auto-fill, minmax(154px, 1fr)); gap: 12px; } .card-copy { min-height: 142px; padding: 12px; } .footer { flex-direction: column; } }
   </style>
@@ -2140,13 +2150,28 @@
     </footer>
   </main>
 
+  <dialog class="poster-dialog" id="poster-dialog" aria-labelledby="poster-title">
+    <button class="poster-close" type="button" id="poster-close" aria-label="Close poster preview">×</button>
+    <div class="poster-viewer">
+      <div class="poster-stage">
+        <img id="poster-image" src="" alt="">
+      </div>
+      <div class="poster-info">
+        <span class="poster-chip" id="poster-chip">EN OCR</span>
+        <h2 id="poster-title">Poster title</h2>
+        <p id="poster-meta">OCR language</p>
+        <a class="button primary" id="poster-original" href="#" target="_blank" rel="noopener" data-i18n="openOriginal">Open original</a>
+      </div>
+    </div>
+  </dialog>
+
   <script>
     const copy = {
       en: {
-        navStory: 'Story', navCollections: 'Collection', donate: 'Donate', kicker: 'English poster collection', title: 'Disappearing Animal Species', lede: 'The English version of the visual atlas: conservation posters whose image text was detected as English by OCR.', explore: 'Explore English posters', support: 'Support the project', statAll: 'images scanned by OCR', statCurrent: 'English posters shown here', statOther: 'Russian posters in RU version', sideTitle: 'English version', sideText: 'This version shows only posters with dominant English text inside the image.', storyKicker: 'Editorial mission', storyTitle: 'Make the endangered visible before it becomes archival.', storyOne: 'The atlas turns conservation material into a visual library: species, habitats, threats, recovery efforts, and the emotional scale of ecological loss.', storyTwo: 'The English version shows English-text posters only. The Russian version shows Russian-text posters only.', supportKicker: 'Support the archive', supportTitle: 'Help the collection grow.', supportText: 'Donations help cover visual production, research time, bilingual editing, OCR cleanup, and hosting.', supportButton: 'Donate through CloudTips', collectionKicker: 'English collection', collectionTitle: 'English posters.', collectionText: 'Language is determined from text inside the image. Switching the site language also switches the visible poster collection.', platesLabel: 'plates', ruTitle: 'Russian Text Posters', ruText: 'Switch to RU to view posters whose image text was detected as Russian.', enTitle: 'English Text Posters', enText: 'These images were classified as English because OCR found dominant Latin text and no meaningful Cyrillic block.', footerOne: 'Disappearing Animal Species visual atlas', footerDonate: 'Donate to the project', search: 'Search English posters by species, title, or OCR text'
+        navStory: 'Story', navCollections: 'Collection', donate: 'Donate', kicker: 'English poster collection', title: 'Disappearing Animal Species', lede: 'The English version of the visual atlas: conservation posters whose image text was detected as English by OCR.', explore: 'Explore English posters', support: 'Support the project', statAll: 'images scanned by OCR', statCurrent: 'English posters shown here', statOther: 'Russian posters in RU version', sideTitle: 'English version', sideText: 'This version shows only posters with dominant English text inside the image.', storyKicker: 'Editorial mission', storyTitle: 'Make the endangered visible before it becomes archival.', storyOne: 'The atlas turns conservation material into a visual library: species, habitats, threats, recovery efforts, and the emotional scale of ecological loss.', storyTwo: 'The English version shows English-text posters only. The Russian version shows Russian-text posters only.', supportKicker: 'Support the archive', supportTitle: 'Help the collection grow.', supportText: 'Donations help cover visual production, research time, bilingual editing, OCR cleanup, and hosting.', supportButton: 'Donate through CloudTips', collectionKicker: 'English collection', collectionTitle: 'English posters.', collectionText: 'Language is determined from text inside the image. Switching the site language also switches the visible poster collection.', platesLabel: 'plates', ruTitle: 'Russian Text Posters', ruText: 'Switch to RU to view posters whose image text was detected as Russian.', enTitle: 'English Text Posters', enText: 'These images were classified as English because OCR found dominant Latin text and no meaningful Cyrillic block.', footerOne: 'Disappearing Animal Species visual atlas', footerDonate: 'Donate to the project', openOriginal: 'Open original', search: 'Search English posters by species, title, or OCR text'
       },
       ru: {
-        navStory: 'История', navCollections: 'Коллекция', donate: 'Поддержать', kicker: 'Русская коллекция постеров', title: 'Исчезающие виды животных', lede: 'Русская версия визуального атласа: природоохранные постеры, в которых OCR определил русский текст внутри изображения.', explore: 'Открыть русские постеры', support: 'Поддержать проект', statAll: 'изображений проверено OCR', statCurrent: 'русских постеров здесь', statOther: 'английских постеров в EN-версии', sideTitle: 'Русская версия', sideText: 'Эта версия показывает только постеры с доминирующим русским текстом внутри изображения.', storyKicker: 'Редакционная миссия', storyTitle: 'Сделать исчезающее видимым, пока оно не стало архивом.', storyOne: 'Атлас превращает природоохранные материалы в визуальную библиотеку: виды, среды обитания, угрозы, восстановление и эмоциональный масштаб экологической потери.', storyTwo: 'Русская версия показывает только постеры с русским текстом. Английская версия показывает только постеры с английским текстом.', supportKicker: 'Поддержать архив', supportTitle: 'Помогите коллекции расти.', supportText: 'Донаты помогают покрывать визуальное производство, исследование, двуязычную редактуру, OCR-чистку и хостинг.', supportButton: 'Поддержать через CloudTips', collectionKicker: 'Русская коллекция', collectionTitle: 'Постеры на русском.', collectionText: 'Язык определяется по тексту внутри изображения. Переключение языка сайта переключает и видимую коллекцию постеров.', platesLabel: 'листов', ruTitle: 'Постеры с русским текстом', ruText: 'Эти изображения отнесены к русским, потому что OCR нашёл внутри постера доминирующий текст кириллицей.', enTitle: 'Постеры с английским текстом', enText: 'Переключитесь на EN, чтобы увидеть постеры, где OCR определил английский текст.', footerOne: 'Визуальный атлас исчезающих видов животных', footerDonate: 'Поддержать проект', search: 'Искать русские постеры по виду, заголовку или OCR-тексту'
+        navStory: 'История', navCollections: 'Коллекция', donate: 'Поддержать', kicker: 'Русская коллекция постеров', title: 'Исчезающие виды животных', lede: 'Русская версия визуального атласа: природоохранные постеры, в которых OCR определил русский текст внутри изображения.', explore: 'Открыть русские постеры', support: 'Поддержать проект', statAll: 'изображений проверено OCR', statCurrent: 'русских постеров здесь', statOther: 'английских постеров в EN-версии', sideTitle: 'Русская версия', sideText: 'Эта версия показывает только постеры с доминирующим русским текстом внутри изображения.', storyKicker: 'Редакционная миссия', storyTitle: 'Сделать исчезающее видимым, пока оно не стало архивом.', storyOne: 'Атлас превращает природоохранные материалы в визуальную библиотеку: виды, среды обитания, угрозы, восстановление и эмоциональный масштаб экологической потери.', storyTwo: 'Русская версия показывает только постеры с русским текстом. Английская версия показывает только постеры с английским текстом.', supportKicker: 'Поддержать архив', supportTitle: 'Помогите коллекции расти.', supportText: 'Донаты помогают покрывать визуальное производство, исследование, двуязычную редактуру, OCR-чистку и хостинг.', supportButton: 'Поддержать через CloudTips', collectionKicker: 'Русская коллекция', collectionTitle: 'Постеры на русском.', collectionText: 'Язык определяется по тексту внутри изображения. Переключение языка сайта переключает и видимую коллекцию постеров.', platesLabel: 'листов', ruTitle: 'Постеры с русским текстом', ruText: 'Эти изображения отнесены к русским, потому что OCR нашёл внутри постера доминирующий текст кириллицей.', enTitle: 'Постеры с английским текстом', enText: 'Переключитесь на EN, чтобы увидеть постеры, где OCR определил английский текст.', footerOne: 'Визуальный атлас исчезающих видов животных', footerDonate: 'Поддержать проект', openOriginal: 'Открыть оригинал', search: 'Искать русские постеры по виду, заголовку или OCR-тексту'
       }
     };
 
@@ -2157,6 +2182,13 @@
     const sections = [...document.querySelectorAll('.gallery-section')];
     const langButtons = [...document.querySelectorAll('[data-lang]')];
     const translatable = [...document.querySelectorAll('[data-i18n]')];
+    const posterDialog = document.querySelector('#poster-dialog');
+    const posterClose = document.querySelector('#poster-close');
+    const posterImage = document.querySelector('#poster-image');
+    const posterTitle = document.querySelector('#poster-title');
+    const posterMeta = document.querySelector('#poster-meta');
+    const posterChip = document.querySelector('#poster-chip');
+    const posterOriginal = document.querySelector('#poster-original');
     const urlLanguage = new URLSearchParams(window.location.search).get('lang');
     let language = urlLanguage === 'ru' || urlLanguage === 'en' ? urlLanguage : (localStorage.getItem('language') || 'en');
 
@@ -2202,6 +2234,28 @@
 
     search.addEventListener('input', applySearch);
     langButtons.forEach((button) => button.addEventListener('click', () => setLanguage(button.dataset.lang)));
+    document.querySelectorAll('.card-image').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const card = link.closest('.card');
+        const image = link.querySelector('img');
+        const title = card.querySelector('h3').textContent;
+        const meta = card.querySelector('.card-copy p').textContent;
+        const chip = card.querySelector('.card-meta span:last-child').textContent;
+
+        posterImage.src = image.src;
+        posterImage.alt = image.alt;
+        posterTitle.textContent = title;
+        posterMeta.textContent = meta;
+        posterChip.textContent = chip;
+        posterOriginal.href = link.href;
+        posterDialog.showModal();
+      });
+    });
+    posterClose.addEventListener('click', () => posterDialog.close());
+    posterDialog.addEventListener('click', (event) => {
+      if (event.target === posterDialog) posterDialog.close();
+    });
     setLanguage(language);
   </script>
 </body>
