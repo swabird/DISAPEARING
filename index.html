@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Disappearing Animal Species</title>
   <meta name="description" content="A bilingual visual atlas of endangered animal species, separated by OCR-detected Russian and English poster text.">
+  <meta property="og:title" content="Disappearing Animal Species">
+  <meta property="og:description" content="149 conservation posters sorted by OCR-detected Russian and English text.">
+  <meta property="og:image" content="056_endangered_species_visual_atlas_cover.png">
   <style>
     :root {
       color-scheme: dark;
@@ -17,7 +20,6 @@
       --panel-strong: rgba(10, 15, 13, 0.94);
       --accent: #e4b75f;
       --accent-ink: #1c1307;
-      --leaf: #86a66b;
       --water: #7bbab2;
       --berry: #d86f61;
     }
@@ -26,6 +28,7 @@
     html { scroll-behavior: smooth; }
     body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: var(--bg); color: var(--ink); }
     a { color: inherit; }
+    a:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
     .nav { position: fixed; z-index: 20; inset: 0 0 auto 0; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 22px; padding: 14px clamp(18px, 4vw, 56px); background: linear-gradient(180deg, rgba(6, 10, 9, 0.92), rgba(6, 10, 9, 0.18)); backdrop-filter: blur(14px); }
     .brand { font-weight: 820; text-transform: uppercase; font-size: 0.88rem; }
@@ -190,7 +193,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Индийский Слон</h3>
-              <p>Кириллица: 1677</p>
+              <p>Cyrillic OCR: 1677</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="иберийская рысь 002_a_composite_infographic_poster_image_showing_8_ani.png 17 иберийская рысь (lynx pardinus) ареал обитания: юго-замад испании и португали питание: кролики, птицы, грызуны уникальные особенности: имеет кисточки на ушах, самая редкая кошка">
@@ -203,7 +206,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Иберийская Рысь</h3>
-              <p>Кириллица: 866</p>
+              <p>Cyrillic OCR: 866</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="синий кит 003_a_composite_poster_image_a_grid_of_8_wildlife_inf.png 01 синий кит (balaenoptera musculus) blue whale ареал обитания / навітат: мировой океан world ocean питание / diet: криль, мепкие ракообразные krill, small crustaceans уникальные о">
@@ -216,7 +219,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Синий Кит</h3>
-              <p>Кириллица: 1725</p>
+              <p>Cyrillic OCR: 1725</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="зондский панголин 004_a_detailed_infographic_collage_poster_an_overall.png 1 зондский панголин (manis jovanico) кто-бастовал аз: питанне: клубся при списности. критически на грани исчезновения 5 суматранский тигр (panthere tigris sumatrae) askaher остров">
@@ -229,7 +232,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Зондский Панголин</h3>
-              <p>Кириллица: 3291</p>
+              <p>Cyrillic OCR: 3291</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="белый медведь 005_a_detailed_infographic_image_a_grid_of_eight_wild.png 33 белый медведь (ursus maritimus) polar bear ареал обитания / habiat: арктика arctic region питание / diet: тюлени, рыба seals, fish уникальные особенности / unique traits: самый">
@@ -242,7 +245,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Белый Медведь</h3>
-              <p>Кириллица: 1668</p>
+              <p>Cyrillic OCR: 1668</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="индийский слон 006_a_detailed_infographic_poster._overall_scene_a_ve.png 25 индийский слон (elephas maximus indicus) asian elephant южная и юго-восточная азия south and southeast asia питание / diet: травы, листья, кора, фрукты grasses, leaves, bark, fr">
@@ -255,7 +258,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Индийский Слон</h3>
-              <p>Кириллица: 265</p>
+              <p>Cyrillic OCR: 265</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="иберийская рысь 007_a_detailed_infographic_poster_style_scene._overall.png иберийская рысь lynx pardinus ареал обитания: юго-запад испании и португалии питание: кролики, птицы, грызуны ! уникальные особенности: имеет кисточки на ушах. самая редкая кошка в">
@@ -268,7 +271,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Иберийская Рысь</h3>
-              <p>Кириллица: 351</p>
+              <p>Cyrillic OCR: 351</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="шёлковая акула 008_a_high_detail_infographic_poster_card_grid_over.png 17 шёлковая акула (carcharhinus falciformis) silky shark ареал обитания / навітат: тропические и тёплые воды всего мира tropical and warm waters worldwide питание / diet: рыба, кал">
@@ -281,7 +284,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Шёлковая Акула</h3>
-              <p>Кириллица: 1783</p>
+              <p>Cyrillic OCR: 1783</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="амурский тигр 009_a_high_detail_infographic_poster_chart_style_ima.png 25 амурский тигр (panthera tigris altaica) amur tiger ареал обитания / навітат: дальний восток россии, северо-восток китая russian far east, northeast china питание / diet: кабаны,">
@@ -294,7 +297,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Амурский Тигр</h3>
-              <p>Кириллица: 1708</p>
+              <p>Cyrillic OCR: 1708</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="зондский панголин 010_a_high_detail_infographic_poster_collage_a_grid_o.png 01 зондский панголин (manis javanica) ареал обитання: нидонезия, малайзия, мурлеьк, термиты уникальные особенности- с чищуси сводочивлется в шар для зашакты. бромерство, торговля к">
@@ -307,7 +310,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Зондский Панголин</h3>
-              <p>Кириллица: 1833</p>
+              <p>Cyrillic OCR: 1833</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="гирляндовая акула 011_a_high_detail_infographic_poster_grid_a_4x2_block.png 73 гирляндовая акула (somniosus microcephalus) greenland shark ареал обитания / навітат арктические и субарктические воды arctic and subarctic waters питание / diet: рыба, тюлени,">
@@ -320,7 +323,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Гирляндовая Акула</h3>
-              <p>Кириллица: 1621</p>
+              <p>Cyrillic OCR: 1621</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="атлантический тупик 012_a_high_resolution_infographic_poster_collage_of_en.png 09 атлантический тупик (fratercula arctica) atlantic puffin ареал обитания / навітат: северная атлантика north atlantic питание / diet: мелкая рыба: песчанка, small fish: sand eels">
@@ -333,7 +336,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Атлантический Тупик</h3>
-              <p>Кириллица: 1852</p>
+              <p>Cyrillic OCR: 1852</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="зондский панголин 013_a_large_composite_poster_infographic_sheet_over.png зондский панголин mint orone sunda pangolin matt virac амурский леопард portio вы нокете помочь суматранский тигр porthora tigris sumatrae you can helm sumatran tiger panthero tigr">
@@ -346,7 +349,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Зондский Панголин</h3>
-              <p>Кириллица: 501</p>
+              <p>Cyrillic OCR: 501</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="зинужина 014_a_super_detailed_infographic_poster_collage_grid.png dunes on зинужина 9 khex* ecoco honoh &quot;holauou -иld0hh39000 07 зіничуина •shiu 9l кисамони 19d0djk зічичичжина 8 киинтих анонсвони зінчина (0s0dı3o) l valoven our burn зачинина can">
@@ -359,7 +362,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Зинужина</h3>
-              <p>Кириллица: 173</p>
+              <p>Cyrillic OCR: 173</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="амурский леопард 015_a_wide_composite_infographic_poster_grid_scene_i.png 89 амурский леопард (panthera pardus orientalis) amur leopard ареал обитания / нітат: дальний восток россии, китай russian far east, china питание / diet: косули, изюбри, кабаны, з">
@@ -372,7 +375,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Амурский Леопард</h3>
-              <p>Кириллица: 1827</p>
+              <p>Cyrillic OCR: 1827</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="ламантин амазонский 016_amazonian_manatee_conservation_guide.png ламантин амазонский trichechus inunguis amazonian manatee ареал: бассейн амазонки южная америка ареал: реки и затопляемые леса бассейна амазонки. питание: водные растения, травы, п">
@@ -385,7 +388,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Ламантин Амазонский</h3>
-              <p>Кириллица: 445</p>
+              <p>Cyrillic OCR: 445</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="амурский леопард к 018_amur_leopard_infographic_poster.png амурский леопард критически угрожаемый вид • panthera pardus orientalis где обитает ареал: юг дальнего востока россии и северо-восток китая россия •приморский край статус мсоп: кри">
@@ -398,7 +401,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Амурский Леопард К</h3>
-              <p>Кириллица: 1617</p>
+              <p>Cyrillic OCR: 1617</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="аксолотль 020_axolotl_conservation_unique_species_at_risk.png аксолотль ambystoma mexicanum статус мсоп: критически угрожаемый вид неотеническая саламандра, сохранившая внешние жабры. в природе сохранилась почти исключительно в районе сочимил">
@@ -411,7 +414,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Аксолотль</h3>
-              <p>Кириллица: 888</p>
+              <p>Cyrillic OCR: 888</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="черноногий хорек 021_black_footed_ferret_conservation_poster.png черноногий хорек mustela nigripes статус мсоп: под угрозой редкий хищник североамериканских прерий. почти полностью зависит от колоний луговых собачек и их нор. где обитает прерии">
@@ -424,7 +427,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Черноногий Хорек</h3>
-              <p>Кириллица: 954</p>
+              <p>Cyrillic OCR: 954</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="синий кит 022_blue_whale_conservation_infographic.png синий кит balaenoptera musculus под угрозой сокращение численности из-за деятельности человека и изменения климата. где обитает открытые океаны по всему миру | ареал обитания питае">
@@ -437,7 +440,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Синий Кит</h3>
-              <p>Кириллица: 1029</p>
+              <p>Cyrillic OCR: 1029</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="борнейский орангутан к 025_bornean_orangutan_conservation_poster.png борнейский орангутан критически угрожаемый вид • pongo pygmaeus статус мсоп: критически угрожаемый главные угрозы: вырубка лесов, плантации масличной пальмы, пожары, охота и незако">
@@ -450,7 +453,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Борнейский Орангутан К</h3>
-              <p>Кириллица: 959</p>
+              <p>Cyrillic OCR: 959</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="афалина 026_bottlenose_dolphin_wildlife_guide_poster.png 22 афалина tursiops truncatus bottlenose dolphin ареал: тёплые и умеренные моря, особенно прибрежные воды. питание: рыба, кальмары, ракообразные. уникальные черты: • высокий интелл">
@@ -463,7 +466,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Афалина</h3>
-              <p>Кириллица: 358</p>
+              <p>Cyrillic OCR: 358</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="гренландский кит 027_bowhead_whale_in_the_arctic_ocean.png 21 гренландский кит balaena mysticetus bowhead whale ареал: арктические и субарктические воды. ареал: арктические и субарктические воды. питание: планктон, криль, мелкие ракообразн">
@@ -476,7 +479,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Гренландский Кит</h3>
-              <p>Кириллица: 429</p>
+              <p>Cyrillic OCR: 429</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="калифорнийский кондор 028_california_condor_conservation_poster.png калифорнийский кондор gymnogyps californianus статус мсоп: критически исчезающий вид крупнейшая наземная птица северной америки. этот величественный падальщик спасён от полного исч">
@@ -489,7 +492,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Калифорнийский Кондор</h3>
-              <p>Кириллица: 996</p>
+              <p>Cyrillic OCR: 996</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="китайская гигантская саламандра 029_chinese_giant_salamander_conservation_infographic.png китайская гигантская саламандра andrias davidianus а статус мсоп: критически угрожаемый вид крупнейшее современное земноводное мира. страдает от изъятия из природы, загрязнения и р">
@@ -502,7 +505,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Китайская Гигантская Саламандра</h3>
-              <p>Кириллица: 881</p>
+              <p>Cyrillic OCR: 881</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="обыкновенный дельфин 030_common_dolphin_wildlife_guide_infographic.png 24 обыкновенный дельфин delphinus delphis common dolphin ареал: умеренные и тропические моря по всему миру. a питание: рыба, кальмары, мелкие стайные виды. уникальные черты: • очен">
@@ -515,7 +518,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Обыкновенный Дельфин</h3>
-              <p>Кириллица: 335</p>
+              <p>Cyrillic OCR: 335</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="conservation dossier fiji crested iguana 031_conservation_dossier_fiji_crested_iguana.png полевое досье • сохраним будущее нашей планеы фиджийская хохлатая игуана brachylophus vitiensis ареал острова фиджи питание листья, цветы, плоды уникальные черты • ярко-зелёная окр">
@@ -528,7 +531,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Conservation Dossier Fiji Crested Iguana</h3>
-              <p>Кириллица: 547</p>
+              <p>Cyrillic OCR: 547</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="ай-ай 034_conservation_of_the_aye_aye_lemur.png ай-ай daubentonia madagascariensis статус мсоп: исчезающий вид необычный ночной лемур мадагаскара, известный своими огромными ушами, постоянно растущими резцами и длинным средним п">
@@ -541,7 +544,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Ай-ай</h3>
-              <p>Кириллица: 1062</p>
+              <p>Cyrillic OCR: 1062</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="окапи 035_conservation_of_the_elusive_okapi.png окапи okapia johnstoni статус мсоп: исчезающий вид редкий лесной родственник жирафа, скрытно живущий в густых лесах демократической республики конго. вид страдает от вырубки лесов,">
@@ -554,7 +557,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Окапи</h3>
-              <p>Кириллица: 993</p>
+              <p>Cyrillic OCR: 993</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="европейский угорь 036_conservation_of_the_european_eel.png 19 европейский угорь anguilla anguilla european eel ареал: реки, озёра и прибрежные воды европы и северной африки; нерест в саргассовом море. питание: мелкая рыба, ракообразные, ли">
@@ -567,7 +570,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Европейский Угорь</h3>
-              <p>Кириллица: 578</p>
+              <p>Cyrillic OCR: 578</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="индо-тихоокеанский горбатый дельфин 037_conservation_of_the_indo_pacific_humpback_dolphin.png индо-тихоокеанский горбатый дельфин sousa chinensis статус мсоп: уязвимый вид прибрежный дельфин тёплых вод восточного индийского и западной части тихого океана. близость к человек">
@@ -580,7 +583,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Индо-тихоокеанский Горбатый Дельфин</h3>
-              <p>Кириллица: 908</p>
+              <p>Cyrillic OCR: 908</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="длиннорылыи морской конёк 038_conservation_of_the_long_snouted_seahorse.png длиннорылыи морской конёк hippocampus reidi статус мсоп: близок к уязвимому изящная рыба мелководных морских лугов и мангров. уязвима из-за разрушения прибрежных местообитаний и из">
@@ -593,7 +596,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Длиннорылыи Морской Конёк</h3>
-              <p>Кириллица: 939</p>
+              <p>Cyrillic OCR: 939</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="северный атлантический гладкий кит 040_conservation_of_the_north_atlantic_whale.png северный атлантический гладкий кит eubalaena glacialis статус мсоп: критически угрожаемый вид один из самых редких крупных китов на планете. на грани исчезновения. 2 где обитает за">
@@ -606,7 +609,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Северный Атлантический Гладкий Кит</h3>
-              <p>Кириллица: 1609</p>
+              <p>Cyrillic OCR: 1609</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="американский журавль 042_conservation_of_the_whooping_crane.png американский журавль grus americana статус мсоп: под угрозой самый высокий журавль северной америки. зависит от сохранности болот и водно-болотных миграционных стоянок. где обитает">
@@ -619,7 +622,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Американский Журавль</h3>
-              <p>Кириллица: 943</p>
+              <p>Cyrillic OCR: 943</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="носач 043_conserving_borneo_s_proboscis_monkey.png носач nasalis larvatus статус мсоп: исчезающий вид уникальная обезьяна борнео с характерным носом и удивительной приспособленностью к жизни в прибрежных лесах. борнео где обитает м">
@@ -632,7 +635,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Носач</h3>
-              <p>Кириллица: 749</p>
+              <p>Cyrillic OCR: 749</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="азиатский слон в 044_conserving_the_asian_elephant_s_habitat.png азиатский слон вымирающий вид • elephas maximus статус мсоп: вымирающий главные угрозы: утрата и фрагментация среды, конфликт с человеком, браконьерство, столкновения с транспортом">
@@ -645,7 +648,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Азиатский Слон В</h3>
-              <p>Кириллица: 964</p>
+              <p>Cyrillic OCR: 964</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="фосса 045_conserving_the_fossa_of_madagascar.png фосса cryptoprocta ferox статус мсоп: уязвимый вид крупнейший наземный хищник мадагаскара, сочетающий черты кошки, куницы и мангуста. вид уязвим из-за вырубки лесов, сокращения доб">
@@ -658,7 +661,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Фосса</h3>
-              <p>Кириллица: 1018</p>
+              <p>Cyrillic OCR: 1018</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="медленный лори 047_conserving_the_javan_slow_loris.png медленный лори nycticebus javanicus яванский медленный лори статус мсоп: критически вымирающий вид медленный лори явы - уникальный ночной примат с большими глазами и ядовитым укусо">
@@ -671,7 +674,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Медленный Лори</h3>
-              <p>Кириллица: 834</p>
+              <p>Cyrillic OCR: 834</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="долгопят 048_conserving_the_tarsier_of_siau_island.png долгопят tarsius tumpara сиауский долгопят статус. мсоп: критически вымирающий вид маленький, удивительный и единственный представитель своего рода на острове сиау. его выживание з">
@@ -684,7 +687,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Долгопят</h3>
-              <p>Кириллица: 834</p>
+              <p>Cyrillic OCR: 834</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="crocodile field guide dossier design 049_crocodile_field_guide_dossier_design.png полевое досье • сохраним будущее нашей планеты гребнистый 30 крокодил 48 видов crocodylus porosus ареал южная и юго-восточная азия, север австралии питание рыба, ракообразные, птиц">
@@ -697,7 +700,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Crocodile Field Guide Dossier Design</h3>
-              <p>Кириллица: 526</p>
+              <p>Cyrillic OCR: 526</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="дюгонь 050_dugong_conservation_infographic_poster.png дюгонь dugong dugon статус мсоп: уязвимый вид крупное морское млекопитающее, тесно связанное с подводными лугами морских трав. медленно размножается и особенно уязвимо к потере мес">
@@ -710,7 +713,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Дюгонь</h3>
-              <p>Кириллица: 918</p>
+              <p>Cyrillic OCR: 918</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="галапагосский пингвин 052_endangered_galápagos_penguin_conservation_guide.png галапагосский пингвин spheniscus mendiculus статус мсоп: исчезающий вид редкий пингвин эквадора и единственный вид пингвинов, регулярно живущий у экватора. сильно зависит от холодн">
@@ -723,7 +726,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Галапагосский Пингвин</h3>
-              <p>Кириллица: 1108</p>
+              <p>Cyrillic OCR: 1108</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="endangered species visual atlas cover 056_endangered_species_visual_atlas_cover.png полевое досье • сохраним будущее нашей планеты исчезающие виды 48 видов визуальный атлас 48 животных инфографический журнал • русская версия дальний восток россии сундский панголин">
@@ -736,7 +739,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Endangered Species Visual Atlas Cover</h3>
-              <p>Кириллица: 516</p>
+              <p>Cyrillic OCR: 516</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="индийский слон 057_ephiopian_fox.png 25 индийский слон (elephas maximus indicus) asian elephant ареал обитания / habita: южная и юго-восточная азия south and southeast asia питание / diet: травы, листья, кора, фрукты">
@@ -749,7 +752,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Индийский Слон</h3>
-              <p>Кириллица: 1714</p>
+              <p>Cyrillic OCR: 1714</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="ethiopian wolf conservation dossier 058_ethiopian_wolf_conservation_dossier.png полевое досье • сохраним будущее нашей планеты эфиопский волк canis simensis ареал высокогорья эфиопии 48 видов карта ареала высокогорья эфиопии питание грызуны, мелкие птицы, насе">
@@ -762,7 +765,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Ethiopian Wolf Conservation Dossier</h3>
-              <p>Кириллица: 481</p>
+              <p>Cyrillic OCR: 481</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="африканский лесной слон н 059_forest_elephant_conservation_infographic_poster.png африканский лесной слон на грани исчезновения • loxodonta cyclotis статус мсоп: на грани исчезновения главные угрозы: браконьерство ради слоновой кости, утрата и фрагментация лесов">
@@ -775,7 +778,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Африканский Лесной Слон Н</h3>
-              <p>Кириллица: 965</p>
+              <p>Cyrillic OCR: 965</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="гангский дельфин 062_ganges_river_dolphin_conservation_poster.png гангский дельфин platanista gangetica статус мсоп: под угрозой редкий пресноводный дельфин рек ганг-брахмапутра-мегхна. вид страдает из-за загрязнения, дамб и рыболовных сетей. 1 г">
@@ -788,7 +791,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Гангский Дельфин</h3>
-              <p>Кириллица: 857</p>
+              <p>Cyrillic OCR: 857</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="большая панда 065_giant_panda_conservation_infographic.png большая панда ailuropoda melanoleuca статус мсоп: уязвимый вид знаменитый медведь центрального китая, тесно связанный с бамбуковыми горными лесами. несмотря на успехи охраны, вид в">
@@ -801,7 +804,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Большая Панда</h3>
-              <p>Кириллица: 990</p>
+              <p>Cyrillic OCR: 990</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="золотая ядовитая лягушка 066_golden_poison_frog_conservation_infographic.png золотая ядовитая лягушка phyllobates terribilis статус: под угрозой ярко окрашенный обитатель влажных лесов колумбии. один из самых адовитых современных животных. 1 где обитает n т">
@@ -814,7 +817,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Золотая Ядовитая Лягушка</h3>
-              <p>Кириллица: 886</p>
+              <p>Cyrillic OCR: 886</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="большая белая акула 067_great_white_shark_conservation_poster.png 20 большая белая акула carcharodon carcharias great white shark ареал: умеренные и тёплые моря по всему миру. питание: тюлени, рыба, скаты, морские млекопитающие. уникальные черты:">
@@ -827,7 +830,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Большая Белая Акула</h3>
-              <p>Кириллица: 317</p>
+              <p>Cyrillic OCR: 317</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="иберийская рысь у 070_iberian_lynx_conservation_infographic_poster.png иберийская рысь уязвимый вид • lynx pardinus 2 где обитает испания португалия статус мсоп: уязвимый вид андалусия главные угрозы: сокращение кроликов, фрагментация среды, дороги, н">
@@ -840,7 +843,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Иберийская Рысь У</h3>
-              <p>Кириллица: 937</p>
+              <p>Cyrillic OCR: 937</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="большая белая акула 071_imagegen.png 20 большая белая акула carcharodon carcharias great white shark ареал: умеренные и тёплые моря по всему миру. питание: тюлени, рыба, скаты, морские млекопитающие. уникальные черты:">
@@ -853,7 +856,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Большая Белая Акула</h3>
-              <p>Кириллица: 317</p>
+              <p>Cyrillic OCR: 317</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="indian elephant conservation field guide 072_indian_elephant_conservation_field_guide.png 25 «полевое досье • сохраним будущее нашей планеты индийский слон elephas maximus indicus ареал южная и юго-восточная азия питание травы, листья, кора, плоды уникальные черты • уши">
@@ -866,7 +869,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Indian Elephant Conservation Field Guide</h3>
-              <p>Кириллица: 574</p>
+              <p>Cyrillic OCR: 574</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="ирравадийский дельфин 073_irrawaddy_dolphin_conservation_guide.png ирравадийский дельфин orcaella brevirostris статус мсоп: под угрозой исчезновения редкий дельфин рек, эстуариев и прибрежных вод юго-восточной азии. особенно уязвим рядом с человеч">
@@ -879,7 +882,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Ирравадийский Дельфин</h3>
-              <p>Кириллица: 919</p>
+              <p>Cyrillic OCR: 919</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="яванский носорог к 076_javan_rhinoceros_conservation_infographic.png яванский носорог критически угрожаемый вид • rhinoceros sondaicus статус мсоп: критически угрожаемый главные угрозы: крайне малая численность, уязвимость единственной популяции, бо">
@@ -892,7 +895,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Яванский Носорог К</h3>
-              <p>Кириллица: 1135</p>
+              <p>Cyrillic OCR: 1135</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="какапо к 078_kakapo_endangered_forest_dweller_infographic.png какапо критически угрожаемый вид • strigops habroptilus статус мсоп: критически угрожаемый главные угрозы: завезенные хищники, низкая успешность выведения птенцов, болезни, низкое">
@@ -905,7 +908,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Какапо К</h3>
-              <p>Кириллица: 961</p>
+              <p>Cyrillic OCR: 961</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="kemp s ridley sea turtle conservation guide 079_kemp_s_ridley_sea_turtle_conservation_guide.png 32 полевое досье • сохраним будущее нашей планеты черепаха кемпа lepidochelys kempii морские виды ареал мексиканский залив и западная атлантика питание крабы, моллюски, медузы уник">
@@ -918,7 +921,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Kemp S Ridley Sea Turtle Conservation Guide</h3>
-              <p>Кириллица: 487</p>
+              <p>Cyrillic OCR: 487</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="комодский варан 081_komodo_dragon_conservation_infographic.png комодский варан varanus komodoensis статус мсоп: исчезающий вид крупнейшая современная ящерица и верховный хищник нескольких индонезийских островов. вид уязвим из-за очень малого а">
@@ -931,7 +934,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Комодский Варан</h3>
-              <p>Кириллица: 1053</p>
+              <p>Cyrillic OCR: 1053</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="manatee conservation fact sheet poster 086_manatee_conservation_fact_sheet_poster.png 29 полевое досье • сохраним будущее нашей планеты карибский ламантин trichechus manatus 48 видов карибский регион и прилегающие побережья западной атлантики ареал карибский регион,">
@@ -944,7 +947,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Manatee Conservation Fact Sheet Poster</h3>
-              <p>Кириллица: 486</p>
+              <p>Cyrillic OCR: 486</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="рифовая манта 087_manta_ray_conservation_infographic_poster.png рифовая манта mobula alfredi статус мсоп: уязвимый вид крупный фильтратор тёплых морей индо-тихоокеанского региона. медленно размножается и поэтому особенно чувствителен к перелову">
@@ -957,7 +960,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Рифовая Манта</h3>
-              <p>Кириллица: 930</p>
+              <p>Cyrillic OCR: 930</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="средиземноморский тюлень-монах 088_mediterranean_monk_seal_conservation_poster.png средиземноморский тюлень-монах monachus monachus статус мсоп: под угрозой исчезновения один из самых редких тюленей в мире. выживает в уединённых бухтах, морских пещерах и охраняем">
@@ -970,7 +973,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Средиземноморский Тюлень-монах</h3>
-              <p>Кириллица: 963</p>
+              <p>Cyrillic OCR: 963</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="mexican gray wolf conservation guide 089_mexican_gray_wolf_conservation_guide.png 27 полевое досье • сохраним будущее нашей планеты мексиканский серый волк canis lupus baileyi ареал юго-запад сша и север мексики питание олени, кролики, мелкие млекопитающие уника">
@@ -983,7 +986,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Mexican Gray Wolf Conservation Guide</h3>
-              <p>Кириллица: 415</p>
+              <p>Cyrillic OCR: 415</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="малый полосатик 090_minke_whale_species_guide_poster.png 23 | малый полосатик balaenoptera acutorostrata minke whale ареал: холодные и умеренные моря обоих полушарий. питание: криль, мелкая рыба, планктон. уникальные черты: • один из сам">
@@ -996,7 +999,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Малый Полосатик</h3>
-              <p>Кириллица: 444</p>
+              <p>Cyrillic OCR: 444</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="горная горилла в 092_mountain_gorilla_conservation_overview.png горная горилла вымирающий вид • gorilla beringei beringei статус мсоп: вымирающий главные угрозы: утрата среды, болезни, петли и браконьерство, давление человека особенности самый">
@@ -1009,7 +1012,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Горная Горилла В</h3>
-              <p>Кириллица: 964</p>
+              <p>Cyrillic OCR: 964</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="зондский панголин к 095_pangolin_conservation_facts_sheet_in_russian.png зондский панголин критически угрожаемый вид • manis javanica статус мсоп: критически угрожаемый главные угрозы: незаконная торговля дикими животными, браконьерство, утрата лесов 1">
@@ -1022,7 +1025,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Зондский Панголин К</h3>
-              <p>Кириллица: 1254</p>
+              <p>Cyrillic OCR: 1254</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="носач 097_proboscis_monkey_conservation_in_borneo.png носач nasalis larvatus статус мсоп: исчезающий вид уникальная обезьяна борнео с характерным носом; удивительно приспособлена к жизни в прибрежных и речных лесах. где обитает мангро">
@@ -1035,7 +1038,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Носач</h3>
-              <p>Кириллица: 736</p>
+              <p>Cyrillic OCR: 736</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="африканская дикая собака 099_protecting_the_african_wild_dog_s_habitat.png африканская дикая собака lycaon pictus статус мсоп: исчезающий вид очень социальный и эффективный хищник саванн африки; его выживание зависит от крупных связанных ландшафтов. восто">
@@ -1048,7 +1051,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Африканская Дикая Собака</h3>
-              <p>Кириллица: 818</p>
+              <p>Cyrillic OCR: 818</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="атлантический тулик 100_protecting_the_atlantic_puffin_s_home.png атлантический тулик fratercula arctica статус мсоп: уязвимый вид яркая морская птица северной атлантики. её благополучие зависит от богатых рыбой морей и безопасных островных колон">
@@ -1061,7 +1064,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Атлантический Тулик</h3>
-              <p>Кириллица: 907</p>
+              <p>Cyrillic OCR: 907</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="гавиал 101_protecting_the_gharial_a_critical_mission.png гавиал gavialis gangeticus статус мсоп: критически исчезающий вид редкий речной крокодил южной азии, мгновенно узнаваемый по очень длинной узкой морде. сильно страдает от разрушени">
@@ -1074,7 +1077,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Гавиал</h3>
-              <p>Кириллица: 923</p>
+              <p>Cyrillic OCR: 923</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="бисса 102_protecting_the_hawksbill_sea_turtle.png бисса eretmochelys imbricata критически угрожаемый вид где обитает тропические и субтропические моря. в основном коралловые рифы, лагуны, скалистые побережья и пляжи для гнездовани">
@@ -1087,7 +1090,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Бисса</h3>
-              <p>Кириллица: 957</p>
+              <p>Cyrillic OCR: 957</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="кожистая черепаха 103_protecting_the_leatherback_turtle_endoftext.png кожистая черепаха dermochelys coriacea статус мсоп: уязвимый вид крупнейшая морская черепаха планеты; совершает грандиозные миграции и зависит от здоровых океанов и безопасных пляж">
@@ -1100,7 +1103,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Кожистая Черепаха</h3>
-              <p>Кириллица: 856</p>
+              <p>Cyrillic OCR: 856</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="снежный барс 106_protecting_the_snow_leopard_s_highland_home.png снежный барс panthera uncia статус мсоп: уязвимый вид легендарный хищник высокогорий азии; выживает там, где сохраняются дикие горные экосистемы и естественная добыча. центральная">
@@ -1113,7 +1116,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Снежный Барс</h3>
-              <p>Кириллица: 777</p>
+              <p>Cyrillic OCR: 777</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="красная панда 108_red_panda_conservation_awareness_poster.png красная панда ailurus fulgens статус мсоп: исчезающий вид горные леса азии - дом красной панды почему это важно • индикатор здоровья горных лесов • помогает сохранять бамбуковые эк">
@@ -1126,7 +1129,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Красная Панда</h3>
-              <p>Кириллица: 790</p>
+              <p>Cyrillic OCR: 790</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="красный волк н 109_red_wolf_conservation_infographic_poster.png красный волк на грани исчезновения • canis rufus статус мсоп: на грани исчезновения главные угрозы: утрата среды, гибридизация с койотами, отстрел, гибель на дорогах особенности по">
@@ -1139,7 +1142,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Красный Волк Н</h3>
-              <p>Кириллица: 913</p>
+              <p>Cyrillic OCR: 913</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="саола к 111_saola_the_asian_unicorn_at_risk.png саола критически угрожаемый вид • pseudoryx nghetinhensis а статус соп: критически угрожаемый главные угрозы: петли и ловушки, фрагментация лесов, давление охоты, крайне малая числ">
@@ -1152,7 +1155,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Саола К</h3>
-              <p>Кириллица: 1143</p>
+              <p>Cyrillic OCR: 1143</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="красная панда 113_save_the_red_panda_save_nature.png красная панда ailurus fulgens статус мсоп: исчезающий вид скрытный древесный зверь гималаев; его выживание зависит от сохранения горных лесов и бамбуковых зарослей. где обитает неп">
@@ -1165,7 +1168,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Красная Панда</h3>
-              <p>Кириллица: 863</p>
+              <p>Cyrillic OCR: 863</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="пилорыл 114_save_the_sawfish_protect_ecosystems.png пилорыл pristis pristis статус мсоп: критически угрожаемый вид древняя рыба-скат с длинным зубчатым рострумом. когда-то была широко распространена, а теперь почти исчезла во многих">
@@ -1178,7 +1181,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Пилорыл</h3>
-              <p>Кириллица: 944</p>
+              <p>Cyrillic OCR: 944</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="медленный лори 118_saving_the_javan_slow_loris.png медленный лори nycticebus javanicus яванский медленный лори статус мсоп: критически вымирающий вид медленный лори явы - уникальный ночной примат с большими глазами и ядовитым укусо">
@@ -1191,7 +1194,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Медленный Лори</h3>
-              <p>Кириллица: 922</p>
+              <p>Cyrillic OCR: 922</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="филиппинский орёл 120_saving_the_philippine_eagle_a_conservation_guide.png филиппинский орёл pithecophaga jefferyi статус мсоп: критически исчезающий вид один из самых редких орлов мира и крупнейший лесной хищник филиппин. зависит от старовозрастных тропи">
@@ -1204,7 +1207,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Филиппинский Орёл</h3>
-              <p>Кириллица: 860</p>
+              <p>Cyrillic OCR: 860</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="сайгак 122_saving_the_saiga_a_conservation_call.png сайгак saiga tatarica статус мсоп: критически угрожаемый вид редкая степная антилопа центральной азии с характерным вздутым носом. вид страдает от браконьерства, болезней и фрагмен">
@@ -1217,7 +1220,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Сайгак</h3>
-              <p>Кириллица: 1000</p>
+              <p>Cyrillic OCR: 1000</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="китоглав 127_shoebill_africa_s_vulnerable_swamp_sentinel.png китоглав balaeniceps rex статус мсоп: уязвимый вид крупная болотная птица африки, известная своим массивным клювом и неподвижной охотничьей стойкой. страдает от осушения болот, пож">
@@ -1230,7 +1233,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Китоглав</h3>
-              <p>Кириллица: 941</p>
+              <p>Cyrillic OCR: 941</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="сиамский крокодил 129_siamese_crocodile_conservation_infographic.png сиамский крокодил crocodylus siamensis статус мсоп: критически угрожаемый вид редкий пресноводный крокодил юго-восточной азии. страдает от разрушения болот, незаконного отлова и из">
@@ -1243,7 +1246,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Сиамский Крокодил</h3>
-              <p>Кириллица: 970</p>
+              <p>Cyrillic OCR: 970</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="silky shark species field guide 130_silky_shark_species_field_guide.png полевой досье визуальный атлас морских видов шёлковая акула carcharhinus falciformis silky shark ареал тропические и тёплые океанические воды по всему миру. питание рыба, кальмары,">
@@ -1256,7 +1259,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Silky Shark Species Field Guide</h3>
-              <p>Кириллица: 529</p>
+              <p>Cyrillic OCR: 529</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="снежный барс у 131_snow_leopard_conservation_infographic_poster.png снежный барс уязвимый вид • panthera uncia статус мсоп: уязвимый вид главные угрозы: потеря добычи, браконьерство, конфликты со скотоводами, изменение климата особенности очень дли">
@@ -1269,7 +1272,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Снежный Барс У</h3>
-              <p>Кириллица: 917</p>
+              <p>Cyrillic OCR: 917</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="суматранский носорог к 132_sumatran_rhino_conservation_infographic.png суматранский носорог критически угрожаемый вид • dicerorhinus sumatrensis статус мсоп: критически угрожаемый главные угрозы: фрагментация лесов, крайне малая численность, разобщенн">
@@ -1282,7 +1285,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Суматранский Носорог К</h3>
-              <p>Кириллица: 1311</p>
+              <p>Cyrillic OCR: 1311</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="sumatran rhinoceros conservation field guide 133_sumatran_rhinoceros_conservation_field_guide.png 26 полевое досье • сохраним будущее нашей планеты суматранский hocopot dicerorhinus sumatrensis визуальный атлас 48 животных ru ареал остров суматра, индонезия питание листья, побе">
@@ -1295,7 +1298,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Sumatran Rhinoceros Conservation Field Guide</h3>
-              <p>Кириллица: 399</p>
+              <p>Cyrillic OCR: 399</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="зондский панголин к 136_sunda_pangolin_conservation_infographic.png зондский панголин критически угрожаемый вид • manis javanica статус мсоп: критически угрожаемый плавне угрозы незакая торговля дикими животами, браконьерство, утрата лесов особенно">
@@ -1308,7 +1311,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Зондский Панголин К</h3>
-              <p>Кириллица: 1400</p>
+              <p>Cyrillic OCR: 1400</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="тапанулийский орангутан к 139_tapanuli_orangutan_critically_endangered_species.png тапанулийский орангутан критически угрожаемый вид • pongo tapanuliensis статус мсоп: критически угрожаемый главные угрозы: фрагментация лесов, дороги малая популяция особенности са">
@@ -1321,7 +1324,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Тапанулийский Орангутан К</h3>
-              <p>Кириллица: 967</p>
+              <p>Cyrillic OCR: 967</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="долгопят 140_tarsius_tumpara_conservation_and_survival_guide.png долгопят tarsius tumpara сиауский долгопят статус мсоп: критически вымирающий вид маленький, удивительный и единственный представитель своего рода на острове сиау; его выживание за">
@@ -1334,7 +1337,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Долгопят</h3>
-              <p>Кириллица: 811</p>
+              <p>Cyrillic OCR: 811</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="тасманийский дьявол 141_tasmanian_devil_conservation_poster.png тасманийский дьявол sarcophilus harrisii статус мсоп: исчезающий вид крупнейшее современное хищное сумчатое и ночной падальщик острова тасмания. наиболее серьёзная угроза для вида">
@@ -1347,7 +1350,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Тасманийский Дьявол</h3>
-              <p>Кириллица: 1059</p>
+              <p>Cyrillic OCR: 1059</p>
             </div>
           </article>
           <article class="card" data-lang="ru" data-title="вакита к 145_vaquita_critically_endangered_species_infographic.png вакита критически угрожаемый вид • phocoena sinus статус мсоп: критически угрожаемый главные угрозы: незаконные жаберные сети, прилов при добыче тотоабы, крайне малая численность о">
@@ -1360,7 +1363,7 @@
                 <span data-label="ru">RU OCR</span>
               </div>
               <h3>Вакита К</h3>
-              <p>Кириллица: 976</p>
+              <p>Cyrillic OCR: 976</p>
             </div>
           </article>
       </div>
@@ -1383,7 +1386,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Amur Leopard</h3>
-              <p>Latin text: 973</p>
+              <p>Latin OCR: 973</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="axolotl 019_axolotl_conservation_a_vital_species.png axolotl — ambystoma mexicanum conservation status: critically endangered a neotenic salamander that keeps its external gills into adulthood. in the wild it survives mainly in the x">
@@ -1396,7 +1399,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Axolotl</h3>
-              <p>Latin text: 970</p>
+              <p>Latin OCR: 970</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="blue whale 023_blue_whale_conservation_infographic_poster.png blue whale balaenoptera musculus conservation status: endangered human activities have significantly reduced blue whale populations. they are protected under international law. uni">
@@ -1409,7 +1412,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Blue Whale</h3>
-              <p>Latin text: 908</p>
+              <p>Latin OCR: 908</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="bornean orangutan 024_bornean_orangutan_conservation_infographic.png bornean orangutan critically endangered • pongo pygmaeus iucn: critically endangered main threats: deforestation, oil palm expansion, fires, hunting, illegal trade distinctive feat">
@@ -1422,7 +1425,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Bornean Orangutan</h3>
-              <p>Latin text: 931</p>
+              <p>Latin OCR: 931</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="asian elephant 032_conservation_of_the_asian_elephant.png asian elephant endangered • elephas maximus iucn: endangered main threats: habitat loss and fragmentation, human-elephant conflict, poaching, collisions with transport 1 distinctiv">
@@ -1435,7 +1438,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Asian Elephant</h3>
-              <p>Latin text: 972</p>
+              <p>Latin OCR: 972</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="atlantic puffin 033_conservation_of_the_atlantic_puffin.png atlantic puffin fratercula arctica conservation status: vulnerable a colorful seabird of the north atlantic. its survival depends on fish-rich seas and safe island colonies. where">
@@ -1448,7 +1451,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Atlantic Puffin</h3>
-              <p>Latin text: 854</p>
+              <p>Latin OCR: 854</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="north atlantic right whale 039_conservation_of_the_north_atlantic_right_whale.png north atlantic right whale eubalaena glacialis conservation status: critically endangered one of the world's rarest large whales, facing multiple human-caused threats across the no">
@@ -1461,7 +1464,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>North Atlantic Right Whale</h3>
-              <p>Latin text: 1166</p>
+              <p>Latin OCR: 1166</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="proboscis monkey 041_conservation_of_the_proboscis_monkey.png proboscis monkey nasalis larvatus conservation status: endangered borneo 1 where it lives mangroves, riverine forests, and swampy lowlands of borneo. unique traits • huge nose in m">
@@ -1474,7 +1477,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Proboscis Monkey</h3>
-              <p>Latin text: 659</p>
+              <p>Latin OCR: 659</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="indo-pacific humpback dolphin 046_conserving_the_indo_pacific_humpback_dolphin.png indo-pacific humpback dolphin sousa chinensis , conservation status: vulnerable a coastal dolphin of warm waters in the eastern indian and western pacific oceans. its closeness to">
@@ -1487,7 +1490,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Indo-Pacific Humpback Dolphin</h3>
-              <p>Latin text: 889</p>
+              <p>Latin OCR: 889</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="dugong 051_dugong_conservation_protecting_a_marine_icon.png dugong dugong dugon conservation status: vulnerable a large marine mammal closely tied to underwater seagrass meadows. it reproduces slowly and is especially vulnerable to habitat">
@@ -1500,7 +1503,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Dugong</h3>
-              <p>Latin text: 873</p>
+              <p>Latin OCR: 873</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="mediterranean monk seal 053_endangered_mediterranean_monk_seal_guide.png mediterranean monk seal monachus monachus conservation status: endangered one of the rarest seals in the world. it survives in secluded coves, sea caves, and protected coastal wate">
@@ -1513,7 +1516,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Mediterranean Monk Seal</h3>
-              <p>Latin text: 888</p>
+              <p>Latin OCR: 888</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="proboscis monkey 054_endangered_proboscis_monkey_conservation_poster.png proboscis monkey nasalis larvatus conservation status: endangered a distinctive monkey of borneo, highly adapted to life in mangroves, riverside forests, and swampy lowlands. where">
@@ -1526,7 +1529,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Proboscis Monkey</h3>
-              <p>Latin text: 711</p>
+              <p>Latin OCR: 711</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="endangered species visual atlas 055_endangered_species_visual_atlas.png field dossier • preserve our planet's future endangered species 48 species visual atlas of 48 animals infographic journal • english edition sunda pangolin manis javanica critically">
@@ -1539,7 +1542,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Endangered Species Visual Atlas</h3>
-              <p>Latin text: 614</p>
+              <p>Latin OCR: 614</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="gal pagos penguin 060_galápagos_penguin_conservation_overview.png galápagos penguin spheniscus mendiculus conservation status: endangered a rare penguin of ecuador and the only penguin species regularly living at the equator. it depends on cold o">
@@ -1552,7 +1555,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Gal Pagos Penguin</h3>
-              <p>Latin text: 1059</p>
+              <p>Latin OCR: 1059</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="ganges river dolphin 061_ganges_river_dolphin_conservation_guide.png ganges river dolphin platanista gangetica a conservation status: endangered a rare freshwater dolphin of the ganges-brahmaputra- meghna river system, threatened by pollution, dams,">
@@ -1565,7 +1568,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Ganges River Dolphin</h3>
-              <p>Latin text: 800</p>
+              <p>Latin OCR: 800</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="gharial 063_gharial_conservation_endangered_river_crocodile.png gharial gavialis gangeticus conservation status: critically endangered a rare river crocodilian of south asia, instantly recognizable by its extremely long narrow snout. it is heav">
@@ -1578,7 +1581,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Gharial</h3>
-              <p>Latin text: 950</p>
+              <p>Latin OCR: 950</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="giant panda 064_giant_panda_conservation_guide.png giant panda ailuropoda melanoleuca conservation status: vulnerable an iconic bear of central china, closely tied to mountain bamboo forests. although conservation has helped, the s">
@@ -1591,7 +1594,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Giant Panda</h3>
-              <p>Latin text: 1031</p>
+              <p>Latin OCR: 1031</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="hawksbill sea turtle 068_hawksbill_sea_turtle_protect_preserve_conserve.png hawksbill sea turtle eretmochelys imbricata conservation status: critically endangered severe population decline due to illegal trade, habitat loss, and human impacts. where it liv">
@@ -1604,7 +1607,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Hawksbill Sea Turtle</h3>
-              <p>Latin text: 1028</p>
+              <p>Latin OCR: 1028</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="iberian lynx 069_iberian_lynx_conservation_facts_and_features.png iberian lynx vulnerable • lynx pardinus iucn: vulnerable main threats: rabbit decline, habitat fragmentation, roads, illegal killing distinctive features ear tufts and long facial">
@@ -1617,7 +1620,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Iberian Lynx</h3>
-              <p>Latin text: 852</p>
+              <p>Latin OCR: 852</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="irrawaddy dolphin 074_irrawaddy_dolphin_conservation_poster.png irrawaddy dolphin orcaella brevirostris conservation status: endangered a rare dolphin of rivers, estuaries, and coastal waters in south and southeast asia. it is especially vulner">
@@ -1630,7 +1633,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Irrawaddy Dolphin</h3>
-              <p>Latin text: 904</p>
+              <p>Latin OCR: 904</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="javan rhino 075_javan_rhino_conservation_awareness_poster.png javan rhino critically endangered • rhinoceros sondaicus 2 where it lives range: western java, indonesia java ujung kulon national park 100 km iucn: critically endangered lowland r">
@@ -1643,7 +1646,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Javan Rhino</h3>
-              <p>Latin text: 1079</p>
+              <p>Latin OCR: 1079</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="slow loris 077_javan_slow_loris_conservation_awareness.png slow loris nycticebus javanicus javan slow loris as conservation status: critically endangered the javan slow loris is a nocturnal primate with huge eyes and a venomous bite, threa">
@@ -1656,7 +1659,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Slow Loris</h3>
-              <p>Latin text: 758</p>
+              <p>Latin OCR: 758</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="komodo dragon 080_komodo_dragon_conservation_field_guide.png komodo dragon varanus komodoensis conservation status: endangered the world's largest living lizard and the top predator of several indonesian islands. it is threatened by its tiny">
@@ -1669,7 +1672,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Komodo Dragon</h3>
-              <p>Latin text: 964</p>
+              <p>Latin OCR: 964</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="kakapo 082_kākāpō_conservation_field_guide.png kakapo critically endangered • strigops habroptilus iucn: critically endangered main threats: introduced predators, low hatch success, disease, low genetic diversity distinctive tr">
@@ -1682,7 +1685,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Kakapo</h3>
-              <p>Latin text: 900</p>
+              <p>Latin OCR: 900</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="largetooth sawfish 083_largetooth_sawfish_conservation_guide.png largetooth sawfish pristis pristis conservation status: critically endangered an ancient ray with a long tooth-edged rostrum. once widespread, it has nearly vanished from many part">
@@ -1695,7 +1698,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Largetooth Sawfish</h3>
-              <p>Latin text: 938</p>
+              <p>Latin OCR: 938</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="leatherback sea turtle 084_leatherback_sea_turtle_conservation_guide.png leatherback sea turtle dermochelys coriacea conservation status: vulnerable range oceans worldwide • found in all major oceans, from tropical to temperate waters. habitat oceans wo">
@@ -1708,7 +1711,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Leatherback Sea Turtle</h3>
-              <p>Latin text: 995</p>
+              <p>Latin OCR: 995</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="longsnout seahorse 085_longsnout_seahorse_conservation_guide.png longsnout seahorse hippocampus reidi conservation status: near threatened a graceful fish of shallow seagrass meadows and mangroves. it is vulnerable to coastal habitat loss and wi">
@@ -1721,7 +1724,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Longsnout Seahorse</h3>
-              <p>Latin text: 867</p>
+              <p>Latin OCR: 867</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="mountain gorilla 091_mountain_gorilla_conservation_facts_poster.png mountain gorilla endangered • gorilla beringei beringei iucn: endangered main threats: habitat loss, disease, snares and poaching, human pressure distinctive features largest livin">
@@ -1734,7 +1737,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Mountain Gorilla</h3>
-              <p>Latin text: 931</p>
+              <p>Latin OCR: 931</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="okapia johnstoni 093_okapi_conservation_protecting_congo_s_forests.png okapia johnstoni conservation status: endangered a rare forest relative of the giraffe, hidden in the dense rainforests of the democratic republic of the congo. it is threatened by">
@@ -1747,7 +1750,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Okapia Johnstoni</h3>
-              <p>Latin text: 960</p>
+              <p>Latin OCR: 960</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="orinoco crocodile 094_orinoco_crocodile_conservation_infographic.png orinoco crocodile crocodylus intermedius a conservation status: critically endangered the largest freshwater predator in south america, now surviving in small and fragmented popula">
@@ -1760,7 +1763,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Orinoco Crocodile</h3>
-              <p>Latin text: 828</p>
+              <p>Latin OCR: 828</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="philippine eagle 096_philippine_eagle_conservation_infographic.png philippine eagle pithecophaga jefferyi conservation status: critically endangered one of the rarest eagles in the world and the largest forest raptor in the philippines. it depends">
@@ -1773,7 +1776,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Philippine Eagle</h3>
-              <p>Latin text: 903</p>
+              <p>Latin OCR: 903</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="african wild dog 098_protecting_the_african_wild_dog.png african wild dog lycaon pictus conservation status: endangered a highly social and efficient hunter of african savannas whose survival depends on vast connected landscapes. where i">
@@ -1786,7 +1789,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>African Wild Dog</h3>
-              <p>Latin text: 813</p>
+              <p>Latin OCR: 813</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="red panda 104_protecting_the_red_panda_s_habitat.png red panda ailurus fulgens conservation status: endangered a shy and arboreal mammal of the himalayas, the red panda depends on healthy mountain forests and bamboo undergrowth. wher">
@@ -1799,7 +1802,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Red Panda</h3>
-              <p>Latin text: 845</p>
+              <p>Latin OCR: 845</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="tarsier 105_protecting_the_siau_island_tarsier.png tarsier tarsius tumpara siau island tarsier conservation status: critically endangered indonesia siau island 2 where it lives found only in tiny forest patches on siau island, indo">
@@ -1812,7 +1815,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Tarsier</h3>
-              <p>Latin text: 724</p>
+              <p>Latin OCR: 724</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="sumatran rhino 107_protecting_the_sumatran_rhino.png sumatran rhino critically endangered • dicerorhinus sumatrensis where it lives range: sumatra, indonesia leuser ecosystem bukit barisan selatan national park iucn: critically endan">
@@ -1825,7 +1828,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Sumatran Rhino</h3>
-              <p>Latin text: 996</p>
+              <p>Latin OCR: 996</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="red wolf 110_red_wolf_conservation_overview_infographic.png red wolf critically endangered • canis rufus iucn: critically endangered main threats: habitat loss, hybridization with coyotes, shooting, road mortality 1 distinctive features int">
@@ -1838,7 +1841,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Red Wolf</h3>
-              <p>Latin text: 889</p>
+              <p>Latin OCR: 889</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="african forest elephant 112_save_the_african_forest_elephant.png african forest elephant critically endangered • loxodonta cyclotis iucn: critically endangered main threats: ivory poaching, forest loss and fragmentation, human conflict where it">
@@ -1851,7 +1854,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>African Forest Elephant</h3>
-              <p>Latin text: 913</p>
+              <p>Latin OCR: 913</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="black-footed ferret 115_saving_the_black_footed_ferret_endoftext.png black-footed ferret mustela nigripes conservation status: endangered a rare predator of north american grasslands. it depends heavily on prairie dog colonies and the burrow systems">
@@ -1864,7 +1867,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Black-Footed Ferret</h3>
-              <p>Latin text: 929</p>
+              <p>Latin OCR: 929</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="california condor 116_saving_the_california_condor_infographic.png california condor gymnogyps californianus conservation status: critically endangered the largest land bird in north america. this majestic scavenger was brought back from the brink">
@@ -1877,7 +1880,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>California Condor</h3>
-              <p>Latin text: 945</p>
+              <p>Latin OCR: 945</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="chinese giant salamander 117_saving_the_chinese_giant_salamander.png chinese giant salamander • andrias davidianus conservation status: critically endangered the world's largest living amphibian, threatened by harvesting, pollution, and the destruct">
@@ -1890,7 +1893,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Chinese Giant Salamander</h3>
-              <p>Latin text: 829</p>
+              <p>Latin OCR: 829</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="reef manta ray 119_saving_the_manta_protecting_our_reefs.png reef manta ray mobula alfredi conservation status: vulnerable a giant filter-feeder of warm indo-pacific seas. its slow reproduction makes it especially sensitive to overfishing. w">
@@ -1903,7 +1906,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Reef Manta Ray</h3>
-              <p>Latin text: 881</p>
+              <p>Latin OCR: 881</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="red panda 121_saving_the_red_panda_heritage.png red panda ailurus fulgens conservation status: endangered a shy and arboreal mammal of the himalayas, the red panda plays a vital role in its forest ecosystem. its future depends o">
@@ -1916,7 +1919,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Red Panda</h3>
-              <p>Latin text: 896</p>
+              <p>Latin OCR: 896</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="saiga antelope 123_saving_the_saiga_a_steppe_battle.png saiga antelope saiga tatarica conservation status: critically endangered a rare steppe antelope of central asia with a distinctive swollen nose. the species is threatened by poachi">
@@ -1929,7 +1932,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Saiga Antelope</h3>
-              <p>Latin text: 974</p>
+              <p>Latin OCR: 974</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="siamese crocodile 124_saving_the_siamese_crocodile_poster.png siamese crocodile crocodylus siamensis conservation status: critically endangered a rare freshwater crocodile of southeast asia, threatened by wetland destruction, illegal capture,">
@@ -1942,7 +1945,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Siamese Crocodile</h3>
-              <p>Latin text: 980</p>
+              <p>Latin OCR: 980</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="slow loris 125_saving_the_slow_loris_java_s_treasure.png slow loris nycticebus javanicus javan slow loris conservation status: critically endangered 1 2 java, indonesia where it lives • humid forests and agroforests of java, indonesia. •">
@@ -1955,7 +1958,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Slow Loris</h3>
-              <p>Latin text: 657</p>
+              <p>Latin OCR: 657</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="tasmanian devil 126_saving_the_tasmanian_devil_conservation_facts.png tasmanian devil sarcophilus harrisii conservation status: endangered the largest living carnivorous marsupial and a nocturnal scavenger of tasmania. its greatest threat is the cont">
@@ -1968,7 +1971,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Tasmanian Devil</h3>
-              <p>Latin text: 990</p>
+              <p>Latin OCR: 990</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="shoebill 128_shoebill_stork_conservation_guide.png shoebill balaeniceps rex conservation status: vulnerable a giant wetland bird of africa, famous for its massive bill and statue-like hunting posture. it is threatened by wetland dr">
@@ -1981,7 +1984,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Shoebill</h3>
-              <p>Latin text: 931</p>
+              <p>Latin OCR: 931</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="sumatran tiger 134_sumatran_tiger_conservation_infographic.png sumatran tiger critically endangered • panthera tigris sumatrae where it lives range: sumatra, indonesia aceh north sumatra riau jambi south sumatra bengkulu iucn: critically endan">
@@ -1994,7 +1997,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Sumatran Tiger</h3>
-              <p>Latin text: 1001</p>
+              <p>Latin OCR: 1001</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="sunda pangolin 135_sunda_pangolin_a_critically_endangered_species.png sunda pangolin critically endangered • manis javanica iucn: critically endangered main threats: illegal wildlife trade, poaching, habitat loss built for insect hunting keratin scal">
@@ -2007,7 +2010,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Sunda Pangolin</h3>
-              <p>Latin text: 1310</p>
+              <p>Latin OCR: 1310</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="sunda pangolin 137_sunda_pangolin_endangered_species_insights.png sunda pangolin critically endangered • manis javanica iucn status: critically endangered threats: trafficking and habitat loss keratin scale armor the world's only mammal covered i">
@@ -2020,7 +2023,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Sunda Pangolin</h3>
-              <p>Latin text: 1089</p>
+              <p>Latin OCR: 1089</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="tapanuli orangutan 138_tapanuli_orangutan_conservation_infographic.png tapanuli orangutan critically endangered • pongo tapanuliensis where it lives range: batang toru ecosystem, north sumatra, indonesia batang toru iucn: critically endangered sumatra">
@@ -2033,7 +2036,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Tapanuli Orangutan</h3>
-              <p>Latin text: 936</p>
+              <p>Latin OCR: 936</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="aye-aye 142_the_aye_aye_madagascar_s_nocturnal_wonder.png aye-aye daubentonia madagascariensis conservation status: endangered a strange nocturnal lemur of madagascar, famous for its huge ears, ever-growing incisors, and elongated middle">
@@ -2046,7 +2049,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Aye-Aye</h3>
-              <p>Latin text: 1025</p>
+              <p>Latin OCR: 1025</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="saola 143_the_rare_saola_earth_s_asian_unicorn.png saola critically endangered • pseudory nghetinhensis iucn: critically endangered main threats: snaring, forest fragmentation, hunting pressure, extremely small population distincti">
@@ -2059,7 +2062,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Saola</h3>
-              <p>Latin text: 1027</p>
+              <p>Latin OCR: 1027</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="vaquita 144_vaquita_conservation_critical_facts_and_action.png vaquita critically endangered • phocoena sinus iucn: critically endangered main threats: illegal gillnets, bycatch from totoaba fishing, tiny remaining population distinctive featu">
@@ -2072,7 +2075,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Vaquita</h3>
-              <p>Latin text: 858</p>
+              <p>Latin OCR: 858</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="fossa 146_vulnerable_fossa_protect_madagascar_s_wild_forest.png fossa cryptoprocta ferox conservation status: vulnerable madagascar's largest land predator, combining cat-like agility with mongoose ancestry. it is vulnerable because of forest l">
@@ -2085,7 +2088,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Fossa</h3>
-              <p>Latin text: 1113</p>
+              <p>Latin OCR: 1113</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="whale shark 147_whale_shark_conservation_illustrated_guide.png whale shark rhincodon typus conservation status: endangered the largest fish on earth. this gentle giant feeds on plankton yet faces threats from fisheries, bycatch, and ship strik">
@@ -2098,7 +2101,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Whale Shark</h3>
-              <p>Latin text: 860</p>
+              <p>Latin OCR: 860</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="siamese crocodile 2b4a8a13-e4bb-4406-95fe-dcccedf2254a.png siamese crocodile crocodylus siamensis conservation status: critically endangered a rare freshwater crocodile of southeast asia, threatened by wetland destruction, illegal capture,">
@@ -2111,7 +2114,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Siamese Crocodile</h3>
-              <p>Latin text: 980</p>
+              <p>Latin OCR: 980</p>
             </div>
           </article>
           <article class="card" data-lang="en" data-title="komodo dragon b1476c21-ac62-486d-9340-c2a03da47734.png komodo dragon varanus komodoensis conservation status: endangered the world's largest living lizard and the top predator of several indonesian islands. it is threatened by its tiny">
@@ -2124,7 +2127,7 @@
                 <span data-label="en">EN OCR</span>
               </div>
               <h3>Komodo Dragon</h3>
-              <p>Latin text: 964</p>
+              <p>Latin OCR: 964</p>
             </div>
           </article>
       </div>
