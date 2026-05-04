@@ -1,17 +1,27 @@
 const { mkdirSync, readdirSync } = require('node:fs');
-const { basename, extname, join } = require('node:path');
+const { dirname, extname, join, relative, sep } = require('node:path');
 const { spawnSync } = require('node:child_process');
 
 const root = process.cwd();
-const outputDir = join(root, 'assets', 'thumbs');
-mkdirSync(outputDir, { recursive: true });
+const posterDir = join(root, 'assets', 'posters');
+const outputRoot = join(root, 'assets', 'thumbs');
 
-const files = readdirSync(root)
-  .filter((name) => name.toLowerCase().endsWith('.png'))
+function collectPngs(dir) {
+  return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const entryPath = join(dir, entry.name);
+    if (entry.isDirectory()) return collectPngs(entryPath);
+    return entry.name.toLowerCase().endsWith('.png') ? [entryPath] : [];
+  });
+}
+
+const files = collectPngs(posterDir)
+  .filter((file) => !file.includes(`${join('assets', 'posters', 'legacy')}${sep}`))
   .sort((a, b) => a.localeCompare(b, 'en', { numeric: true, sensitivity: 'base' }));
 
 for (const file of files) {
-  const out = join(outputDir, `${basename(file, extname(file))}.jpg`);
+  const rel = relative(posterDir, file);
+  const out = join(outputRoot, rel).replace(new RegExp(`${extname(file)}$`), '.jpg');
+  mkdirSync(dirname(out), { recursive: true });
   const result = spawnSync('sips', [
     '-Z', '720',
     '-s', 'format', 'jpeg',
@@ -27,4 +37,4 @@ for (const file of files) {
   }
 }
 
-console.log(`Generated ${files.length} thumbnails in assets/thumbs`);
+console.log(`Generated ${files.length} thumbnails in assets/thumbs/{en,ru}/{land,marine,mass}`);
