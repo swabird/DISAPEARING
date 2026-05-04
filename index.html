@@ -64,8 +64,8 @@
     .story p, .support-band p, .collection-head p { margin: 0 0 18px; color: var(--muted); font-size: 1rem; line-height: 1.7; }
     .focus-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; padding: 12px 0 20px; }
     .focus-card { min-height: 220px; display: grid; align-content: end; padding: 18px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; position: relative; background: #111915; }
-    .focus-card::before { content: ""; position: absolute; inset: 0; background: var(--focus-image) var(--focus-position, center) / cover; opacity: 0.58; transform: scale(1.03); }
-    .focus-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6, 10, 9, 0.02), rgba(6, 10, 9, 0.48) 42%, rgba(6, 10, 9, 0.94)); }
+    .focus-card::before { content: ""; position: absolute; inset: 0; background: var(--focus-image) var(--focus-position, center) / cover; opacity: 0.82; transform: scale(1.03); filter: saturate(0.72) contrast(1.14) brightness(0.58); }
+    .focus-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2, 4, 3, 0.18), rgba(2, 4, 3, 0.58) 42%, rgba(2, 4, 3, 0.96)); }
     .focus-card > * { position: relative; z-index: 1; }
     .focus-card span { width: fit-content; margin-bottom: 10px; border: 1px solid rgba(247, 242, 232, 0.26); border-radius: 999px; padding: 5px 10px; color: var(--accent); font-size: 0.72rem; font-weight: 820; text-transform: uppercase; }
     .focus-card h3 { margin: 0; font-size: 1.15rem; line-height: 1.12; }
@@ -128,9 +128,9 @@
   <nav class="nav" aria-label="Primary navigation">
     <div class="brand">Disappearing</div>
     <div class="nav-links">
-      <a href="#story" data-i18n="navStory">Story</a>
-      <a href="#collections" data-i18n="navCollections">Collection</a>
-      <a class="donate" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="donate">Donate</a>
+      <a href="#story" data-i18n="navStory">Mission</a>
+      <a href="#collections" data-i18n="navCollections">Posters</a>
+      <a class="donate" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="donate">Help animals</a>
     </div>
     <div class="lang-toggle" aria-label="Language switcher">
       <button type="button" data-lang="en" aria-pressed="true">EN</button>
@@ -141,24 +141,24 @@
   <header class="hero">
     <div class="hero-content">
       <div>
-        <p class="kicker" data-i18n="kicker">English poster collection</p>
+        <p class="kicker" data-i18n="kicker">Endangered species posters</p>
         <h1 data-i18n="title">Disappearing Animal Species</h1>
-        <p class="lede" data-i18n="lede">The English version of the visual atlas: conservation posters whose image text was detected as English by OCR.</p>
+        <p class="lede" data-i18n="lede">A bilingual visual atlas built to make endangered animals impossible to ignore and easier to support.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#collections" data-i18n="explore">Explore English posters</a>
-          <a class="button" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="support">Support the project</a>
+          <a class="button primary" href="#collections" data-i18n="explore">Explore animals at risk</a>
+          <a class="button" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="support">Help save animals</a>
         </div>
-        <div class="stats" aria-label="Collection summary">
+        <div class="stats" aria-label="Posters summary">
           <div class="stat"><strong>149</strong><span data-i18n="statAll">images scanned by OCR</span></div>
-          <div class="stat"><strong>58</strong><span data-i18n="statCurrent">English posters shown here</span></div>
-          <div class="stat"><strong>91</strong><span data-i18n="statOther">Russian posters in RU version</span></div>
+          <div class="stat"><strong>58</strong><span data-i18n="statCurrent">English rescue posters shown here</span></div>
+          <div class="stat"><strong>91</strong><span data-i18n="statOther">Russian rescue posters in RU version</span></div>
         </div>
       </div>
       <aside class="side-panel" aria-label="Language collection preview">
         <img src="assets/thumbs/017_amur_leopard_conservation_infographic.jpg" alt="English conservation poster preview">
         <div>
-          <strong data-i18n="sideTitle">English version</strong>
-          <span data-i18n="sideText">This version shows only posters with dominant English text inside the image.</span>
+          <strong data-i18n="sideTitle">English rescue version</strong>
+          <span data-i18n="sideText">This version shows English-language posters about animals that need protection now.</span>
         </div>
       </aside>
     </div>
@@ -168,26 +168,26 @@
     <section class="story" id="story">
       <div>
         <p class="section-kicker" data-i18n="storyKicker">Editorial mission</p>
-        <h2 data-i18n="storyTitle">Make the endangered visible before it becomes archival.</h2>
+        <h2 data-i18n="storyTitle">Make endangered animals visible while they can still be saved.</h2>
       </div>
       <div>
-        <p data-i18n="storyOne">The atlas turns conservation material into a visual library: species, habitats, threats, recovery efforts, and the emotional scale of ecological loss.</p>
-        <p data-i18n="storyTwo">The English version shows English-text posters only. The Russian version shows Russian-text posters only.</p>
+        <p data-i18n="storyOne">The atlas turns each poster into a clear call to protect habitats, reduce threats, and support real survival for endangered animals.</p>
+        <p data-i18n="storyTwo">The English rescue version shows English-text posters only. The Russian version shows Russian-text posters only.</p>
       </div>
     </section>
 
     <section class="focus-strip" aria-label="Editorial focus areas">
-      <article class="focus-card" style="--focus-image: url('assets/thumbs/044_conserving_the_asian_elephant_s_habitat.jpg'); --focus-position: center 42%">
+      <article class="focus-card" style="--focus-image: url('assets/generated/focus-habitat-elephant.jpg'); --focus-position: center 42%">
         <span data-i18n="focusOneTag">Habitat</span>
         <h3 data-i18n="focusOneTitle">Fragmented homes become silent borders.</h3>
         <p data-i18n="focusOneText">Forest loss turns movement, feeding, and breeding into a daily risk.</p>
       </article>
-      <article class="focus-card" style="--focus-image: url('assets/thumbs/147_whale_shark_conservation_illustrated_guide.jpg'); --focus-position: center 48%">
+      <article class="focus-card" style="--focus-image: url('assets/generated/focus-oceans-whale-shark.jpg'); --focus-position: center 48%">
         <span data-i18n="focusTwoTag">Oceans</span>
         <h3 data-i18n="focusTwoTitle">Invisible nets still decide visible futures.</h3>
         <p data-i18n="focusTwoText">Bycatch and warming seas pressure whales, rays, turtles, and reef life.</p>
       </article>
-      <article class="focus-card" style="--focus-image: url('assets/thumbs/116_saving_the_california_condor_infographic.jpg'); --focus-position: center 46%">
+      <article class="focus-card" style="--focus-image: url('assets/generated/focus-recovery-condor.jpg'); --focus-position: center 46%">
         <span data-i18n="focusThreeTag">Recovery</span>
         <h3 data-i18n="focusThreeTitle">Recovery starts when attention becomes infrastructure.</h3>
         <p data-i18n="focusThreeText">Captive breeding, protected corridors, and public memory can bring species back.</p>
@@ -196,12 +196,12 @@
 
     <section class="support-band" aria-label="Donation callout">
       <div>
-        <p class="section-kicker" data-i18n="supportKicker">Support the archive</p>
-        <h2 data-i18n="supportTitle">Help the collection grow.</h2>
-        <p data-i18n="supportText">Donations help cover visual production, research time, bilingual editing, OCR cleanup, and hosting.</p>
+        <p class="section-kicker" data-i18n="supportKicker">Save endangered animals</p>
+        <h2 data-i18n="supportTitle">Help protect endangered animals.</h2>
+        <p data-i18n="supportText">Donations support conservation outreach: visual education, bilingual materials, species research, and tools that help people act before it is too late.</p>
       </div>
       <div class="support-actions">
-        <a class="button primary" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="supportButton">Donate through CloudTips</a>
+        <a class="button primary" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="supportButton">Support animal protection</a>
         <a class="qr-card" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" aria-label="Open CloudTips donation page">
           <img src="assets/cloudtips-qr.svg" alt="QR code for CloudTips donation link">
         </a>
@@ -213,10 +213,10 @@
         <div>
           <p class="section-kicker" data-i18n="videoKicker">Short-form field notes</p>
           <h2 data-i18n="videoTitle">Turn each poster into a 30-second species signal.</h2>
-          <p data-i18n="videoText">The atlas is ready for a YouTube Shorts format: one animal, one threat, one visual fact, and one direct way to support the archive.</p>
+          <p data-i18n="videoText">The atlas is ready for a YouTube Shorts format: one animal, one threat, one action, and one direct way to support protection work.</p>
           <div class="video-actions">
             <a class="button primary" href="https://www.youtube.com/shorts" target="_blank" rel="noopener" data-i18n="videoButton">Open YouTube</a>
-            <a class="button" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="videoDonate">Donate before the next episode</a>
+            <a class="button" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="videoDonate">Support animal protection</a>
           </div>
         </div>
         <div class="episode-list" aria-label="Episode format">
@@ -238,7 +238,7 @@
             <span>03</span>
             <div>
               <strong data-i18n="episodeThreeTitle">Support signal</strong>
-              <small data-i18n="episodeThreeText">A donation CTA keeps the visual archive growing.</small>
+              <small data-i18n="episodeThreeText">A donation CTA turns attention into practical support for endangered species.</small>
             </div>
           </div>
         </div>
@@ -269,7 +269,7 @@
 
           <article class="card" data-lang="ru" data-title="азиатский слон 044_conserving_the_asian_elephant_s_habitat.png азиатский слон вымирающий вид • elephas maximus статус мсоп: вымирающий главные угрозы: утрата и фрагментация среды, конфликт с человеком, браконьерство, столкновения с транспортом">
             <a class="card-image" href="044_conserving_the_asian_elephant_s_habitat.png" aria-label="Open Азиатский Слон">
-              <img src="assets/thumbs/044_conserving_the_asian_elephant_s_habitat.jpg" alt="Азиатский Слон" loading="lazy" decoding="async">
+              <img src="assets/generated/focus-habitat-elephant.jpg" alt="Азиатский Слон" loading="lazy" decoding="async">
             </a>
             <div class="card-copy">
               <div class="card-meta">
@@ -1592,7 +1592,7 @@
           </article>
           <article class="card" data-lang="en" data-title="california condor 116_saving_the_california_condor_infographic.png california condor gymnogyps californianus conservation status: critically endangered the largest land bird in north america. this majestic scavenger was brought back from the brink">
             <a class="card-image" href="116_saving_the_california_condor_infographic.png" aria-label="Open California Condor">
-              <img src="assets/thumbs/116_saving_the_california_condor_infographic.jpg" alt="California Condor" loading="lazy" decoding="async">
+              <img src="assets/generated/focus-recovery-condor.jpg" alt="California Condor" loading="lazy" decoding="async">
             </a>
             <div class="card-copy">
               <div class="card-meta">
@@ -2203,7 +2203,7 @@
           </article>
           <article class="card" data-lang="en" data-title="whale shark 147_whale_shark_conservation_illustrated_guide.png whale shark rhincodon typus conservation status: endangered the largest fish on earth. this gentle giant feeds on plankton yet faces threats from fisheries, bycatch, and ship strik">
             <a class="card-image" href="147_whale_shark_conservation_illustrated_guide.png" aria-label="Open Whale Shark">
-              <img src="assets/thumbs/147_whale_shark_conservation_illustrated_guide.jpg" alt="Whale Shark" loading="lazy" decoding="async">
+              <img src="assets/generated/focus-oceans-whale-shark.jpg" alt="Whale Shark" loading="lazy" decoding="async">
             </a>
             <div class="card-copy">
               <div class="card-meta">
@@ -2218,8 +2218,8 @@
     </section>
 
     <footer class="footer">
-      <span data-i18n="footerOne">Disappearing Animal Species visual atlas</span>
-      <a href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="footerDonate">Donate to the project</a>
+      <span data-i18n="footerOne">For endangered animals</span>
+      <a href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="footerDonate">Help animals to the project</a>
     </footer>
   </main>
 
@@ -2241,10 +2241,10 @@
   <script>
     const copy = {
       en: {
-        navStory: 'Story', navCollections: 'Collection', donate: 'Donate', kicker: 'English poster collection', title: 'Disappearing Animal Species', lede: 'The English version of the visual atlas: conservation posters whose image text was detected as English by OCR.', explore: 'Explore English posters', support: 'Support the project', statAll: 'images scanned by OCR', statCurrent: 'English posters shown here', statOther: 'Russian posters in RU version', sideTitle: 'English version', sideText: 'This version shows only posters with dominant English text inside the image.', storyKicker: 'Editorial mission', storyTitle: 'Make the endangered visible before it becomes archival.', storyOne: 'The atlas turns conservation material into a visual library: species, habitats, threats, recovery efforts, and the emotional scale of ecological loss.', storyTwo: 'The English version shows English-text posters only. The Russian version shows Russian-text posters only.', focusOneTag: 'Habitat', focusOneTitle: 'Fragmented homes become silent borders.', focusOneText: 'Forest loss turns movement, feeding, and breeding into a daily risk.', focusTwoTag: 'Oceans', focusTwoTitle: 'Invisible nets still decide visible futures.', focusTwoText: 'Bycatch and warming seas pressure whales, rays, turtles, and reef life.', focusThreeTag: 'Recovery', focusThreeTitle: 'Recovery starts when attention becomes infrastructure.', focusThreeText: 'Captive breeding, protected corridors, and public memory can bring species back.', supportKicker: 'Support the archive', supportTitle: 'Help the collection grow.', supportText: 'Donations help cover visual production, research time, bilingual editing, OCR cleanup, and hosting.', supportButton: 'Donate through CloudTips', videoKicker: 'Short-form field notes', videoTitle: 'Turn each poster into a 30-second species signal.', videoText: 'The atlas is ready for a YouTube Shorts format: one animal, one threat, one visual fact, and one direct way to support the archive.', videoButton: 'Open YouTube', videoDonate: 'Donate before the next episode', episodeOneTitle: 'Species hook', episodeOneText: 'A striking poster crop and the animal name in the first second.', episodeTwoTitle: 'Threat in one line', episodeTwoText: 'Habitat loss, poaching, bycatch, climate pressure, or disease.', episodeThreeTitle: 'Support signal', episodeThreeText: 'A donation CTA keeps the visual archive growing.', collectionKicker: 'English collection', collectionTitle: 'English posters.', collectionText: 'Language is determined from text inside the image. Switching the site language also switches the visible poster collection.', platesLabel: 'plates', ruTitle: 'Russian Text Posters', ruText: 'Switch to RU to view posters whose image text was detected as Russian.', enTitle: 'English Text Posters', enText: 'These images were classified as English because OCR found dominant Latin text and no meaningful Cyrillic block.', footerOne: 'Disappearing Animal Species visual atlas', footerDonate: 'Donate to the project', openOriginal: 'Open original', search: 'Search English posters by species, title, or OCR text'
+        navStory: 'Mission', navCollections: 'Posters', donate: 'Help animals', kicker: 'Endangered species posters', title: 'Disappearing Animal Species', lede: 'A bilingual visual atlas built to make endangered animals impossible to ignore and easier to support.', explore: 'Explore animals at risk', support: 'Help save animals', statAll: 'images scanned by OCR', statCurrent: 'English rescue posters shown here', statOther: 'Russian rescue posters in RU version', sideTitle: 'English rescue version', sideText: 'This version shows English-language posters about animals that need protection now.', storyKicker: 'Editorial mission', storyTitle: 'Make endangered animals visible while they can still be saved.', storyOne: 'The atlas turns each poster into a clear call to protect habitats, reduce threats, and support real survival for endangered animals.', storyTwo: 'The English rescue version shows English-text posters only. The Russian version shows Russian-text posters only.', focusOneTag: 'Habitat', focusOneTitle: 'Fragmented homes become silent borders.', focusOneText: 'Forest loss turns movement, feeding, and breeding into a daily risk.', focusTwoTag: 'Oceans', focusTwoTitle: 'Invisible nets still decide visible futures.', focusTwoText: 'Bycatch and warming seas pressure whales, rays, turtles, and reef life.', focusThreeTag: 'Recovery', focusThreeTitle: 'Recovery starts when attention becomes infrastructure.', focusThreeText: 'Captive breeding, protected corridors, and public memory can bring species back.', supportKicker: 'Save endangered animals', supportTitle: 'Help protect endangered animals.', supportText: 'Donations support conservation outreach: visual education, bilingual materials, species research, and tools that help people act before it is too late.', supportButton: 'Support animal protection', videoKicker: 'Short-form field notes', videoTitle: 'Turn each poster into a 30-second species signal.', videoText: 'The atlas is ready for a YouTube Shorts format: one animal, one threat, one action, and one direct way to support protection work.', videoButton: 'Open YouTube', videoDonate: 'Support animal protection', episodeOneTitle: 'Species hook', episodeOneText: 'A striking poster crop and the animal name in the first second.', episodeTwoTitle: 'Threat in one line', episodeTwoText: 'Habitat loss, poaching, bycatch, climate pressure, or disease.', episodeThreeTitle: 'Support signal', episodeThreeText: 'A donation CTA turns attention into practical support for endangered species.', collectionKicker: 'English posters', collectionTitle: 'English posters.', collectionText: 'Language is determined from text inside the image. Switching the site language also switches the visible rescue posters.', platesLabel: 'plates', ruTitle: 'Russian Text Posters', ruText: 'Switch to RU to view posters whose image text was detected as Russian.', enTitle: 'English Text Posters', enText: 'These images were classified as English because OCR found dominant Latin text and no meaningful Cyrillic block.', footerOne: 'For endangered animals', footerDonate: 'Help protect animals', openOriginal: 'Open original', search: 'Search English posters by species, title, or OCR text'
       },
       ru: {
-        navStory: 'История', navCollections: 'Коллекция', donate: 'Поддержать', kicker: 'Русская коллекция постеров', title: 'Исчезающие виды животных', lede: 'Русская версия визуального атласа: природоохранные постеры, в которых OCR определил русский текст внутри изображения.', explore: 'Открыть русские постеры', support: 'Поддержать проект', statAll: 'изображений проверено OCR', statCurrent: 'русских постеров здесь', statOther: 'английских постеров в EN-версии', sideTitle: 'Русская версия', sideText: 'Эта версия показывает только постеры с доминирующим русским текстом внутри изображения.', storyKicker: 'Редакционная миссия', storyTitle: 'Сделать исчезающее видимым, пока оно не стало архивом.', storyOne: 'Атлас превращает природоохранные материалы в визуальную библиотеку: виды, среды обитания, угрозы, восстановление и эмоциональный масштаб экологической потери.', storyTwo: 'Русская версия показывает только постеры с русским текстом. Английская версия показывает только постеры с английским текстом.', focusOneTag: 'Среда', focusOneTitle: 'Разорванная среда становится невидимой границей.', focusOneText: 'Потеря лесов превращает движение, питание и размножение в ежедневный риск.', focusTwoTag: 'Океаны', focusTwoTitle: 'Невидимые сети всё ещё решают видимое будущее.', focusTwoText: 'Прилов и потепление морей давят на китов, мант, черепах и рифовую жизнь.', focusThreeTag: 'Возвращение', focusThreeTitle: 'Восстановление начинается там, где внимание становится инфраструктурой.', focusThreeText: 'Разведение, охраняемые коридоры и общественная память могут вернуть вид.', supportKicker: 'Поддержать архив', supportTitle: 'Помогите коллекции расти.', supportText: 'Донаты помогают покрывать визуальное производство, исследование, двуязычную редактуру, OCR-чистку и хостинг.', supportButton: 'Поддержать через CloudTips', videoKicker: 'Короткие полевые заметки', videoTitle: 'Превратить каждый постер в 30 секунд внимания к виду.', videoText: 'Атлас готов к формату YouTube Shorts: одно животное, одна угроза, один визуальный факт и прямой способ поддержать архив.', videoButton: 'Открыть YouTube', videoDonate: 'Поддержать перед следующим выпуском', episodeOneTitle: 'Зацепка видом', episodeOneText: 'Сильный фрагмент постера и название животного в первую секунду.', episodeTwoTitle: 'Угроза одной строкой', episodeTwoText: 'Потеря среды, браконьерство, прилов, климатическое давление или болезнь.', episodeThreeTitle: 'Сигнал поддержки', episodeThreeText: 'Донат помогает визуальному архиву расти дальше.', collectionKicker: 'Русская коллекция', collectionTitle: 'Постеры на русском.', collectionText: 'Язык определяется по тексту внутри изображения. Переключение языка сайта переключает и видимую коллекцию постеров.', platesLabel: 'листов', ruTitle: 'Постеры с русским текстом', ruText: 'Эти изображения отнесены к русским, потому что OCR нашёл внутри постера доминирующий текст кириллицей.', enTitle: 'Постеры с английским текстом', enText: 'Переключитесь на EN, чтобы увидеть постеры, где OCR определил английский текст.', footerOne: 'Визуальный атлас исчезающих видов животных', footerDonate: 'Поддержать проект', openOriginal: 'Открыть оригинал', search: 'Искать русские постеры по виду, заголовку или OCR-тексту'
+        navStory: 'Миссия', navCollections: 'Постеры', donate: 'Помочь животным', kicker: 'Постеры о спасении видов', title: 'Исчезающие виды животных', lede: 'Двуязычный визуальный атлас, созданный, чтобы исчезающих животных было невозможно не заметить и проще поддержать.', explore: 'Открыть виды под угрозой', support: 'Помочь животным', statAll: 'изображений проверено OCR', statCurrent: 'русских постеров о спасении здесь', statOther: 'английских постеров о спасении в EN-версии', sideTitle: 'Русская версия о спасении', sideText: 'Эта версия показывает русскоязычные постеры о животных, которым нужна защита сейчас.', storyKicker: 'Редакционная миссия', storyTitle: 'Сделать исчезающих животных видимыми, пока их ещё можно спасти.', storyOne: 'Атлас превращает каждый постер в ясный призыв защищать среду обитания, снижать угрозы и поддерживать выживание исчезающих животных.', storyTwo: 'Русская версия о спасении показывает только постеры с русским текстом. Английская версия показывает только постеры с английским текстом.', focusOneTag: 'Среда', focusOneTitle: 'Разорванная среда становится невидимой границей.', focusOneText: 'Потеря лесов превращает движение, питание и размножение в ежедневный риск.', focusTwoTag: 'Океаны', focusTwoTitle: 'Невидимые сети всё ещё решают видимое будущее.', focusTwoText: 'Прилов и потепление морей давят на китов, мант, черепах и рифовую жизнь.', focusThreeTag: 'Возвращение', focusThreeTitle: 'Восстановление начинается там, где внимание становится инфраструктурой.', focusThreeText: 'Разведение, охраняемые коридоры и общественная память могут вернуть вид.', supportKicker: 'Спасти исчезающих животных', supportTitle: 'Помогите защищать исчезающие виды.', supportText: 'Донаты поддерживают природоохранное просвещение: визуальные материалы, двуязычные тексты, исследование видов и инструменты, которые помогают действовать вовремя.', supportButton: 'Поддержать защиту животных', videoKicker: 'Короткие полевые заметки', videoTitle: 'Превратить каждый постер в 30 секунд внимания к виду.', videoText: 'Атлас готов к формату YouTube Shorts: одно животное, одна угроза, одно действие и прямой способ поддержать защиту видов.', videoButton: 'Открыть YouTube', videoDonate: 'Поддержать защиту животных', episodeOneTitle: 'Зацепка видом', episodeOneText: 'Сильный фрагмент постера и название животного в первую секунду.', episodeTwoTitle: 'Угроза одной строкой', episodeTwoText: 'Потеря среды, браконьерство, прилов, климатическое давление или болезнь.', episodeThreeTitle: 'Сигнал поддержки', episodeThreeText: 'Донат превращает внимание в практическую поддержку исчезающих видов.', collectionKicker: 'Русские постеры', collectionTitle: 'Постеры на русском.', collectionText: 'Язык определяется по тексту внутри изображения. Переключение языка сайта переключает и видимые постеры о спасении видов.', platesLabel: 'листов', ruTitle: 'Постеры с русским текстом', ruText: 'Эти изображения отнесены к русским, потому что OCR нашёл внутри постера доминирующий текст кириллицей.', enTitle: 'Постеры с английским текстом', enText: 'Переключитесь на EN, чтобы увидеть постеры, где OCR определил английский текст.', footerOne: 'Для исчезающих животных', footerDonate: 'Помочь животным', openOriginal: 'Открыть оригинал', search: 'Искать русские постеры по виду, заголовку или OCR-тексту'
       }
     };
 
