@@ -64,8 +64,8 @@
     .story p, .support-band p, .collection-head p { margin: 0 0 18px; color: var(--muted); font-size: 1rem; line-height: 1.7; }
     .focus-strip { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; padding: 12px 0 20px; }
     .focus-card { min-height: 220px; display: grid; align-content: end; padding: 18px; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; position: relative; background: #111915; }
-    .focus-card::before { content: ""; position: absolute; inset: 0; background: var(--focus-image) center / cover; opacity: 0.52; transform: scale(1.02); }
-    .focus-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6, 10, 9, 0.06), rgba(6, 10, 9, 0.9)); }
+    .focus-card::before { content: ""; position: absolute; inset: 0; background: var(--focus-image) var(--focus-position, center) / cover; opacity: 0.58; transform: scale(1.03); }
+    .focus-card::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6, 10, 9, 0.02), rgba(6, 10, 9, 0.48) 42%, rgba(6, 10, 9, 0.94)); }
     .focus-card > * { position: relative; z-index: 1; }
     .focus-card span { width: fit-content; margin-bottom: 10px; border: 1px solid rgba(247, 242, 232, 0.26); border-radius: 999px; padding: 5px 10px; color: var(--accent); font-size: 0.72rem; font-weight: 820; text-transform: uppercase; }
     .focus-card h3 { margin: 0; font-size: 1.15rem; line-height: 1.12; }
@@ -177,17 +177,17 @@
     </section>
 
     <section class="focus-strip" aria-label="Editorial focus areas">
-      <article class="focus-card" style="--focus-image: url('assets/thumbs/104_protecting_the_red_panda_s_habitat.jpg')">
+      <article class="focus-card" style="--focus-image: url('assets/thumbs/044_conserving_the_asian_elephant_s_habitat.jpg'); --focus-position: center 42%">
         <span data-i18n="focusOneTag">Habitat</span>
         <h3 data-i18n="focusOneTitle">Fragmented homes become silent borders.</h3>
         <p data-i18n="focusOneText">Forest loss turns movement, feeding, and breeding into a daily risk.</p>
       </article>
-      <article class="focus-card" style="--focus-image: url('assets/thumbs/119_saving_the_manta_protecting_our_reefs.jpg')">
+      <article class="focus-card" style="--focus-image: url('assets/thumbs/147_whale_shark_conservation_illustrated_guide.jpg'); --focus-position: center 48%">
         <span data-i18n="focusTwoTag">Oceans</span>
         <h3 data-i18n="focusTwoTitle">Invisible nets still decide visible futures.</h3>
         <p data-i18n="focusTwoText">Bycatch and warming seas pressure whales, rays, turtles, and reef life.</p>
       </article>
-      <article class="focus-card" style="--focus-image: url('assets/thumbs/116_saving_the_california_condor_infographic.jpg')">
+      <article class="focus-card" style="--focus-image: url('assets/thumbs/116_saving_the_california_condor_infographic.jpg'); --focus-position: center 46%">
         <span data-i18n="focusThreeTag">Recovery</span>
         <h3 data-i18n="focusThreeTitle">Recovery starts when attention becomes infrastructure.</h3>
         <p data-i18n="focusThreeText">Captive breeding, protected corridors, and public memory can bring species back.</p>
