@@ -58,7 +58,7 @@
     .stat span { display: block; margin-top: 8px; color: var(--muted); font-size: 0.84rem; }
 
     main { background: radial-gradient(circle at 14% 0%, rgba(124, 185, 177, 0.14), transparent 30%), radial-gradient(circle at 82% 20%, rgba(216, 111, 97, 0.12), transparent 24%), linear-gradient(180deg, #0b0f0d, #111915 44%, #0b0f0d); padding: 0 0 80px; }
-    .story, .support-band, .collection-head, .gallery-section, .footer { width: min(1180px, calc(100% - 36px)); margin-left: auto; margin-right: auto; }
+    .story, .support-band, .video-band, .collection-head, .gallery-section, .footer { width: min(1180px, calc(100% - 36px)); margin-left: auto; margin-right: auto; }
     .story { padding: 58px 0 34px; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
     .story h2, .collection-head h2, .support-band h2 { margin: 0; font-size: clamp(2rem, 4vw, 4.2rem); line-height: 1; text-transform: uppercase; }
     .story p, .support-band p, .collection-head p { margin: 0 0 18px; color: var(--muted); font-size: 1rem; line-height: 1.7; }
@@ -68,6 +68,16 @@
     .qr-card img { display: block; width: 100%; height: auto; border-radius: 6px; }
     .support-band h2 { font-size: clamp(1.6rem, 3vw, 3rem); }
     .support-band p { margin: 10px 0 0; }
+    .video-band { margin-top: 20px; padding: 26px; border: 1px solid rgba(124, 185, 177, 0.34); border-radius: 8px; background: rgba(8, 13, 12, 0.52); }
+    .video-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 0.78fr); gap: clamp(22px, 4vw, 48px); align-items: end; }
+    .video-band h2 { margin: 0; max-width: 760px; font-size: clamp(1.9rem, 4vw, 4rem); line-height: 1; text-transform: uppercase; }
+    .video-band p { margin: 14px 0 0; color: var(--muted); line-height: 1.65; }
+    .video-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+    .episode-list { display: grid; gap: 10px; }
+    .episode { min-height: 76px; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: rgba(247, 242, 232, 0.06); }
+    .episode span:first-child { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 999px; background: rgba(124, 185, 177, 0.16); color: var(--water); font-weight: 820; }
+    .episode strong { display: block; font-size: 0.95rem; }
+    .episode small { display: block; margin-top: 4px; color: var(--muted); line-height: 1.35; }
     .collection-head { padding: 58px 0 18px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 520px); gap: 28px; align-items: end; }
     .toolbar { position: sticky; top: 0; z-index: 12; padding: 14px clamp(18px, 4vw, 56px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(9, 13, 12, 0.92); backdrop-filter: blur(14px); }
     .toolbar-inner { width: min(1180px, 100%); margin: 0 auto; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 14px; }
@@ -101,7 +111,7 @@
     .footer { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 18px; color: var(--muted); font-size: 0.92rem; }
     .hidden, .language-hidden { display: none; }
 
-    @media (max-width: 960px) { .hero-content, .story, .collection-head { grid-template-columns: 1fr; } .side-panel { max-width: 420px; } .toolbar-inner { grid-template-columns: 1fr; align-items: stretch; } .support-band { grid-template-columns: 1fr; } .support-actions { justify-content: space-between; } .poster-viewer { grid-template-columns: 1fr; } .poster-info { border-left: 0; border-top: 1px solid var(--line); } .poster-stage img { max-height: 62vh; } }
+    @media (max-width: 960px) { .hero-content, .story, .collection-head, .video-layout { grid-template-columns: 1fr; } .side-panel { max-width: 420px; } .toolbar-inner { grid-template-columns: 1fr; align-items: stretch; } .support-band { grid-template-columns: 1fr; } .support-actions { justify-content: space-between; } .poster-viewer { grid-template-columns: 1fr; } .poster-info { border-left: 0; border-top: 1px solid var(--line); } .poster-stage img { max-height: 62vh; } }
     @media (max-width: 520px) { .support-actions { align-items: stretch; flex-direction: column; } .qr-card { width: 148px; } }
     @media (max-width: 720px) { .nav { grid-template-columns: 1fr auto; gap: 12px; padding: 12px 18px; } .nav-links { grid-column: 1 / -1; justify-content: flex-start; overflow-x: auto; padding-bottom: 2px; } .hero { min-height: 92vh; } .hero-content { padding: 172px 0 58px; } .stats { grid-template-columns: 1fr; } .gallery-title { display: block; } .gallery-title p { margin-top: 10px; } .gallery { grid-template-columns: repeat(auto-fill, minmax(154px, 1fr)); gap: 12px; } .card-copy { min-height: 142px; padding: 12px; } .footer { flex-direction: column; } }
   </style>
@@ -169,6 +179,43 @@
         <a class="qr-card" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" aria-label="Open CloudTips donation page">
           <img src="assets/cloudtips-qr.svg" alt="QR code for CloudTips donation link">
         </a>
+      </div>
+    </section>
+
+    <section class="video-band" aria-label="Short video launch">
+      <div class="video-layout">
+        <div>
+          <p class="section-kicker" data-i18n="videoKicker">Short-form field notes</p>
+          <h2 data-i18n="videoTitle">Turn each poster into a 30-second species signal.</h2>
+          <p data-i18n="videoText">The atlas is ready for a YouTube Shorts format: one animal, one threat, one visual fact, and one direct way to support the archive.</p>
+          <div class="video-actions">
+            <a class="button primary" href="https://www.youtube.com/shorts" target="_blank" rel="noopener" data-i18n="videoButton">Open YouTube</a>
+            <a class="button" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="videoDonate">Donate before the next episode</a>
+          </div>
+        </div>
+        <div class="episode-list" aria-label="Episode format">
+          <div class="episode">
+            <span>01</span>
+            <div>
+              <strong data-i18n="episodeOneTitle">Species hook</strong>
+              <small data-i18n="episodeOneText">A striking poster crop and the animal name in the first second.</small>
+            </div>
+          </div>
+          <div class="episode">
+            <span>02</span>
+            <div>
+              <strong data-i18n="episodeTwoTitle">Threat in one line</strong>
+              <small data-i18n="episodeTwoText">Habitat loss, poaching, bycatch, climate pressure, or disease.</small>
+            </div>
+          </div>
+          <div class="episode">
+            <span>03</span>
+            <div>
+              <strong data-i18n="episodeThreeTitle">Support signal</strong>
+              <small data-i18n="episodeThreeText">A donation CTA keeps the visual archive growing.</small>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -2168,10 +2215,10 @@
   <script>
     const copy = {
       en: {
-        navStory: 'Story', navCollections: 'Collection', donate: 'Donate', kicker: 'English poster collection', title: 'Disappearing Animal Species', lede: 'The English version of the visual atlas: conservation posters whose image text was detected as English by OCR.', explore: 'Explore English posters', support: 'Support the project', statAll: 'images scanned by OCR', statCurrent: 'English posters shown here', statOther: 'Russian posters in RU version', sideTitle: 'English version', sideText: 'This version shows only posters with dominant English text inside the image.', storyKicker: 'Editorial mission', storyTitle: 'Make the endangered visible before it becomes archival.', storyOne: 'The atlas turns conservation material into a visual library: species, habitats, threats, recovery efforts, and the emotional scale of ecological loss.', storyTwo: 'The English version shows English-text posters only. The Russian version shows Russian-text posters only.', supportKicker: 'Support the archive', supportTitle: 'Help the collection grow.', supportText: 'Donations help cover visual production, research time, bilingual editing, OCR cleanup, and hosting.', supportButton: 'Donate through CloudTips', collectionKicker: 'English collection', collectionTitle: 'English posters.', collectionText: 'Language is determined from text inside the image. Switching the site language also switches the visible poster collection.', platesLabel: 'plates', ruTitle: 'Russian Text Posters', ruText: 'Switch to RU to view posters whose image text was detected as Russian.', enTitle: 'English Text Posters', enText: 'These images were classified as English because OCR found dominant Latin text and no meaningful Cyrillic block.', footerOne: 'Disappearing Animal Species visual atlas', footerDonate: 'Donate to the project', openOriginal: 'Open original', search: 'Search English posters by species, title, or OCR text'
+        navStory: 'Story', navCollections: 'Collection', donate: 'Donate', kicker: 'English poster collection', title: 'Disappearing Animal Species', lede: 'The English version of the visual atlas: conservation posters whose image text was detected as English by OCR.', explore: 'Explore English posters', support: 'Support the project', statAll: 'images scanned by OCR', statCurrent: 'English posters shown here', statOther: 'Russian posters in RU version', sideTitle: 'English version', sideText: 'This version shows only posters with dominant English text inside the image.', storyKicker: 'Editorial mission', storyTitle: 'Make the endangered visible before it becomes archival.', storyOne: 'The atlas turns conservation material into a visual library: species, habitats, threats, recovery efforts, and the emotional scale of ecological loss.', storyTwo: 'The English version shows English-text posters only. The Russian version shows Russian-text posters only.', supportKicker: 'Support the archive', supportTitle: 'Help the collection grow.', supportText: 'Donations help cover visual production, research time, bilingual editing, OCR cleanup, and hosting.', supportButton: 'Donate through CloudTips', videoKicker: 'Short-form field notes', videoTitle: 'Turn each poster into a 30-second species signal.', videoText: 'The atlas is ready for a YouTube Shorts format: one animal, one threat, one visual fact, and one direct way to support the archive.', videoButton: 'Open YouTube', videoDonate: 'Donate before the next episode', episodeOneTitle: 'Species hook', episodeOneText: 'A striking poster crop and the animal name in the first second.', episodeTwoTitle: 'Threat in one line', episodeTwoText: 'Habitat loss, poaching, bycatch, climate pressure, or disease.', episodeThreeTitle: 'Support signal', episodeThreeText: 'A donation CTA keeps the visual archive growing.', collectionKicker: 'English collection', collectionTitle: 'English posters.', collectionText: 'Language is determined from text inside the image. Switching the site language also switches the visible poster collection.', platesLabel: 'plates', ruTitle: 'Russian Text Posters', ruText: 'Switch to RU to view posters whose image text was detected as Russian.', enTitle: 'English Text Posters', enText: 'These images were classified as English because OCR found dominant Latin text and no meaningful Cyrillic block.', footerOne: 'Disappearing Animal Species visual atlas', footerDonate: 'Donate to the project', openOriginal: 'Open original', search: 'Search English posters by species, title, or OCR text'
       },
       ru: {
-        navStory: 'История', navCollections: 'Коллекция', donate: 'Поддержать', kicker: 'Русская коллекция постеров', title: 'Исчезающие виды животных', lede: 'Русская версия визуального атласа: природоохранные постеры, в которых OCR определил русский текст внутри изображения.', explore: 'Открыть русские постеры', support: 'Поддержать проект', statAll: 'изображений проверено OCR', statCurrent: 'русских постеров здесь', statOther: 'английских постеров в EN-версии', sideTitle: 'Русская версия', sideText: 'Эта версия показывает только постеры с доминирующим русским текстом внутри изображения.', storyKicker: 'Редакционная миссия', storyTitle: 'Сделать исчезающее видимым, пока оно не стало архивом.', storyOne: 'Атлас превращает природоохранные материалы в визуальную библиотеку: виды, среды обитания, угрозы, восстановление и эмоциональный масштаб экологической потери.', storyTwo: 'Русская версия показывает только постеры с русским текстом. Английская версия показывает только постеры с английским текстом.', supportKicker: 'Поддержать архив', supportTitle: 'Помогите коллекции расти.', supportText: 'Донаты помогают покрывать визуальное производство, исследование, двуязычную редактуру, OCR-чистку и хостинг.', supportButton: 'Поддержать через CloudTips', collectionKicker: 'Русская коллекция', collectionTitle: 'Постеры на русском.', collectionText: 'Язык определяется по тексту внутри изображения. Переключение языка сайта переключает и видимую коллекцию постеров.', platesLabel: 'листов', ruTitle: 'Постеры с русским текстом', ruText: 'Эти изображения отнесены к русским, потому что OCR нашёл внутри постера доминирующий текст кириллицей.', enTitle: 'Постеры с английским текстом', enText: 'Переключитесь на EN, чтобы увидеть постеры, где OCR определил английский текст.', footerOne: 'Визуальный атлас исчезающих видов животных', footerDonate: 'Поддержать проект', openOriginal: 'Открыть оригинал', search: 'Искать русские постеры по виду, заголовку или OCR-тексту'
+        navStory: 'История', navCollections: 'Коллекция', donate: 'Поддержать', kicker: 'Русская коллекция постеров', title: 'Исчезающие виды животных', lede: 'Русская версия визуального атласа: природоохранные постеры, в которых OCR определил русский текст внутри изображения.', explore: 'Открыть русские постеры', support: 'Поддержать проект', statAll: 'изображений проверено OCR', statCurrent: 'русских постеров здесь', statOther: 'английских постеров в EN-версии', sideTitle: 'Русская версия', sideText: 'Эта версия показывает только постеры с доминирующим русским текстом внутри изображения.', storyKicker: 'Редакционная миссия', storyTitle: 'Сделать исчезающее видимым, пока оно не стало архивом.', storyOne: 'Атлас превращает природоохранные материалы в визуальную библиотеку: виды, среды обитания, угрозы, восстановление и эмоциональный масштаб экологической потери.', storyTwo: 'Русская версия показывает только постеры с русским текстом. Английская версия показывает только постеры с английским текстом.', supportKicker: 'Поддержать архив', supportTitle: 'Помогите коллекции расти.', supportText: 'Донаты помогают покрывать визуальное производство, исследование, двуязычную редактуру, OCR-чистку и хостинг.', supportButton: 'Поддержать через CloudTips', videoKicker: 'Короткие полевые заметки', videoTitle: 'Превратить каждый постер в 30 секунд внимания к виду.', videoText: 'Атлас готов к формату YouTube Shorts: одно животное, одна угроза, один визуальный факт и прямой способ поддержать архив.', videoButton: 'Открыть YouTube', videoDonate: 'Поддержать перед следующим выпуском', episodeOneTitle: 'Зацепка видом', episodeOneText: 'Сильный фрагмент постера и название животного в первую секунду.', episodeTwoTitle: 'Угроза одной строкой', episodeTwoText: 'Потеря среды, браконьерство, прилов, климатическое давление или болезнь.', episodeThreeTitle: 'Сигнал поддержки', episodeThreeText: 'Донат помогает визуальному архиву расти дальше.', collectionKicker: 'Русская коллекция', collectionTitle: 'Постеры на русском.', collectionText: 'Язык определяется по тексту внутри изображения. Переключение языка сайта переключает и видимую коллекцию постеров.', platesLabel: 'листов', ruTitle: 'Постеры с русским текстом', ruText: 'Эти изображения отнесены к русским, потому что OCR нашёл внутри постера доминирующий текст кириллицей.', enTitle: 'Постеры с английским текстом', enText: 'Переключитесь на EN, чтобы увидеть постеры, где OCR определил английский текст.', footerOne: 'Визуальный атлас исчезающих видов животных', footerDonate: 'Поддержать проект', openOriginal: 'Открыть оригинал', search: 'Искать русские постеры по виду, заголовку или OCR-тексту'
       }
     };
 
