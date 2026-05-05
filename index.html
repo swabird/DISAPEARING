@@ -57,8 +57,8 @@
     .stat strong { display: block; font-size: clamp(1.75rem, 4vw, 3rem); line-height: 1; }
     .stat span { display: block; margin-top: 8px; color: var(--muted); font-size: 0.84rem; }
 
-    main { background: radial-gradient(circle at 14% 0%, rgba(124, 185, 177, 0.14), transparent 30%), radial-gradient(circle at 82% 20%, rgba(216, 111, 97, 0.12), transparent 24%), linear-gradient(180deg, #0b0f0d, #111915 44%, #0b0f0d); padding: 0 0 80px; }
-    .story, .focus-strip, .support-band, .video-band, .collection-head, .gallery-section, .footer { width: min(1180px, calc(100% - 36px)); margin-left: auto; margin-right: auto; }
+    main { background: #0b0f0d; padding: 0 0 80px; }
+    .story, .focus-strip, .support-band, .collection-head, .gallery-section, .footer { width: min(1180px, calc(100% - 36px)); margin-left: auto; margin-right: auto; }
     .story { padding: 58px 0 34px; display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
     .story h2, .collection-head h2, .support-band h2 { margin: 0; font-size: clamp(2rem, 4vw, 4.2rem); line-height: 1; text-transform: uppercase; }
     .story p, .support-band p, .collection-head p { margin: 0 0 18px; color: var(--muted); font-size: 1rem; line-height: 1.7; }
@@ -70,22 +70,12 @@
     .focus-card span { width: fit-content; margin-bottom: 10px; border: 1px solid rgba(247, 242, 232, 0.26); border-radius: 999px; padding: 5px 10px; color: var(--accent); font-size: 0.72rem; font-weight: 820; text-transform: uppercase; }
     .focus-card h3 { margin: 0; font-size: 1.15rem; line-height: 1.12; }
     .focus-card p { margin: 9px 0 0; color: var(--soft); line-height: 1.45; font-size: 0.9rem; }
-    .support-band { margin-top: 14px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 24px; border: 1px solid rgba(228, 183, 95, 0.38); border-radius: 8px; background: linear-gradient(135deg, rgba(228, 183, 95, 0.18), rgba(124, 185, 177, 0.1)); }
+    .support-band { margin-top: 14px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: center; padding: 24px 0; border-top: 1px solid rgba(228, 183, 95, 0.38); border-bottom: 1px solid rgba(228, 183, 95, 0.28); }
     .support-actions { display: flex; align-items: center; gap: 16px; }
     .qr-card { width: 124px; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: rgba(247, 242, 232, 0.08); }
     .qr-card img { display: block; width: 100%; height: auto; border-radius: 6px; }
     .support-band h2 { font-size: clamp(1.6rem, 3vw, 3rem); }
     .support-band p { margin: 10px 0 0; }
-    .video-band { margin-top: 20px; padding: 26px; border: 1px solid rgba(124, 185, 177, 0.34); border-radius: 8px; background: rgba(8, 13, 12, 0.52); }
-    .video-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 0.78fr); gap: clamp(22px, 4vw, 48px); align-items: end; }
-    .video-band h2 { margin: 0; max-width: 760px; font-size: clamp(1.9rem, 4vw, 4rem); line-height: 1; text-transform: uppercase; }
-    .video-band p { margin: 14px 0 0; color: var(--muted); line-height: 1.65; }
-    .video-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
-    .episode-list { display: grid; gap: 10px; }
-    .episode { min-height: 76px; display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; padding: 12px; border: 1px solid var(--line); border-radius: 8px; background: rgba(247, 242, 232, 0.06); }
-    .episode span:first-child { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 999px; background: rgba(124, 185, 177, 0.16); color: var(--water); font-weight: 820; }
-    .episode strong { display: block; font-size: 0.95rem; }
-    .episode small { display: block; margin-top: 4px; color: var(--muted); line-height: 1.35; }
     .collection-head { padding: 58px 0 18px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 520px); gap: 28px; align-items: end; }
     .toolbar { position: sticky; top: 0; z-index: 12; padding: 14px clamp(18px, 4vw, 56px); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(9, 13, 12, 0.92); backdrop-filter: blur(14px); }
     .toolbar-inner { width: min(1180px, 100%); margin: 0 auto; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 14px; }
@@ -119,7 +109,7 @@
     .footer { margin-top: 64px; padding-top: 28px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 18px; color: var(--muted); font-size: 0.92rem; }
     .hidden, .language-hidden { display: none; }
 
-    @media (max-width: 960px) { .hero-content, .story, .collection-head, .video-layout { grid-template-columns: 1fr; } .focus-strip { grid-template-columns: 1fr; } .focus-card { min-height: 190px; } .side-panel { max-width: 420px; } .toolbar-inner { grid-template-columns: 1fr; align-items: stretch; } .support-band { grid-template-columns: 1fr; } .support-actions { justify-content: space-between; } .poster-viewer { grid-template-columns: 1fr; overflow-y: auto; } .poster-info { border-left: 0; border-top: 1px solid var(--line); } .poster-stage img { max-height: 62vh; } }
+    @media (max-width: 960px) { .hero-content, .story, .collection-head { grid-template-columns: 1fr; } .focus-strip { grid-template-columns: 1fr; } .focus-card { min-height: 190px; } .side-panel { max-width: 420px; } .toolbar-inner { grid-template-columns: 1fr; align-items: stretch; } .support-band { grid-template-columns: 1fr; } .support-actions { justify-content: space-between; } .poster-viewer { grid-template-columns: 1fr; overflow-y: auto; } .poster-info { border-left: 0; border-top: 1px solid var(--line); } .poster-stage img { max-height: 62vh; } }
     @media (max-width: 520px) { .support-actions { align-items: stretch; flex-direction: column; } .qr-card { width: 148px; } }
     @media (max-width: 720px) { .nav { grid-template-columns: 1fr auto; gap: 12px; padding: 12px 18px; } .nav-links { grid-column: 1 / -1; justify-content: flex-start; overflow-x: auto; padding-bottom: 2px; } .hero { min-height: 92vh; } .hero-content { padding: 172px 0 58px; } .stats { grid-template-columns: 1fr; } .gallery-title { display: block; } .gallery-title p { margin-top: 10px; } .gallery { grid-template-columns: repeat(auto-fill, minmax(154px, 1fr)); gap: 12px; } .card-copy { min-height: 142px; padding: 12px; } .footer { flex-direction: column; } }
   </style>
@@ -205,43 +195,6 @@
         <a class="qr-card" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" aria-label="Open CloudTips donation page">
           <img src="assets/payment/cloudtips-qr.svg" alt="QR code for CloudTips donation link">
         </a>
-      </div>
-    </section>
-
-    <section class="video-band" aria-label="Short video launch">
-      <div class="video-layout">
-        <div>
-          <p class="section-kicker" data-i18n="videoKicker">Short-form field notes</p>
-          <h2 data-i18n="videoTitle">Turn each poster into a 30-second species signal.</h2>
-          <p data-i18n="videoText">The atlas is ready for a YouTube Shorts format: one animal, one threat, one action, and one direct way to support protection work.</p>
-          <div class="video-actions">
-            <a class="button primary" href="https://www.youtube.com/shorts" target="_blank" rel="noopener" data-i18n="videoButton">Open YouTube</a>
-            <a class="button" href="https://pay.cloudtips.ru/p/5585456c" target="_blank" rel="noopener" data-i18n="videoDonate">Support animal protection</a>
-          </div>
-        </div>
-        <div class="episode-list" aria-label="Episode format">
-          <div class="episode">
-            <span>01</span>
-            <div>
-              <strong data-i18n="episodeOneTitle">Species hook</strong>
-              <small data-i18n="episodeOneText">A striking poster crop and the animal name in the first second.</small>
-            </div>
-          </div>
-          <div class="episode">
-            <span>02</span>
-            <div>
-              <strong data-i18n="episodeTwoTitle">Threat in one line</strong>
-              <small data-i18n="episodeTwoText">Habitat loss, poaching, bycatch, climate pressure, or disease.</small>
-            </div>
-          </div>
-          <div class="episode">
-            <span>03</span>
-            <div>
-              <strong data-i18n="episodeThreeTitle">Support signal</strong>
-              <small data-i18n="episodeThreeText">A donation CTA turns attention into practical support for endangered species.</small>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -2241,10 +2194,10 @@
   <script>
     const copy = {
       en: {
-        navStory: 'Mission', navCollections: 'Posters', donate: 'Help animals', kicker: 'Endangered species posters', title: 'Disappearing Animal Species', lede: 'A bilingual visual atlas built to make endangered animals impossible to ignore and easier to support.', explore: 'Explore animals at risk', support: 'Help save animals', statAll: 'images scanned by OCR', statCurrent: 'English rescue posters shown here', statOther: 'Russian rescue posters in RU version', sideTitle: 'English rescue version', sideText: 'This version shows English-language posters about animals that need protection now.', storyKicker: 'Editorial mission', storyTitle: 'Make endangered animals visible while they can still be saved.', storyOne: 'The atlas turns each poster into a clear call to protect habitats, reduce threats, and support real survival for endangered animals.', storyTwo: 'The English rescue version shows English-text posters only. The Russian version shows Russian-text posters only.', focusOneTag: 'Habitat', focusOneTitle: 'Fragmented homes become silent borders.', focusOneText: 'Forest loss turns movement, feeding, and breeding into a daily risk.', focusTwoTag: 'Oceans', focusTwoTitle: 'Invisible nets still decide visible futures.', focusTwoText: 'Bycatch and warming seas pressure whales, rays, turtles, and reef life.', focusThreeTag: 'Recovery', focusThreeTitle: 'Recovery starts when attention becomes infrastructure.', focusThreeText: 'Captive breeding, protected corridors, and public memory can bring species back.', supportKicker: 'Save endangered animals', supportTitle: 'Help protect endangered animals.', supportText: 'Donations support conservation outreach: visual education, bilingual materials, species research, and tools that help people act before it is too late.', supportButton: 'Support animal protection', videoKicker: 'Short-form field notes', videoTitle: 'Turn each poster into a 30-second species signal.', videoText: 'The atlas is ready for a YouTube Shorts format: one animal, one threat, one action, and one direct way to support protection work.', videoButton: 'Open YouTube', videoDonate: 'Support animal protection', episodeOneTitle: 'Species hook', episodeOneText: 'A striking poster crop and the animal name in the first second.', episodeTwoTitle: 'Threat in one line', episodeTwoText: 'Habitat loss, poaching, bycatch, climate pressure, or disease.', episodeThreeTitle: 'Support signal', episodeThreeText: 'A donation CTA turns attention into practical support for endangered species.', collectionKicker: 'English posters', collectionTitle: 'English posters.', collectionText: 'Language is determined from text inside the image. Switching the site language also switches the visible rescue posters.', platesLabel: 'plates', ruTitle: 'Russian Text Posters', ruText: 'Switch to RU to view posters whose image text was detected as Russian.', enTitle: 'English Text Posters', enText: 'These images were classified as English because OCR found dominant Latin text and no meaningful Cyrillic block.', footerOne: 'For endangered animals', footerDonate: 'Help protect animals', openOriginal: 'Open original', search: 'Search English posters by species, title, or OCR text'
+        navStory: 'Mission', navCollections: 'Posters', donate: 'Help animals', kicker: 'Endangered species posters', title: 'Disappearing Animal Species', lede: 'A quiet atlas for animals running out of time.', explore: 'See the species', support: 'Help protect them', statAll: 'images scanned by OCR', statCurrent: 'English posters here', statOther: 'Russian posters in RU', sideTitle: 'English posters', sideText: 'Only posters with English text inside the image.', storyKicker: 'Mission', storyTitle: 'See them. Protect them.', storyOne: 'Each poster names a species, a threat, and a reason to act now.', storyTwo: 'English and Russian images stay separate, so every poster speaks in its own language.', focusOneTag: 'Habitat', focusOneTitle: 'No habitat. No future.', focusOneText: 'Protect the places animals need to move, feed, and breed.', focusTwoTag: 'Oceans', focusTwoTitle: 'The ocean remembers every net.', focusTwoText: 'Bycatch, heat, and noise push marine life toward silence.', focusThreeTag: 'Recovery', focusThreeTitle: 'Protection works when it stays.', focusThreeText: 'Breeding, corridors, and public memory can bring a species back.', supportKicker: 'Act now', supportTitle: 'Help before silence wins.', supportText: 'Your support keeps the atlas useful: clear images, bilingual materials, and outreach that moves people to act.', supportButton: 'Support protection', collectionKicker: 'English posters', collectionTitle: 'English posters.', collectionText: 'Only the selected language is shown. No mixing, no noise.', platesLabel: 'plates', ruTitle: 'Russian Text Posters', ruText: 'Switch to RU to see posters with Russian text inside the image.', enTitle: 'English Text Posters', enText: 'Posters where OCR found dominant English text.', footerOne: 'For endangered animals', footerDonate: 'Help protect animals', openOriginal: 'Open original', search: 'Search species, title, or OCR text'
       },
       ru: {
-        navStory: 'Миссия', navCollections: 'Постеры', donate: 'Помочь животным', kicker: 'Постеры о спасении видов', title: 'Исчезающие виды животных', lede: 'Двуязычный визуальный атлас, созданный, чтобы исчезающих животных было невозможно не заметить и проще поддержать.', explore: 'Открыть виды под угрозой', support: 'Помочь животным', statAll: 'изображений проверено OCR', statCurrent: 'русских постеров о спасении здесь', statOther: 'английских постеров о спасении в EN-версии', sideTitle: 'Русская версия о спасении', sideText: 'Эта версия показывает русскоязычные постеры о животных, которым нужна защита сейчас.', storyKicker: 'Редакционная миссия', storyTitle: 'Сделать исчезающих животных видимыми, пока их ещё можно спасти.', storyOne: 'Атлас превращает каждый постер в ясный призыв защищать среду обитания, снижать угрозы и поддерживать выживание исчезающих животных.', storyTwo: 'Русская версия о спасении показывает только постеры с русским текстом. Английская версия показывает только постеры с английским текстом.', focusOneTag: 'Среда', focusOneTitle: 'Разорванная среда становится невидимой границей.', focusOneText: 'Потеря лесов превращает движение, питание и размножение в ежедневный риск.', focusTwoTag: 'Океаны', focusTwoTitle: 'Невидимые сети всё ещё решают видимое будущее.', focusTwoText: 'Прилов и потепление морей давят на китов, мант, черепах и рифовую жизнь.', focusThreeTag: 'Возвращение', focusThreeTitle: 'Восстановление начинается там, где внимание становится инфраструктурой.', focusThreeText: 'Разведение, охраняемые коридоры и общественная память могут вернуть вид.', supportKicker: 'Спасти исчезающих животных', supportTitle: 'Помогите защищать исчезающие виды.', supportText: 'Донаты поддерживают природоохранное просвещение: визуальные материалы, двуязычные тексты, исследование видов и инструменты, которые помогают действовать вовремя.', supportButton: 'Поддержать защиту животных', videoKicker: 'Короткие полевые заметки', videoTitle: 'Превратить каждый постер в 30 секунд внимания к виду.', videoText: 'Атлас готов к формату YouTube Shorts: одно животное, одна угроза, одно действие и прямой способ поддержать защиту видов.', videoButton: 'Открыть YouTube', videoDonate: 'Поддержать защиту животных', episodeOneTitle: 'Зацепка видом', episodeOneText: 'Сильный фрагмент постера и название животного в первую секунду.', episodeTwoTitle: 'Угроза одной строкой', episodeTwoText: 'Потеря среды, браконьерство, прилов, климатическое давление или болезнь.', episodeThreeTitle: 'Сигнал поддержки', episodeThreeText: 'Донат превращает внимание в практическую поддержку исчезающих видов.', collectionKicker: 'Русские постеры', collectionTitle: 'Постеры на русском.', collectionText: 'Язык определяется по тексту внутри изображения. Переключение языка сайта переключает и видимые постеры о спасении видов.', platesLabel: 'листов', ruTitle: 'Постеры с русским текстом', ruText: 'Эти изображения отнесены к русским, потому что OCR нашёл внутри постера доминирующий текст кириллицей.', enTitle: 'Постеры с английским текстом', enText: 'Переключитесь на EN, чтобы увидеть постеры, где OCR определил английский текст.', footerOne: 'Для исчезающих животных', footerDonate: 'Помочь животным', openOriginal: 'Открыть оригинал', search: 'Искать русские постеры по виду, заголовку или OCR-тексту'
+        navStory: 'Миссия', navCollections: 'Постеры', donate: 'Помочь животным', kicker: 'Постеры о спасении видов', title: 'Исчезающие виды животных', lede: 'Тихий атлас о тех, у кого заканчивается время.', explore: 'Посмотреть виды', support: 'Помочь защитить', statAll: 'изображений проверено OCR', statCurrent: 'русских постеров здесь', statOther: 'английских постеров в EN', sideTitle: 'Русские постеры', sideText: 'Только постеры с русским текстом внутри изображения.', storyKicker: 'Миссия', storyTitle: 'Увидеть. Защитить.', storyOne: 'Каждый постер называет вид, угрозу и причину действовать сейчас.', storyTwo: 'Русские и английские изображения не смешиваются: каждый постер говорит на своём языке.', focusOneTag: 'Среда', focusOneTitle: 'Нет среды. Нет будущего.', focusOneText: 'Сохраняем места, где животные движутся, питаются и размножаются.', focusTwoTag: 'Океаны', focusTwoTitle: 'Океан помнит каждую сеть.', focusTwoText: 'Прилов, жара и шум толкают морскую жизнь к тишине.', focusThreeTag: 'Возвращение', focusThreeTitle: 'Защита работает, когда длится.', focusThreeText: 'Разведение, коридоры и общественная память могут вернуть вид.', supportKicker: 'Действовать сейчас', supportTitle: 'Помочь, пока тишина не победила.', supportText: 'Поддержка сохраняет атлас полезным: ясные изображения, двуязычные материалы и работу, которая побуждает людей действовать.', supportButton: 'Поддержать защиту', collectionKicker: 'Русские постеры', collectionTitle: 'Постеры на русском.', collectionText: 'Показываем только выбранный язык. Без смешивания, без шума.', platesLabel: 'листов', ruTitle: 'Постеры с русским текстом', ruText: 'Постеры, где OCR нашёл доминирующий русский текст.', enTitle: 'Постеры с английским текстом', enText: 'Переключитесь на EN, чтобы увидеть постеры с английским текстом.', footerOne: 'Для исчезающих животных', footerDonate: 'Помочь животным', openOriginal: 'Открыть оригинал', search: 'Искать вид, заголовок или OCR-текст'
       }
     };
 
